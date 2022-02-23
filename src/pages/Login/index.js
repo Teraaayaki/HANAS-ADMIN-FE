@@ -29,6 +29,7 @@ const Login = () => {
             <Form.Control
               type="email"
               placeholder="e.g. johndoe@gmail.com"
+              autoComplete="email"
               className={style.inputFields}
             />
           </Form.Group>
@@ -40,6 +41,7 @@ const Login = () => {
             <Form.Control
               type={showPassword ? 'text' : 'password'}
               placeholder="min of 8 characters"
+              autoComplete="current-password"
               className={style.inputFields}
             />
             <FaEye
