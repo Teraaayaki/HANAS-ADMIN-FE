@@ -3,7 +3,7 @@
 ### 1. Clone repository in your local
 
 ```
-https://github.com/TaiyoShiawase/HANAS-ADMIN-FE.git
+git clone https://github.com/TaiyoShiawase/HANAS-ADMIN-FE.git
 ```
 
 ### 2. Install the packages being used in this project
