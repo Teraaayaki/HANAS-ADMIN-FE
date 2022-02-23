@@ -3,7 +3,7 @@ import React from 'react';
 import style from './index.module.scss';
 
 const UserReport = () => {
-  return <div>UserReport</div>;
+  return <div className={style.sample}>UserReport</div>;
 };
 
 export default UserReport;

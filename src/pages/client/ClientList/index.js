@@ -3,7 +3,7 @@ import React from 'react';
 import style from './index.module.scss';
 
 const ClientList = () => {
-  return <div>ClientList</div>;
+  return <div className={style.sample}>ClientList</div>;
 };
 
 export default ClientList;
