@@ -24,6 +24,6 @@ _Initial Packages Installed:_
 ```
 npm start
 ```
-Sample:
+_Sample:_
 
 ![Hanas Admin FE Login Page](https://user-images.githubusercontent.com/51246035/155332256-945dc901-89fb-489d-90e7-b9c057671b55.gif)
