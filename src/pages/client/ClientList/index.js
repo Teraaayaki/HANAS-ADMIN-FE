@@ -3,7 +3,12 @@ import React from 'react';
 import style from './index.module.scss';
 
 const ClientList = () => {
-  return <div className={style.sample}>ClientList</div>;
+  return (
+    <div className="main-content">
+      {/* insert code here, do not erase MAIN-CONTENT DIV*/}
+      <div className={style.sample}>Client List</div>
+    </div>
+  );
 };
 
 export default ClientList;

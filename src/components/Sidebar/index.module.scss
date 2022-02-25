@@ -1,0 +1,85 @@
+@use '../../styles/variables' as *;
+
+%display-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 255px;
+  top: 0;
+  left: 0;
+
+  background-color: $color-black-1;
+  align-items: center;
+
+  @extend %display-flex-column;
+}
+
+.sidebarHeader {
+  height: 200px;
+
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  @extend %display-flex-column;
+}
+
+.logo {
+  width: 150px;
+  height: 50px;
+}
+
+.adminText {
+  font-weight: $font-weight-bold;
+  color: $color-gray-1;
+  font-size: $font-size-lg;
+}
+
+.nav {
+  justify-content: center;
+  width: 100%;
+
+  @extend %display-flex-column;
+}
+
+%nav-link-style {
+  text-decoration: none;
+  font-size: $font-size-base;
+
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+%hovered-link-style {
+  background-color: $color-white-hover;
+  border-left: 3px solid $color-white-1;
+  color: $color-white-1;
+}
+
+.navLink {
+  color: $color-gray-1;
+
+  @extend %nav-link-style;
+
+  &:hover {
+    @extend %hovered-link-style;
+  }
+}
+
+.activeLink,
+.activeLink:hover {
+  @extend %nav-link-style;
+  @extend %hovered-link-style;
+}
+
+.icon {
+  margin-left: 45px;
+  opacity: 0.4;
+}

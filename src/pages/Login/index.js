@@ -13,7 +13,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <Container className={style.formContainer}>
+    <div className={style.formContainer}>
       <Form className={style.form}>
         <center className="d-flex flex-column align-items-center">
           <img src={logo} className={style.logo} alt="Hanas Logo" />
@@ -64,7 +64,7 @@ const Login = () => {
           Log In
         </Button>
       </Form>
-    </Container>
+    </div>
   );
 };
 

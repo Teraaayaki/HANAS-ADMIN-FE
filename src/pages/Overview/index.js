@@ -3,7 +3,12 @@ import React from 'react';
 import style from './index.module.scss';
 
 const Overview = () => {
-  return <div className={style.sample}>Overview</div>;
+  return (
+    <div className="main-content">
+      {/* insert code here, do not erase MAIN-CONTENT DIV*/}
+      <div className={style.sample}>Overview</div>
+    </div>
+  );
 };
 
 export default Overview;

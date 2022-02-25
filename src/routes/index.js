@@ -29,13 +29,13 @@ const Routes = () => {
       <AdminRoute path="/overview" exact component={Overview}></AdminRoute>
 
       <AdminRoute
-        path="/verification"
+        path="/requests"
         exact
         component={VerificationRequestList}
       ></AdminRoute>
 
       <AdminRoute
-        path="/verification/:request-id"
+        path="/requests/:request-id"
         exact
         component={VerificationRequestDetail}
       ></AdminRoute>
