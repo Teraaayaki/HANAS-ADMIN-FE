@@ -45,7 +45,7 @@ const Sidebar = () => {
     },
     {
       name: 'User Reports',
-      path: '/userreports',
+      path: '/user-reports',
       icon: <FaClipboardList className={style.icon} />
     }
   ];

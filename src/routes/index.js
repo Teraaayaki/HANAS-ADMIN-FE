@@ -66,7 +66,11 @@ const Routes = () => {
         component={Transaction}
       ></AdminRoute>
 
-      <AdminRoute path="/userreports" exact component={UserReport}></AdminRoute>
+      <AdminRoute
+        path="/user-reports"
+        exact
+        component={UserReport}
+      ></AdminRoute>
     </Switch>
   );
 };
