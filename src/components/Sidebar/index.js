@@ -25,7 +25,7 @@ const Sidebar = () => {
     },
     {
       name: 'Verification',
-      path: '/requests',
+      path: '/verification-requests',
       icon: <FaTicketAlt className={style.icon} />
     },
     {
