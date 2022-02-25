@@ -29,13 +29,13 @@ const Routes = () => {
       <AdminRoute path="/overview" exact component={Overview}></AdminRoute>
 
       <AdminRoute
-        path="/verification"
+        path="/verification-requests"
         exact
         component={VerificationRequestList}
       ></AdminRoute>
 
       <AdminRoute
-        path="/verification/:request-id"
+        path="/verification-requests/:request-id"
         exact
         component={VerificationRequestDetail}
       ></AdminRoute>
@@ -66,7 +66,11 @@ const Routes = () => {
         component={Transaction}
       ></AdminRoute>
 
-      <AdminRoute path="/userreports" exact component={UserReport}></AdminRoute>
+      <AdminRoute
+        path="/user-reports"
+        exact
+        component={UserReport}
+      ></AdminRoute>
     </Switch>
   );
 };

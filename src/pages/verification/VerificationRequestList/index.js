@@ -3,7 +3,12 @@ import React from 'react';
 import style from './index.module.scss';
 
 const VerificationRequestList = () => {
-  return <div>Verification</div>;
+  return (
+    <div className="main-content">
+      {/* insert code here, do not erase MAIN-CONTENT DIV*/}
+      <div className={style.sample}>Verification Request List</div>
+    </div>
+  );
 };
 
 export default VerificationRequestList;
