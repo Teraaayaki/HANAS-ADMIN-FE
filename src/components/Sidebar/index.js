@@ -15,7 +15,7 @@ import { MdGroups } from 'react-icons/md';
 import style from './index.module.scss';
 
 const Sidebar = () => {
-  const [activeLink, setActiveLink] = useState(null);
+  const [activeLink, setActiveLink] = useState(0);
 
   const navigationLinks = [
     {
