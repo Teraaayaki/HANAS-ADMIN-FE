@@ -5,6 +5,11 @@
   flex-direction: column;
 }
 
+%flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
 .sidebar {
   position: fixed;
   height: 100%;
@@ -51,10 +56,9 @@
   font-size: $font-size-base;
 
   height: 55px;
-
-  display: flex;
-  align-items: center;
   gap: 20px;
+
+  @extend %flex-align-center;
 }
 
 %hovered-link-style {
@@ -82,4 +86,26 @@
 .icon {
   margin-left: 45px;
   opacity: 0.4;
+}
+
+.logoutContainer {
+  color: $color-gray-1;
+
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 20px;
+  justify-content: center;
+
+  @extend %nav-link-style;
+
+  &:hover {
+    background-color: $color-white-hover;
+    color: $color-white-1;
+  }
+}
+
+.logout {
+  gap: 20px;
+
+  @extend %flex-align-center;
 }

@@ -3,12 +3,14 @@ import { Route } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
 import Sidebar from '../../../components/Sidebar';
+import Header from '../../../components/Header';
 
-const AdminRoute = ({ component: Component, ...rest }) => {
+const AdminRoute = ({ pageTitle, component: Component, ...rest }) => {
   return (
     <Fragment>
-      {/* Navigation Side Bar */}
+      {/* Navigation Sidebar and Header*/}
       <Sidebar />
+      <Header pageTitle={pageTitle} />
 
       {/* Main Component */}
       <Route

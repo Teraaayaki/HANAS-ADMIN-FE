@@ -6,7 +6,7 @@ const VerificationRequestDetail = () => {
   return (
     <div className="main-content">
       {/* insert code here, do not erase MAIN-CONTENT DIV*/}
-      <div className={style.sample}>Verification Request Detail</div>
+      <div className={style.sample}></div>
     </div>
   );
 };

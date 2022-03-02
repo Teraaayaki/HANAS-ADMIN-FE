@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+%flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.headerPostition {
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 255px);
+  left: 255px;
+}
+
+.header {
+  margin: 35px;
+  justify-content: space-between;
+
+  @extend %flex-align-center;
+}
+
+.pageTitle {
+  font-size: $font-size-page-title;
+  font-weight: $font-weight-bold;
+}
+
+.userInfo {
+  border-left: 1px solid $color-gray-1;
+  height: 30px;
+  gap: 10px;
+
+  @extend %flex-align-center;
+}
+
+.adminName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  margin-left: 30px;
+}
+
+.profilePic {
+  height: 45px;
+  border-radius: 100%;
+}
