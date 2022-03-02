@@ -11,6 +11,7 @@ import {
   FaClipboardList
 } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
+import { BiLogOutCircle } from 'react-icons/bi';
 
 import style from './index.module.scss';
 
@@ -81,6 +82,12 @@ const Sidebar = () => {
           );
         })}
       </Nav>
+      <Link to="/login" className={style.logoutContainer}>
+        <div className={style.logout}>
+          <BiLogOutCircle />
+          <span>Logout</span>
+        </div>
+      </Link>
     </div>
   );
 };

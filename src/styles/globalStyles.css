@@ -18,4 +18,5 @@ body {
   height: 100%;
   width: calc(100% - 255px);
   left: 255px;
+  padding: 125px 35px 0px;
 }

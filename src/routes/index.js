@@ -26,48 +26,65 @@ const Routes = () => {
 
       <AuthRoute path="/login" exact component={Login}></AuthRoute>
 
-      <AdminRoute path="/overview" exact component={Overview}></AdminRoute>
+      <AdminRoute
+        path="/overview"
+        pageTitle="Overview"
+        exact
+        component={Overview}
+      ></AdminRoute>
 
       <AdminRoute
         path="/verification-requests"
+        pageTitle="Verification Requests"
         exact
         component={VerificationRequestList}
       ></AdminRoute>
 
       <AdminRoute
         path="/verification-requests/:request-id"
+        pageTitle="Verification Request Detail"
         exact
         component={VerificationRequestDetail}
       ></AdminRoute>
 
-      <AdminRoute path="/clients" exact component={ClientList}></AdminRoute>
+      <AdminRoute
+        path="/clients"
+        pageTitle="Clients"
+        exact
+        component={ClientList}
+      ></AdminRoute>
 
       <AdminRoute
         path="/clients/:client-id"
+        pageTitle="Client Details"
         exact
         component={ClientDetail}
       ></AdminRoute>
 
       <AdminRoute
         path="/skilledworkers"
+        pageTitle="Skilled Workers"
         exact
         component={SkilledWorkerList}
       ></AdminRoute>
 
       <AdminRoute
         path="/skilledworkers/:skilledworker-id"
+        pageTitle="Skilled Worker Details"
         exact
         component={SkilledWorkerDetail}
       ></AdminRoute>
 
       <AdminRoute
         path="/transactions"
+        pageTitle="Transactions"
         exact
         component={Transaction}
       ></AdminRoute>
 
       <AdminRoute
         path="/user-reports"
+        pageTitle="User Reports"
         exact
         component={UserReport}
       ></AdminRoute>
