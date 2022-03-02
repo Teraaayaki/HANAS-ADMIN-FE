@@ -59,7 +59,15 @@ const Login = () => {
             </Form.Text>
           </Form.Group>
         </div>
-        <Button className={style.loginButton} type="submit">
+        <Button
+          className={style.loginButton}
+          onClick={(e) => {
+            //Temporary Code: So that we can redirect to the Overview Page
+            e.preventDefault();
+            window.location = '/admin/overview';
+          }}
+          type="submit"
+        >
           Log In
         </Button>
       </Form>
