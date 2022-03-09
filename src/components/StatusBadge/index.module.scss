@@ -1,0 +1,26 @@
+@use '../../styles/variables' as *;
+
+@mixin bg-color($bg-color) {
+  background-color: $bg-color;
+  border-radius: 100px;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $color-white-1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 88px;
+  height: 24px;
+}
+
+.yellow {
+  @include bg-color($pending-color);
+}
+
+.red {
+  @include bg-color($rejected-color);
+}
+
+.green {
+  @include bg-color($verified-color);
+}
