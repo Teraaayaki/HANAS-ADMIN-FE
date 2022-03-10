@@ -83,9 +83,19 @@
   @extend %hovered-link-style;
 }
 
-.icon {
+%icons-style {
   margin-left: 45px;
   opacity: 0.4;
+}
+
+.icon {
+  @extend %icons-style;
+}
+
+.clientsIcon {
+  font-size: 20px;
+
+  @extend %icons-style;
 }
 
 .logoutContainer {

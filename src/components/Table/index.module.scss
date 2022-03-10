@@ -1,0 +1,93 @@
+@use '../../styles/variables' as *;
+
+.card {
+  height: 100%;
+  padding: 35px 0px 0px;
+
+  color: $color-black-1;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 35px 45px 35px;
+  background-color: $color-white-3;
+  border: none;
+}
+
+.cardHeaderTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+}
+
+.listConditions {
+  display: flex;
+  gap: 35px;
+}
+
+.conditions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.conditionsText {
+  font-size: $font-size-md;
+  color: $color-black-1;
+}
+
+.sortIcon {
+  font-size: $font-size-lg;
+  color: $color-gray-1;
+}
+
+.filterIcon {
+  font-size: $font-size-sm;
+  color: $color-gray-1;
+}
+
+.cardBody {
+  padding: 0px;
+  overflow: auto;
+  overflow-x: hidden;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $color-white-1;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $color-gray-1;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-gray-3;
+  }
+}
+
+.tableHeaderRow {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-md;
+  color: $color-gray-1;
+}
+
+.headerName {
+  &:first-child {
+    padding-left: 38px;
+  }
+
+  &:nth-last-child(3) {
+    width: 230px;
+  }
+
+  &:nth-last-child(2) {
+    width: 210px;
+  }
+}

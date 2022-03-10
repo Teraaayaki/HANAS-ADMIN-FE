@@ -32,7 +32,7 @@ const Sidebar = () => {
     {
       name: 'Clients',
       path: '/clients',
-      icon: <MdGroups className={style.icon} />
+      icon: <MdGroups className={style.clientsIcon} />
     },
     {
       name: 'Skilled Workers',
