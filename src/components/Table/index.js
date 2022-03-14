@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { BiSortUp } from 'react-icons/bi';
 import { FaFilter } from 'react-icons/fa';
 
@@ -12,14 +13,36 @@ const DataTable = ({ tableTitle, headerNames, renderData }) => {
       <Card.Header className={style.cardHeader}>
         <h6 className={style.cardHeaderTitle}>{tableTitle}</h6>
         <div className={style.listConditions}>
-          <div className={style.conditions}>
-            <BiSortUp className={style.sortIcon} />
-            <span className={style.conditionsText}>Sort</span>
-          </div>
-          <div className={style.conditions}>
-            <FaFilter className={style.filterIcon} />
-            <span className={style.conditionsText}>Filter</span>
-          </div>
+          <Dropdown>
+            <Dropdown.Toggle
+              className={style.conditionButtons}
+              bsPrefix="none"
+              id="dropdown-basic"
+            >
+              <BiSortUp className={style.sortIcon} />
+              <span className={style.conditionsText}>Sort</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={style.conditionMenu}>
+              <Dropdown.Item> Option 1</Dropdown.Item>
+              <Dropdown.Item>Option 2</Dropdown.Item>
+              <Dropdown.Item>Option 3</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle
+              className={style.conditionButtons}
+              bsPrefix="none"
+              id="dropdown-basic"
+            >
+              <FaFilter className={style.filterIcon} />
+              <span className={style.conditionsText}>Filter</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={style.conditionMenu}>
+              <Dropdown.Item>Option 1</Dropdown.Item>
+              <Dropdown.Item>Option 2</Dropdown.Item>
+              <Dropdown.Item>Option 3</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </Card.Header>
       <Card.Body className={style.cardBody}>

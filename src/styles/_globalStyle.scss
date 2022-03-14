@@ -1,0 +1,7 @@
+@mixin truncate($width-value) {
+  display: -webkit-box;
+  max-width: $width-value;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

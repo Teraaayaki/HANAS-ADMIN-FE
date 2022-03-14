@@ -90,7 +90,7 @@ const skilledworkers = [
   {
     id: 9,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'José Protacio Rizal Mercado y Alonso Realonda',
+    name: 'José Protacio Rizal Mercado y Alonso Realonda Alonso Realonda',
     address: 'Carcar City, Cebu',
     services: 'Plumbing, Electrical',
     member_since: 'September 26, 2022',
@@ -119,7 +119,7 @@ const SkilledWorkerList = () => {
               alt="&nbsp; Profile Pic"
             />
             <Link to={`/skilledworkers/${skilledworker.id}`}>
-              <span>{skilledworker.name}</span>
+              <span className={style.truncate}>{skilledworker.name}</span>
             </Link>
           </td>
           <td className={style.tableData}>

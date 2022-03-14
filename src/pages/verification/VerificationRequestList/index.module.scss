@@ -1,1 +1,11 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/tableGlobalStyles' as *;
+
+.deleteIcon {
+  color: $color-gray-1;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-gray-3;
+  }
+}
