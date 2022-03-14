@@ -6,11 +6,11 @@ import { FaFilter } from 'react-icons/fa';
 
 import style from './index.module.scss';
 
-const DataTable = ({ headerNames, renderData }) => {
+const DataTable = ({ tableTitle, headerNames, renderData }) => {
   return (
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
-        <h6 className={style.cardHeaderTitle}>Details</h6>
+        <h6 className={style.cardHeaderTitle}>{tableTitle}</h6>
         <div className={style.listConditions}>
           <div className={style.conditions}>
             <BiSortUp className={style.sortIcon} />

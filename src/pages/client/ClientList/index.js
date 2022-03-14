@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
 import { GoKebabVertical } from 'react-icons/go';
@@ -7,6 +8,7 @@ import style from './index.module.scss';
 
 const clients = [
   {
+    id: 1,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Mary Therese Sun Alegre',
     address: 'Bogo City, Cebu',
@@ -15,6 +17,7 @@ const clients = [
     status: 'PENDING'
   },
   {
+    id: 2,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'General Salipada K. Pendatun',
     address: 'Cebu City, Cebu',
@@ -23,6 +26,7 @@ const clients = [
     status: 'VERIFIED'
   },
   {
+    id: 3,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Robert Downey',
     address: 'Mandaue City, Cebu',
@@ -31,6 +35,7 @@ const clients = [
     status: 'UNVERIFIED'
   },
   {
+    id: 4,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Christian Bale',
     address: 'Danao City, Cebu',
@@ -39,6 +44,7 @@ const clients = [
     status: 'PENDING'
   },
   {
+    id: 5,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Henry Cavil',
     address: 'Daanbantayan City, Cebu',
@@ -47,6 +53,7 @@ const clients = [
     status: 'VERIFIED'
   },
   {
+    id: 6,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Blake Lively',
     address: 'Carcar City, Cebu',
@@ -55,6 +62,7 @@ const clients = [
     status: 'VERIFIED'
   },
   {
+    id: 7,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Christian Bale',
     address: 'Danao City, Cebu',
@@ -63,6 +71,7 @@ const clients = [
     status: 'PENDING'
   },
   {
+    id: 8,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Henry Cavil',
     address: 'Daanbantayan City, Cebu',
@@ -71,6 +80,7 @@ const clients = [
     status: 'VERIFIED'
   },
   {
+    id: 9,
     pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
     name: 'Blake Lively',
     address: 'Carcar City, Cebu',
@@ -91,9 +101,11 @@ const ClientList = () => {
             <img
               className={style.profilePic}
               src={client.pp}
-              alt="profile pic"
+              alt="&nbsp; Profile Pic"
             />
-            <span>{client.name}</span>
+            <Link to={`/clients/${client.id}`}>
+              <span>{client.name}</span>
+            </Link>
           </td>
           <td className={style.tableData}>
             <span>{client.address}</span>
@@ -115,7 +127,11 @@ const ClientList = () => {
 
   return (
     <div className="main-content">
-      <DataTable headerNames={headerNames} renderData={renderClientListData} />
+      <DataTable
+        tableTitle="Details"
+        headerNames={headerNames}
+        renderData={renderClientListData}
+      />
     </div>
   );
 };

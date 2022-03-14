@@ -10,9 +10,10 @@ const Header = ({ pageTitle }) => {
         <div className={style.userInfo}>
           <span className={style.adminName}>John Doe</span>
           <img
+            title="John Doe"
             className={style.profilePic}
             src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
-            alt="Profile Pic"
+            alt="&nbsp; Avatar"
           />
         </div>
       </div>

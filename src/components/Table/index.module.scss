@@ -49,11 +49,11 @@
 .cardBody {
   padding: 0px;
   overflow: auto;
-  overflow-x: hidden;
 
   /* width */
   &::-webkit-scrollbar {
     width: 5px;
+    height: 0px;
   }
 
   /* Track */
@@ -84,10 +84,10 @@
   }
 
   &:nth-last-child(3) {
-    width: 230px;
+    min-width: 200px;
   }
 
   &:nth-last-child(2) {
-    width: 210px;
+    min-width: 150px;
   }
 }

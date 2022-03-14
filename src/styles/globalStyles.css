@@ -20,3 +20,19 @@ body {
   left: 255px;
   padding: 125px 35px 35px;
 }
+
+@media only screen and (max-width: 1000px) {
+  .main-content {
+    width: calc(100% - 200px);
+    left: 200px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #363740;
+}
+
+a:hover {
+  color: #a4a6b3;
+}
