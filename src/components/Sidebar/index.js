@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import logo from '../../assets/Logo/hanas-logo.png';
 
@@ -16,7 +16,10 @@ import { BiLogOutCircle } from 'react-icons/bi';
 import style from './index.module.scss';
 
 const Sidebar = () => {
-  const [activeLink, setActiveLink] = useState(0);
+  const history = useHistory();
+  const [activeLink, setActiveLink] = useState(
+    parseInt(window.localStorage.getItem('active-link')) || 0
+  );
 
   const navigationLinks = [
     {
@@ -51,10 +54,19 @@ const Sidebar = () => {
     }
   ];
 
+  useEffect(() => {
+    window.localStorage.setItem('active-link', activeLink);
+  }, [activeLink]);
+
+  const onLogout = () => {
+    window.localStorage.removeItem('active-link');
+    history.push('/login');
+  };
+
   return (
     <div className={style.sidebar}>
       <div className={style.sidebarHeader}>
-        <Link to="/overview">
+        <Link to="/overview" onClick={() => setActiveLink(0)}>
           <img src={logo} className={style.logo} alt="Hanas Logo" />
         </Link>
         <h6 className={style.adminText}>Admin</h6>
@@ -82,12 +94,10 @@ const Sidebar = () => {
           );
         })}
       </Nav>
-      <Link to="/login" className={style.logoutContainer}>
-        <div className={style.logout}>
-          <BiLogOutCircle />
-          <span>Logout</span>
-        </div>
-      </Link>
+      <div onClick={onLogout} className={style.logout}>
+        <BiLogOutCircle />
+        <span>Logout</span>
+      </div>
     </div>
   );
 };

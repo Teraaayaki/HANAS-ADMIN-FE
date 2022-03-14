@@ -21,6 +21,10 @@
   align-items: center;
 
   @extend %display-flex-column;
+
+  @media screen and (max-width: 1000px) {
+    width: 200px;
+  }
 }
 
 .sidebarHeader {
@@ -86,6 +90,10 @@
 %icons-style {
   margin-left: 45px;
   opacity: 0.4;
+
+  @media screen and (max-width: 1000px) {
+    margin-left: 23px;
+  }
 }
 
 .icon {
@@ -98,13 +106,14 @@
   @extend %icons-style;
 }
 
-.logoutContainer {
-  color: $color-gray-1;
-
+.logout {
+  gap: 20px;
   width: 100%;
   margin-top: auto;
   margin-bottom: 20px;
   justify-content: center;
+  color: $color-gray-1;
+  cursor: pointer;
 
   @extend %nav-link-style;
 
@@ -112,10 +121,4 @@
     background-color: $color-white-hover;
     color: $color-white-1;
   }
-}
-
-.logout {
-  gap: 20px;
-
-  @extend %flex-align-center;
 }
