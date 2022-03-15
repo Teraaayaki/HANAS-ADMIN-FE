@@ -10,7 +10,27 @@ body,
 body {
   background-color: #fffcfd;
   font-family: 'Mulish', sans-serif;
-  overflow: hidden;
+  overflow: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: black;
 }
 
 .main-content {
@@ -21,7 +41,7 @@ body {
   padding: 125px 35px 35px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media screen and (max-width: 992px), screen and (max-height: 768px) {
   .main-content {
     width: calc(100% - 200px);
     left: 200px;

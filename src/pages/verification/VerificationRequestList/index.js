@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
-import { GoKebabVertical } from 'react-icons/go';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 
 import style from './index.module.scss';
@@ -85,14 +84,14 @@ const renderVerificationRequests = () => {
             alt="&nbsp; Profile Pic"
           />
           <Link to={`/verification-requests/${request.id}`}>
-            <span>Request for Verification</span>
+            <span className={style.truncate}>Request for Verification</span>
           </Link>
         </td>
         <td className={style.tableData}>
           <span>{request.name}</span>
         </td>
         <td className={style.tableData}>
-          <span>{request.date}</span>
+          <span>{request.date}</span> <br />
           <span className={style.time}>{request.time}</span>
         </td>
         <td className={style.tableData}>

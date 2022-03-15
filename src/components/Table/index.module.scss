@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use '../../styles/globalMixins' as *;
 
 .card {
   height: 100%;
@@ -8,30 +9,26 @@
 }
 
 .cardHeader {
-  display: flex;
-  justify-content: space-between;
   padding: 0px 35px 45px 35px;
   background-color: $color-white-3;
   border: none;
+
+  @include flex(space-between, center, row, none);
 }
 
 .cardHeaderTitle {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bold;
+  @include text-style($color-black-1, $font-size-lg, $font-weight-bold);
 }
 
 .listConditions {
-  display: flex;
-  gap: 35px;
+  @include flex(none, none, row, 35px);
 }
 
 .conditionButtons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
   background-color: transparent;
   border: none;
+
+  @include flex(none, center, row, 10px);
 
   &:hover,
   &:focus,
@@ -42,18 +39,15 @@
 }
 
 .conditionsText {
-  font-size: $font-size-md;
-  color: $color-black-1;
+  @include text-style($color-black-1, $font-size-md, $font-weight-regular);
 }
 
 .sortIcon {
-  font-size: $font-size-lg;
-  color: $color-gray-1;
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-regular);
 }
 
 .filterIcon {
-  font-size: $font-size-sm;
-  color: $color-gray-1;
+  @include text-style($color-gray-1, $font-size-sm, $font-weight-regular);
 }
 
 .cardBody {
@@ -83,9 +77,7 @@
 }
 
 .tableHeaderRow {
-  font-weight: $font-weight-bold;
-  font-size: $font-size-md;
-  color: $color-gray-1;
+  @include text-style($color-gray-1, $font-size-md, $font-weight-bold);
 }
 
 .headerName {
@@ -99,5 +91,15 @@
 
   &:nth-last-child(2) {
     min-width: 150px;
+  }
+}
+
+@media screen and (max-height: 768px) {
+  .cardHeaderTitle {
+    @include text-style($color-black-1, $font-size-base, $font-weight-bold);
+  }
+
+  .tableHeaderRow {
+    @include text-style($color-gray-1, $font-size-sm, $font-weight-bold);
   }
 }

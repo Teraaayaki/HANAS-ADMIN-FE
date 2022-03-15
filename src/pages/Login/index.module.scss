@@ -1,11 +1,11 @@
 @use '../../styles/variables' as *;
+@use '../../styles/globalMixins' as *;
 
 .formContainer {
   background-color: $color-black-1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
+
+  @include flex(center, center, row, none);
 }
 
 .form {
@@ -14,9 +14,8 @@
   width: 380px;
   height: 585px;
   padding: 50px 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
+
+  @include flex(none, none, column, 35px);
 }
 
 .logo {
@@ -24,45 +23,40 @@
 }
 
 .adminText {
-  color: $color-gray-1;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bold;
   margin-bottom: 30px;
   opacity: 0.7;
+
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-bold);
 }
 
 .formTitle {
-  color: $color-black-1;
-  font-weight: $font-weight-bold;
+  @include text-style($color-black-1, $font-size-page-title, $font-weight-bold);
 }
 
 .formMessage {
-  color: $color-gray-1;
-  font-size: $font-size-md;
+  @include text-style($color-gray-1, $font-size-md, $font-weight-regular);
 }
 
 .inputLabels {
-  color: $color-gray-1;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-bold;
+  @include text-style($color-gray-1, $font-size-sm, $font-weight-bold);
 }
 
 .inputFields {
   height: 40px;
-  color: $color-gray-2;
-  font-size: $font-size-md;
   border: 1px solid $color-white-2;
   border-radius: 8px;
   opacity: 0.8;
+
+  @include text-style($color-gray-2, $font-size-md, $font-weight-regular);
 }
 
 .faEyeIcon {
-  font-size: $font-size-lg;
-  color: $color-gray-1;
   position: absolute;
   top: 41.5px;
   right: 12.5px;
   cursor: pointer;
+
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-regular);
 
   &:hover {
     color: $color-gray-2;
@@ -70,8 +64,7 @@
 }
 
 .forgotPassword {
-  font-size: $font-size-sm;
-  color: $color-gray-1;
+  @include text-style($color-gray-1, $font-size-sm, $font-weight-regular);
 }
 
 .clickHereLink {
