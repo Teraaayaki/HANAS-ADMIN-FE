@@ -25,10 +25,20 @@
   gap: 35px;
 }
 
-.conditions {
+.conditionButtons {
   display: flex;
   align-items: center;
   gap: 10px;
+
+  background-color: transparent;
+  border: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: transparent;
+    border: none;
+  }
 }
 
 .conditionsText {
@@ -53,7 +63,7 @@
   /* width */
   &::-webkit-scrollbar {
     width: 5px;
-    height: 0px;
+    height: 5px;
   }
 
   /* Track */

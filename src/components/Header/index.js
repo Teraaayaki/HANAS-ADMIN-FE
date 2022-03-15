@@ -8,7 +8,9 @@ const Header = ({ pageTitle }) => {
       <div className={style.header}>
         <h3 className={style.pageTitle}>{pageTitle}</h3>
         <div className={style.userInfo}>
-          <span className={style.adminName}>John Doe</span>
+          <span className={style.adminName}>
+            José Protacio Rizal Mercado y Alonso Realonda
+          </span>
           <img
             title="John Doe"
             className={style.profilePic}

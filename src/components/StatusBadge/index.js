@@ -6,8 +6,10 @@ const StatusBadge = ({ status }) => {
   const badgeColor = () => {
     switch (status) {
       case 'VERIFIED':
+      case 'ACCEPTED':
         return style.green;
       case 'UNVERIFIED':
+      case 'REJECTED':
         return style.red;
       default:
         return style.yellow;
