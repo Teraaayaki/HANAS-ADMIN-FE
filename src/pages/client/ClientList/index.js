@@ -93,7 +93,7 @@ const clients = [
 const ClientList = () => {
   const headerNames = ['Name', 'Address', 'Member Since', 'Account Status'];
 
-  const renderClientListData = () => {
+  const renderClientList = () => {
     return clients.map((client, idx) => {
       return (
         <tr key={idx} className={style.tableDataRow}>
@@ -130,7 +130,7 @@ const ClientList = () => {
       <DataTable
         tableTitle="Details"
         headerNames={headerNames}
-        renderData={renderClientListData}
+        renderData={renderClientList}
       />
     </div>
   );

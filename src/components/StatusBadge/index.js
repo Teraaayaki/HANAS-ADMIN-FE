@@ -7,6 +7,8 @@ const StatusBadge = ({ status }) => {
     switch (status) {
       case 'VERIFIED':
       case 'ACCEPTED':
+      case 'FINISHED':
+      case 'RESOLVED':
         return style.green;
       case 'UNVERIFIED':
       case 'REJECTED':

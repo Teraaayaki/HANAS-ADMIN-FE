@@ -108,7 +108,7 @@ const SkilledWorkerList = () => {
     'Account Status'
   ];
 
-  const renderClientListData = () => {
+  const renderSkilledWorkersList = () => {
     return skilledworkers.map((skilledworker, idx) => {
       return (
         <tr key={idx} className={style.tableDataRow}>
@@ -129,7 +129,7 @@ const SkilledWorkerList = () => {
             <span>{skilledworker.services}</span>
           </td>
           <td className={style.tableData}>
-            <span>{skilledworker.member_since}</span>
+            <span>{skilledworker.member_since}</span> <br />
             <span className={style.time}>{skilledworker.time}</span>
           </td>
           <td className={style.tableData}>
@@ -148,7 +148,7 @@ const SkilledWorkerList = () => {
       <DataTable
         tableTitle="Details"
         headerNames={headerNames}
-        renderData={renderClientListData}
+        renderData={renderSkilledWorkersList}
       />
     </div>
   );
