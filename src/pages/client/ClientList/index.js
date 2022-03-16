@@ -104,14 +104,14 @@ const ClientList = () => {
               alt="&nbsp; Profile Pic"
             />
             <Link to={`/clients/${client.id}`}>
-              <span>{client.name}</span>
+              <span className={style.truncate}>{client.name}</span>
             </Link>
           </td>
           <td className={style.tableData}>
             <span>{client.address}</span>
           </td>
           <td className={style.tableData}>
-            <span>{client.member_since}</span>
+            <span>{client.member_since}</span> <br />
             <span className={style.time}>{client.time}</span>
           </td>
           <td className={style.tableData}>

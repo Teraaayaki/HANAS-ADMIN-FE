@@ -21,10 +21,6 @@
   align-items: center;
 
   @extend %display-flex-column;
-
-  @media screen and (max-width: 1000px) {
-    width: 200px;
-  }
 }
 
 .sidebarHeader {
@@ -89,11 +85,6 @@
 
 %icons-style {
   margin-left: 45px;
-  opacity: 0.4;
-
-  @media screen and (max-width: 1000px) {
-    margin-left: 23px;
-  }
 }
 
 .icon {
@@ -120,5 +111,24 @@
   &:hover {
     background-color: $color-white-hover;
     color: $color-white-1;
+  }
+}
+
+@media screen and (max-width: 992px), screen and (max-height: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  %icons-style {
+    margin-left: 33px;
+    font-size: $font-size-md;
+  }
+
+  .clientsIcon {
+    font-size: 15px;
+  }
+
+  %nav-link-style {
+    font-size: $font-size-md;
   }
 }
