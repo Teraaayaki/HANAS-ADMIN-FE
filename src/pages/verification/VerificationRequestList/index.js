@@ -73,7 +73,7 @@ const requests = [
   }
 ];
 
-const renderVerificationRequests = () => {
+const renderVerificationRequestList = () => {
   return requests.map((request, idx) => {
     return (
       <tr key={idx} className={style.tableDataRow}>
@@ -118,7 +118,7 @@ const VerificationRequestList = () => {
       <DataTable
         tableTitle="All Requests"
         headerNames={headerNames}
-        renderData={renderVerificationRequests}
+        renderData={renderVerificationRequestList}
       />
     </div>
   );

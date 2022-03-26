@@ -4,6 +4,7 @@
 @mixin bg-color($bg-color) {
   background-color: $bg-color;
   border-radius: 100px;
+  margin: 0px;
   width: 88px;
   height: 24px;
 
