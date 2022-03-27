@@ -41,7 +41,7 @@ const Routes = () => {
       ></AdminRoute>
 
       <AdminRoute
-        path="/verification-requests/:request-id"
+        path="/verification-requests/:requestID"
         pageTitle="Verification Request Detail"
         exact
         component={VerificationRequestDetail}
@@ -55,7 +55,7 @@ const Routes = () => {
       ></AdminRoute>
 
       <AdminRoute
-        path="/clients/:client-id"
+        path="/clients/:clientID"
         pageTitle="Client Details"
         exact
         component={ClientDetail}
@@ -69,7 +69,7 @@ const Routes = () => {
       ></AdminRoute>
 
       <AdminRoute
-        path="/skilledworkers/:skilledworker-id"
+        path="/skilledworkers/:skilledworkerID"
         pageTitle="Skilled Worker Details"
         exact
         component={SkilledWorkerDetail}
