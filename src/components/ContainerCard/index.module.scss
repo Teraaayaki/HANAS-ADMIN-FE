@@ -86,13 +86,9 @@
 }
 
 .infoLabel {
-  font-weight: $font-weight-bold;
-  font-size: $font-size-sm;
-  color: $color-gray-2;
+  @include text-style($color-gray-2, $font-size-sm, $font-weight-bold);
 }
 
 .info {
-  font-weight: $font-weight-semibold;
-  font-size: $font-size-lg;
-  color: $color-black-1;
+  @include text-style($color-black-1, $font-size-lg, $font-weight-semibold);
 }

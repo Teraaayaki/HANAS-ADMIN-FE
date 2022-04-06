@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-import { PropTypes } from 'prop-types';
+import AuthService from '../../../services/AuthService';
 
 const AuthRoute = ({ component: Component, ...rest }) => {
   return (
@@ -9,17 +9,24 @@ const AuthRoute = ({ component: Component, ...rest }) => {
       <Route
         {...rest}
         render={(props) => {
-          return <Component {...props} />;
+          if (!AuthService.authenticated()) {
+            return <Component {...props} />;
+          }
+
+          return (
+            <Redirect
+              to={{
+                pathname: '/overview',
+                state: {
+                  from: props.location
+                }
+              }}
+            />
+          );
         }}
       ></Route>
     </Fragment>
   );
-};
-
-AuthRoute.propTypes = {
-  component: PropTypes.any,
-  name: PropTypes.string,
-  location: PropTypes.any
 };
 
 export default AuthRoute;

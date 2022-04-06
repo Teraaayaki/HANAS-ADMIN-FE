@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import cookies from 'js-cookie';
 import Nav from 'react-bootstrap/Nav';
-import logo from '../../assets/Logo/hanas-logo.png';
-
 import {
   FaChartPie,
   FaTicketAlt,
@@ -13,10 +13,12 @@ import {
 import { MdGroups } from 'react-icons/md';
 import { BiLogOutCircle } from 'react-icons/bi';
 
+import { signOut } from '../../redux/actions/authActions';
+import logo from '../../assets/Logo/hanas-logo.png';
 import style from './index.module.scss';
 
 const Sidebar = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
   const [activeLink, setActiveLink] = useState(
     parseInt(window.localStorage.getItem('active-link')) || 0
   );
@@ -60,7 +62,9 @@ const Sidebar = () => {
 
   const onLogout = () => {
     window.localStorage.removeItem('active-link');
-    history.push('/login');
+    cookies.remove('access_token');
+    cookies.remove('admin_name');
+    dispatch(signOut());
   };
 
   return (

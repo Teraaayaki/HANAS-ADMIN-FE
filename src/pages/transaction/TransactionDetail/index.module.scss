@@ -1,0 +1,79 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/globalMixins' as *;
+
+.modal {
+  margin-right: 400px !important;
+}
+
+.modalBody {
+  height: 575px;
+  padding: 30px 40px;
+  overflow-y: auto;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $color-white-1;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $color-gray-1;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-gray-3;
+  }
+}
+
+.transactionDetails {
+  @include flex(space-between, center, row, none);
+}
+
+.firstColumnDetails,
+.secondColumnDetails {
+  @include flex(flex-start, flex-start, column, 25px);
+}
+
+.transInfoContainer {
+  @include flex(flex-start, flex-start, column, 10px);
+}
+
+.infoLabel {
+  @include text-style($color-gray-2, $font-size-sm, $font-weight-bold);
+}
+
+.info {
+  @include text-style($color-black-1, $font-size-lg, $font-weight-semibold);
+}
+
+.paymentInfos {
+  border: 1px $color-gray-1 solid;
+  border-radius: 5px;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.paymentInfoContainer {
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
+  @include flex(space-between, center, row, none);
+}
+
+.paymentInfoLabels {
+  @include text-style($color-black-1, $font-size-base, $font-weight-bold);
+}
+
+.paymentInfo {
+  @include text-style($color-black-1, $font-size-md, $font-weight-regular);
+}
