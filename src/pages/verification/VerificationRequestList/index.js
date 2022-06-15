@@ -17,22 +17,22 @@ const renderVerificationRequestList = (verificationData) => {
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={verificationData.profile_pic}
+            src={verificationData.workerData[0].profile_pic}
             alt="&nbsp; Profile Pic"
           />
-          <Link to={`/verification-requests/${verificationData._id}`}>
+          <Link to={`/verification-requests/${verificationData.user_id}`}>
             <span className={style.truncate}>Request for Verification</span>
           </Link>
         </td>
         <td className={style.tableData}>
-          <span>{verificationData.name}</span>
+          <span>{verificationData.workerData[0].name}</span>
         </td>
         <td className={style.tableData}>
           <span>{moment(verificationData.createdAt).format('LL')}</span> <br />
           <span className={style.time}>{moment(verificationData.createdAt).format('LT')}</span>
         </td>
         <td className={style.tableData}>
-          <StatusBadge status={verificationData.verify_status.toUpperCase()} />
+          <StatusBadge status={verificationData.workerData[0].verify_status.toUpperCase()} />
         </td>
         <td className={style.tableData}>
           <MdOutlineDeleteOutline size={25} className={style.deleteIcon} />

@@ -1,4 +1,4 @@
-import VerificationAPI from "../../api/Verification";
+import { VerificationAPI } from "../../api/Verification";
 import { VerificationActions } from './types';
 
 export const getVerificationList = () => async (dispatch) => {
