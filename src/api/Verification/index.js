@@ -22,6 +22,8 @@ export const GetSpecificVerificationAPI = {
       }
     };
 
+    console.log("id", id);
+
     return API.request(options);
   }
 }
