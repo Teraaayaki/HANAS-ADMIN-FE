@@ -1,8 +1,9 @@
-import React from 'react';
-import DataTable from '../../components/Table';
-import StatusBadge from '../../components/StatusBadge';
+import React, { useState } from 'react';
 import { GoKebabVertical } from 'react-icons/go';
 
+import DataTable from '../../../components/Table';
+import StatusBadge from '../../../components/StatusBadge';
+import TransactionDetail from '../TransactionDetail';
 import style from './index.module.scss';
 
 const transactions = [
@@ -98,7 +99,9 @@ const transactions = [
   }
 ];
 
-const Transaction = () => {
+const TransactionList = () => {
+  const [showTransactionDets, setShowTransactionDets] = useState(false);
+
   const headerNames = [
     'Client Name',
     'Worker Name',
@@ -111,7 +114,13 @@ const Transaction = () => {
   const renderTransactionsList = () => {
     return transactions.map((transaction, idx) => {
       return (
-        <tr key={idx} className={style.tableDataRow}>
+        <tr
+          key={idx}
+          onClick={() => {
+            setShowTransactionDets(true);
+          }}
+          className={`${style.tableDataRow} ${style.clickable}`}
+        >
           <td className={style.tableData}>
             <span className={style.truncate}>{transaction.client_name}</span>
           </td>
@@ -141,6 +150,10 @@ const Transaction = () => {
 
   return (
     <div className="main-content">
+      <TransactionDetail
+        show={showTransactionDets}
+        handleClose={() => setShowTransactionDets(false)}
+      />
       <DataTable
         tableTitle="Details"
         headerNames={headerNames}
@@ -150,4 +163,4 @@ const Transaction = () => {
   );
 };
 
-export default Transaction;
+export default TransactionList;

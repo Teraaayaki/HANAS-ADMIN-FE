@@ -1,101 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+
 import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { getVerificationList } from "../../../redux/actions/verificationActions.js";
+import moment from "moment";
 
 import style from './index.module.scss';
 
-const requests = [
-  {
-    id: 1,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Mary Therese Sun Alegre',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'ACCEPTED'
-  },
-  {
-    id: 2,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'John Angelo S. Alegre',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  },
-  {
-    id: 3,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'James Karl Sia',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'ACCEPTED'
-  },
-  {
-    id: 4,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Hosea Barriga',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  },
-  {
-    id: 5,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'James Bond',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'REJECTED'
-  },
-  {
-    id: 2,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Louise Lane',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  },
-  {
-    id: 3,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Peter Parker',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'REJECTED'
-  },
-  {
-    id: 4,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Russel John De Castro',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  }
-];
-
-const renderVerificationRequestList = () => {
-  return requests.map((request, idx) => {
+const renderVerificationRequestList = (verificationData) => {
+  return verificationData.map((verificationData, idx) => {
     return (
-      <tr key={idx} className={style.tableDataRow}>
+      <tr key={verificationData._id} className={style.tableDataRow}>
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={request.pp}
+            src={verificationData.workerData[0].profile_pic}
             alt="&nbsp; Profile Pic"
           />
-          <Link to={`/verification-requests/${request.id}`}>
+          <Link to={`/verification-requests/${verificationData.user_id}`}>
             <span className={style.truncate}>Request for Verification</span>
           </Link>
         </td>
         <td className={style.tableData}>
-          <span>{request.name}</span>
+          <span>{verificationData.workerData[0].name}</span>
         </td>
         <td className={style.tableData}>
-          <span>{request.date}</span> <br />
-          <span className={style.time}>{request.time}</span>
+          <span>{moment(verificationData.createdAt).format('LL')}</span> <br />
+          <span className={style.time}>{moment(verificationData.createdAt).format('LT')}</span>
         </td>
         <td className={style.tableData}>
-          <StatusBadge status={request.status} />
+          <StatusBadge status={verificationData.workerData[0].verify_status.toUpperCase()} />
         </td>
         <td className={style.tableData}>
           <MdOutlineDeleteOutline size={25} className={style.deleteIcon} />
@@ -113,12 +50,22 @@ const VerificationRequestList = () => {
     'Request Status'
   ];
 
+  const dispatch = useDispatch();
+
+  const { verificationData } = useSelector((state) => state.verification);
+
+  useEffect(() => {
+
+    dispatch(getVerificationList());
+
+  }, []);
+
   return (
     <div className="main-content">
       <DataTable
         tableTitle="All Requests"
         headerNames={headerNames}
-        renderData={renderVerificationRequestList}
+        renderData={() => renderVerificationRequestList(verificationData)}
       />
     </div>
   );

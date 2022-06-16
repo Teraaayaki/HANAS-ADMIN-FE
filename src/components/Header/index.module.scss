@@ -1,11 +1,6 @@
 @use '../../styles/variables' as *;
 @use '../../styles/globalMixins' as *;
 
-%flex-align-center {
-  display: flex;
-  align-items: center;
-}
-
 .headerPostition {
   position: absolute;
   width: calc(100% - 255px);
@@ -19,9 +14,8 @@
 
 .header {
   margin: 35px;
-  justify-content: space-between;
 
-  @extend %flex-align-center;
+  @include flex(space-between, center, row, none);
 }
 
 .pageTitle {
@@ -33,7 +27,7 @@
   height: 30px;
   gap: 10px;
 
-  @extend %flex-align-center;
+  @include flex(none, center, row, none);
 }
 
 .adminName {

@@ -63,6 +63,19 @@
   }
 }
 
+.adjustedFaEyeIcon {
+  position: absolute;
+  top: 41.5px;
+  right: 35px;
+  cursor: pointer;
+
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-regular);
+
+  &:hover {
+    color: $color-gray-2;
+  }
+}
+
 .forgotPassword {
   @include text-style($color-gray-1, $font-size-sm, $font-weight-regular);
 }

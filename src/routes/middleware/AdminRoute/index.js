@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { Route } from 'react-router-dom';
-import { PropTypes } from 'prop-types';
+import { Route, Redirect } from 'react-router-dom';
 
+import AuthService from '../../../services/AuthService';
 import Sidebar from '../../../components/Sidebar';
 import Header from '../../../components/Header';
 
@@ -16,17 +16,24 @@ const AdminRoute = ({ pageTitle, component: Component, ...rest }) => {
       <Route
         {...rest}
         render={(props) => {
-          return <Component {...props} />;
+          if (AuthService.authenticated()) {
+            return <Component {...props} />;
+          }
+
+          return (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: {
+                  from: props.location
+                }
+              }}
+            />
+          );
         }}
       ></Route>
     </Fragment>
   );
-};
-
-AdminRoute.propTypes = {
-  component: PropTypes.any,
-  name: PropTypes.string,
-  location: PropTypes.any
 };
 
 export default AdminRoute;

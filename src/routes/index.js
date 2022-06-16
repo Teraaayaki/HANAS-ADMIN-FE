@@ -14,7 +14,7 @@ import ClientList from '../pages/client/ClientList';
 import ClientDetail from '../pages/client/ClientDetail';
 import SkilledWorkerList from '../pages/skilledworker/SkilledWorkerList';
 import SkilledWorkerDetail from '../pages/skilledworker/SkilledWorkerDetail';
-import Transaction from '../pages/Transaction';
+import Transaction from '../pages/transaction/TransactionList';
 import UserReport from '../pages/UserReport';
 
 const Routes = () => {
