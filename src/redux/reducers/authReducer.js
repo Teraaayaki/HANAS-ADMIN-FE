@@ -1,10 +1,10 @@
-import { SIGN_IN, SIGN_IN_ERROR, SIGN_OUT } from '../actions/types';
+import { SIGN_IN, SIGN_IN_ERROR, SIGN_OUT } from "../actions/types";
 
 const INITIAL_STATE = {
   isSignedIn: null,
   adminName: null,
   token: null,
-  error: null
+  error: null,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -15,19 +15,19 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isSignedIn: true,
         adminName: action.payload.admin_info.name,
         token: action.payload.token,
-        error: null
+        error: null,
       };
     case SIGN_IN_ERROR:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     case SIGN_OUT:
       return {
         ...state,
         isSignedIn: false,
         adminName: null,
-        token: null
+        token: null,
       };
     default:
       return state;

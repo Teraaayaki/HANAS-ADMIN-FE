@@ -1,4 +1,4 @@
-import { VerificationActions } from '../actions/types';
+import { VerificationActions } from "../actions/types";
 
 const verificationInitialState = {
   loading: false,
