@@ -9,7 +9,7 @@
 }
 
 .card {
-  height: 100%;
+  height: auto;
 }
 
 .cardHeader {
@@ -67,8 +67,8 @@
 
 .profile {
   width: 100px;
-  height: 100px;
-  margin: 0px 100px 0px 0px;
+  height: 80px;
+  margin: 0px 20px 0px 40px;
   border-radius: 100%;
 }
 
@@ -91,4 +91,9 @@
 
 .info {
   @include text-style($color-black-1, $font-size-lg, $font-weight-semibold);
+}
+
+.imagesOffsetContainer {
+  @include flex(none, none, row, 40px);
+  margin-bottom: 25px;
 }

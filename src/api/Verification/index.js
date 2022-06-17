@@ -1,29 +1,53 @@
 import API from '../Base';
 
 export const VerificationAPI = {
-    getVerification: () => {
+
+  getVerification: () => {
     const options = {
       method: 'GET',
       url: '/admin/get-verifications',
     };
 
     return API.request(options);
-  }
-};
+  },
 
-
-export const GetSpecificVerificationAPI = {
-  getSpecificVerification: ({ id }) => {
+  getSpecificVerification: ({id}) => {
     const options = {
       method: 'GET',
-      url: '/admin/get-verification/:id',
-      data: {
-        _id: id
-      }
+      url: `/admin/get-verification/${id}`,
     };
 
-    console.log("id", id);
+    return API.request(options);
+  },
+
+  acceptVerification: (id) => {
+    const options = {
+      method: 'POST',
+      url: `/admin/accept-verification/${id}`,
+    };
+
+    return API.request(options);
+  },
+
+  rejectVerification: (id) => {
+    const options = {
+      method: 'POST',
+      url: `/admin/reject-verification/${id}`,
+    }
+
+    return API.request(options);
+  },
+
+  removeVerification: (id) => {
+    const options = {
+      method: 'POST',
+      url: `/admin/remove-verification/${id}`,
+    }
 
     return API.request(options);
   }
-}
+
+};
+
+export default VerificationAPI;
+
