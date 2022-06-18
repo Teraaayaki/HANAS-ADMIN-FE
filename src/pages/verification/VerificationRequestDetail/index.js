@@ -1,24 +1,30 @@
-import React from 'react';
-import ContainerCard from '../../../components/ContainerCard';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const userInfo = {
-  name: 'Tom Luis Cruis',
-  email: 'tomcruise@gmail.com',
-  address: 'P2, BLK3, LOT18, Deca Homes, Tungkil, Minglanilla, Cebu',
-  sex: 'Male',
-  birthdate: 'July 3, 1962',
-  mobile_no: '09655867131',
-  user_type: 'Skilled Worker',
-  member_since: 'May 26, 2019',
-  valid_id: "Driver's License"
-};
+import ContainerCard from "../../../components/ContainerCard";
+import {
+  getSpecificVerification,
+} from "../../../redux/actions/verificationActions.js";
 
 const VerificationRequestDetail = () => {
+  let { requestID } = useParams();
+
+  const dispatch = useDispatch();
+
+  const { verificationData} = useSelector(
+    (state) => state.verification
+  );
+
+  useEffect(() => {
+    dispatch(getSpecificVerification(requestID));
+  }, []);
+
   return (
     <div className="main-content">
       <ContainerCard
         link="verification-requests"
-        userInfo={userInfo}
+        userInfo={verificationData}
       ></ContainerCard>
     </div>
   );
