@@ -1,20 +1,29 @@
-import { GET_CLIENT, GET_CLIENT_ERROR } from "./types";
+import { ClientActions } from "../actions/types";
 
 const INITIAL_STATE = {
+  clientData: [],
   client_id: null,
-  token: null,
   error: null,
 };
 
 const clientReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GET_CLIENT:
+    case ClientActions.GET_CLIENTS:
       return {
-        client_id: action.payload.client_info.id,
-        token: action.payload.token,
+        clientData: action.payload,
         error: null,
       };
-    case GET_CLIENT_ERROR:
+    case ClientActions.GET_CLIENTS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case ClientActions.GET_CLIENT:
+      return {
+        client_id: action.payload.client_info.id,
+        error: null,
+      };
+    case ClientActions.GET_CLIENT_ERROR:
       return {
         ...state,
         error: action.payload,

@@ -4,7 +4,7 @@ const ClientAPI = {
   getClients: () => {
     const options = {
       method: "GET",
-      url: `/auth/get-clients`,
+      url: `/admin/get-clients`,
     };
     return API.request(options);
   },
@@ -12,7 +12,7 @@ const ClientAPI = {
   getClient: ({ user_id }) => {
     const options = {
       method: "GET",
-      url: `/auth/get-clients/${user_id}`,
+      url: `/admin/get-client/${user_id}`,
       params: {
         id: user_id,
       },

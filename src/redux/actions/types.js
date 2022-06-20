@@ -2,8 +2,12 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_IN_ERROR = "SIGN_IN_ERROR";
 export const SIGN_OUT = "SIGN_OUT";
 
-export const GET_CLIENTS = "GET_CLIENTS";
-export const GET_CLIENT = "GET_CLIENT";
+export const ClientActions = {
+  GET_CLIENTS: "GET_CLIENTS",
+  GET_CLIENTS_ERROR: "GET_CLIENTS_ERROR",
+  GET_CLIENT: "GET_CLIENT",
+  GET_CLIENT_ERROR: "GET_CLIENT_ERROR",
+};
 
 export const VerificationActions = {
   VERIFICATION_LOADING: "VERIFICATION_LOADING",
