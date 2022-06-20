@@ -100,8 +100,8 @@ const ClientList = () => {
   const { clientData, error } = useSelector((state) => state.client);
 
   useEffect(() => {
-    dispatch();
-  });
+    dispatch(getClients());
+  }, []);
 
   const renderClientList = () => {
     return clients.map((client, idx) => {
