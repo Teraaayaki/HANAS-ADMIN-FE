@@ -7,7 +7,7 @@ export const getClients = () => (dispatch) => {
       dispatch({ type: ClientActions.GET_CLIENTS, payload: data });
     })
     .catch((error) => {
-      console.log("Error: getClients");
+      console.log("Error: getClients\n-" + error);
       dispatch({
         type: ClientActions.GET_CLIENTS_ERROR,
         payload: error?.response?.data?.error,

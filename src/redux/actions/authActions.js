@@ -13,7 +13,7 @@ export const signIn = (email, password) => (dispatch) => {
       history.push("/overview");
     })
     .catch((error) => {
-      console.log("hjere");
+      console.log("Sign In Error:" + error);
       dispatch({ type: SIGN_IN_ERROR, payload: error?.response?.data?.error });
     });
 };
