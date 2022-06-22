@@ -70,6 +70,23 @@ const ContainerCard = ({ link, userInfo }) => {
     }
   }, [error]);
 
+  if(!userInfo){
+    return (
+      <>
+        <Card className={style.card}>
+          <Card.Header className={style.cardHeader}>
+            <Link to={`/${link}`} className={style.backButton}>
+              BACK
+            </Link>
+          </Card.Header>
+          <Card.Body className={style.cardBody}>
+            <h1>DATA UNAVAILABLE</h1>
+          </Card.Body>
+        </Card>
+      </>
+    );
+  }
+
   return (
     <>
       <Modal show={show} onHide={handleCloseAccept}>
@@ -120,7 +137,7 @@ const ContainerCard = ({ link, userInfo }) => {
 
           {link === "verification-requests" ? (
             <div>
-              {userInfo[0].workerData[0].verify_status === "Pending" ? (
+              {userInfo[0].verify_status === "Pending" ? (
                 <>
                   <Button
                     className={style.acceptButton}

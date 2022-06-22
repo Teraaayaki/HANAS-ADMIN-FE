@@ -42,7 +42,7 @@ const renderVerificationRequestList = (verificationData, handleOpen) => {
         </td>
         <td className={style.tableData}>
           <StatusBadge
-            status={verificationData.workerData[0].verify_status.toUpperCase()}
+            status={verificationData.verify_status.toUpperCase()}
           />
         </td>
         <td className={style.tableData}>
