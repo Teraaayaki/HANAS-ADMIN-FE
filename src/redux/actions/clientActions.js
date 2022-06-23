@@ -15,8 +15,8 @@ export const getClients = () => (dispatch) => {
     });
 };
 
-export const getClient = (requestID) => (dispatch) => {
-  ClientAPI.getClient({ requestID })
+export const getClient = (id) => (dispatch) => {
+  ClientAPI.getClient({ id })
     .then(({ data }) => {
       dispatch({
         type: ClientActions.GET_CLIENT,
