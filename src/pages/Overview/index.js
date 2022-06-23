@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 import OverviewCard from '../../components/Card';
+import LineGraph from '../../components/LineGraph';
+import moment from "moment";
 
 import style from './index.module.scss';
+import { hanasIncome } from '../../redux/actions/overviewActions';
+
+
 
 const Overview = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(hanasIncome());
+  }, []);
+
   return (
     <div className="main-content">
       <div className={style.container}>
@@ -18,11 +31,12 @@ const Overview = () => {
             <h6 className={style.graphTitle}>Today's trends</h6>
             <div className={style.timeInfo}>
               <span className={style.graphTime}>
-                as of 25 May 2019, 09:41pm
+                as of {moment().calendar()}
               </span>
               <span className={style.graphTime}>Today</span>
             </div>
-            <div className={style.graph}></div>
+            {/* <div className={style.graph}></div> */}
+            <LineGraph />
           </div>
           <div className={style.analytics}>
             <div className={style.analyticCard}>
