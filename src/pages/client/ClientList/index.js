@@ -14,23 +14,25 @@ const ClientList = () => {
   const headerNames = ["Name", "Address", "Member Since", "Account Status"];
 
   const dispatch = useDispatch();
-  const { clientData, error } = useSelector((state) => state.client);
+  const { clientsData, error } = useSelector((state) => state.client);
 
   useEffect(() => {
     dispatch(getClients());
   }, [dispatch]);
 
+  console.log("clientsData", clientsData);
+
   const renderClientList = () => {
-    return clientData.map((client, idx) => {
+    return clientsData.map((client, idx) => {
       return (
-        <tr key={idx} className={style.tableDataRow}>
+        <tr key={client._id} className={style.tableDataRow}>
           <td className={style.tableData}>
             <img
               className={style.profilePic}
               src={client.profile_pic}
               alt="&nbsp; Profile Pic"
             />
-            <Link to={`/clients/${client.id}`}>
+            <Link to={`/clients/${client._id}`}>
               <span className={style.truncate}>{client.name}</span>
             </Link>
           </td>

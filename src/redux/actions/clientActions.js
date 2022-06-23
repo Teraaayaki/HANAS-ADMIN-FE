@@ -15,11 +15,19 @@ export const getClients = () => (dispatch) => {
     });
 };
 
-export const getClient = (user_id) => (dispatch) => {
-  ClientAPI.getClient({ user_id }).then(({ data }) => {
-    dispatch({
-      type: ClientActions.GET_CLIENT,
-      payload: data,
+export const getClient = (requestID) => (dispatch) => {
+  ClientAPI.getClient({ requestID })
+    .then(({ data }) => {
+      dispatch({
+        type: ClientActions.GET_CLIENT,
+        payload: data.client,
+      });
+    })
+    .catch((error) => {
+      console.log("GetClient " + error);
+      dispatch({
+        type: ClientActions.GET_CLIENT_ERROR,
+        payload: error?.response?.data?.error,
+      });
     });
-  });
 };
