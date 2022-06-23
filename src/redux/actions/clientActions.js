@@ -4,7 +4,7 @@ import ClientAPI from "../../api/Client";
 export const getClients = () => (dispatch) => {
   ClientAPI.getClients()
     .then(({ data }) => {
-      dispatch({ type: ClientActions.GET_CLIENTS, payload: data });
+      dispatch({ type: ClientActions.GET_CLIENTS, payload: data.clients });
     })
     .catch((error) => {
       console.log("Error: getClients\n-" + error);
