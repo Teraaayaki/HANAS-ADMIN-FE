@@ -6,6 +6,8 @@ const LineGraph = () => {
 
     const {incomeData} = useSelector( (state) => state.overview);
 
+    console.log("INCOME DATA", incomeData);
+
     return (
     //   <ResponsiveContainer width="100%" height="100%">
         <LineChart
@@ -24,7 +26,7 @@ const LineGraph = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="confirmed_income" stroke="#82ca9d" activeDot={{ r: 8 }}/>
+          <Line type="monotone" dataKey="income" stroke="#82ca9d" activeDot={{ r: 8 }}/>
         </LineChart>
     //   </ResponsiveContainer>
     );

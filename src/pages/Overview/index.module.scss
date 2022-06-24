@@ -91,6 +91,10 @@
     @include flex(flex-start, stretch, column, 0px);
   }
 
+  .flexedRow {
+    @include flex(flex-start, stretch, row, 0px);
+  }
+
   .graphContainer {
     border-right: none;
     border-bottom: 1px $color-gray-4 solid;
