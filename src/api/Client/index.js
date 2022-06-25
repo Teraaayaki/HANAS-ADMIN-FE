@@ -9,13 +9,10 @@ const ClientAPI = {
     return API.request(options);
   },
 
-  getClient: ({ user_id }) => {
+  getClient: (clientID) => {
     const options = {
       method: "GET",
-      url: `/admin/get-client/${user_id}`,
-      params: {
-        id: user_id,
-      },
+      url: `/admin/get-client/${clientID}`,
     };
     return API.request(options);
   },

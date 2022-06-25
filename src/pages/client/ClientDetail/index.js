@@ -17,21 +17,20 @@ const userInfo = {
 };
 
 const ClientDetail = () => {
-  let { requestID } = useParams();
+  let { clientID } = useParams();
 
   const dispatch = useDispatch();
   const { clientData, error } = useSelector((state) => state.client);
 
   useEffect(() => {
-    dispatch(getClient(requestID));
+    dispatch(getClient(clientID));
+    console.log(typeof clientID);
+    console.log("clientData", clientData);
   }, []);
-
-  console.log("requestID", requestID);
-  console.log("clientData", clientData);
 
   return (
     <div className="main-content">
-      <ContainerCard link="clients" userInfo={userInfo}></ContainerCard>
+      <ContainerCard link="clients" userInfo={clientData}></ContainerCard>
     </div>
   );
 };
