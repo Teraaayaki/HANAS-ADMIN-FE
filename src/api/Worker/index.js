@@ -4,7 +4,7 @@ const WorkerAPI = {
   getWorkerList: () => {
     const options = {
       method: "GET",
-      url: `/admin/get-workers`,
+      url: `/admin/get-worker-list`,
     };
     return API.request(options);
   },

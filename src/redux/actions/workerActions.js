@@ -4,8 +4,10 @@ import WorkerAPI from "../../api/Worker";
 export const getWorkerList = () => (dispatch) => {
   WorkerAPI.getWorkerList()
     .then(({ data }) => {
-      dispatch({ type: WorkerActions.GET_WORKER_LIST, payload: data.workers });
-      console.log("GetWorkerList", data.workers);
+      dispatch({
+        type: WorkerActions.GET_WORKER_LIST,
+        payload: data.workerList,
+      });
     })
     .catch((error) => {
       console.log("GetWorkerList\n-" + error);
