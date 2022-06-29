@@ -24,17 +24,22 @@ const SkilledWorkerList = () => {
 
   useEffect(() => {
     dispatch(getWorkerList());
-    console.log("WorkerListData", workerListData);
   }, [dispatch]);
+
+  console.log("WorkerListData", workerListData);
 
   const renderMyServicesList = (myServicesData) => {
     let last = myServicesData.length - 1;
     if (last > 0) {
       return myServicesData.map((myService, idx) => {
         if (idx < last) {
-          return <span>{myService.servicesData[0].service_type}, </span>;
+          return (
+            <span key={idx}>{myService.servicesData[0].service_type}, </span>
+          );
         } else {
-          return <span>{myService.servicesData[0].service_type}</span>;
+          return (
+            <span key={idx}>{myService.servicesData[0].service_type}</span>
+          );
         }
       });
     } else if (last > -1) {
@@ -73,11 +78,11 @@ const SkilledWorkerList = () => {
           <td className={style.tableData}>
             <StatusBadge
               status={
-                skilledworker.isDeactivated
+                skilledworker.is_deactivated
                   ? "DEACTIVATED"
-                  : skilledworker.verificationData.verifyStatus
-                  ? skilledworker.verificationData.verifyStatus.toUpperCase()
-                  : "NO DATA"
+                  : skilledworker.verificationData.verify_status
+                  ? skilledworker.verificationData.verify_status.toUpperCase()
+                  : "MISSING DATA"
               }
             />
           </td>
