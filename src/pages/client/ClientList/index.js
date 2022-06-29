@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import { getClients } from "../../../redux/actions/clientActions";
+import { getClientList } from "../../../redux/actions/clientActions";
 import { Link } from "react-router-dom";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
@@ -14,14 +14,15 @@ const ClientList = () => {
   const headerNames = ["Name", "Address", "Member Since", "Account Status"];
 
   const dispatch = useDispatch();
-  const { clientsData, error } = useSelector((state) => state.client);
+  const { clientListData, error } = useSelector((state) => state.client);
 
   useEffect(() => {
-    dispatch(getClients());
+    dispatch(getClientList());
   }, [dispatch]);
+  console.log("clientListData", clientListData);
 
   const renderClientList = () => {
-    return clientsData.map((client, idx) => {
+    return clientListData.map((client, idx) => {
       return (
         <tr key={client._id} className={style.tableDataRow}>
           <td className={style.tableData}>
@@ -45,7 +46,11 @@ const ClientList = () => {
           </td>
           <td className={style.tableData}>
             <StatusBadge
-              status={client.verificationData[0].verify_status.toUpperCase()}
+              status={
+                client.verificationData[0].verify_status
+                  ? client.verificationData[0].verify_status.toUpperCase()
+                  : "MISSING DATA"
+              }
             />
           </td>
           <td className={style.tableData}>

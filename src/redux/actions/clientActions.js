@@ -1,15 +1,18 @@
 import { ClientActions } from "./types";
 import ClientAPI from "../../api/Client";
 
-export const getClients = () => (dispatch) => {
-  ClientAPI.getClients()
+export const getClientList = () => (dispatch) => {
+  ClientAPI.getClientList()
     .then(({ data }) => {
-      dispatch({ type: ClientActions.GET_CLIENTS, payload: data.clients });
+      dispatch({
+        type: ClientActions.GET_CLIENT_LIST,
+        payload: data.clientList,
+      });
     })
     .catch((error) => {
-      console.log("Error: getClients\n-" + error);
+      console.log("GetClientList " + error);
       dispatch({
-        type: ClientActions.GET_CLIENTS_ERROR,
+        type: ClientActions.GET_CLIENT_LIST_ERROR,
         payload: error?.response?.data?.error,
       });
     });

@@ -1,10 +1,10 @@
 import API from "../Base";
 
 const ClientAPI = {
-  getClients: () => {
+  getClientList: () => {
     const options = {
       method: "GET",
-      url: `/admin/get-clients`,
+      url: `/admin/get-client-list`,
     };
     return API.request(options);
   },

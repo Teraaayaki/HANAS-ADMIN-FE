@@ -1,26 +1,25 @@
 import { ClientActions } from "../actions/types";
 
 const INITIAL_STATE = {
-  clientsData: [],
+  clientListData: [],
   clientData: [],
   error: null,
 };
 
 const clientReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ClientActions.GET_CLIENTS:
+    case ClientActions.GET_CLIENT_LIST:
       return {
         ...state,
-        clientsData: action.payload,
+        clientListData: action.payload,
         error: null,
       };
-    case ClientActions.GET_CLIENTS_ERROR:
+    case ClientActions.GET_CLIENT_LIST_ERROR:
       return {
         ...state,
         error: action.payload,
       };
     case ClientActions.GET_CLIENT:
-      console.log("Action Payload" + action.payload);
       return {
         ...state,
         clientData: action.payload,
