@@ -82,15 +82,6 @@ const VerificationRequestList = ({ itemsPerPage }) => {
   const { verificationData, success, error, successMessage } = useSelector(
     (state) => state.verification
   );
-  
-
-  useEffect(() => {
-    // Fetch items from another resources.
-    const endOffset = itemOffset + itemsPerPage;
-    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(verificationData.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(verificationData.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, verificationData]);
 
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
@@ -140,6 +131,14 @@ const VerificationRequestList = ({ itemsPerPage }) => {
     }
   }, [error]);
 
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + itemsPerPage;
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(verificationData.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(verificationData.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, verificationData]);
+  
   return (
     <>
       <Modal show={show} onHide={handleClose}>
