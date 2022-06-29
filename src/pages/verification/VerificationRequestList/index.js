@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import ReactDOM from 'react-dom';
 
+import ReactPaginate from 'react-paginate';
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { MdOutlineDeleteOutline } from "react-icons/md";
@@ -15,7 +17,11 @@ import {
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import style from "./index.module.scss";
+
+/*bootstrap module for easier styling for the pagination*/
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const renderVerificationRequestList = (verificationData, handleOpen) => {
   return verificationData.map((verificationData, idx) => {
@@ -57,7 +63,7 @@ const renderVerificationRequestList = (verificationData, handleOpen) => {
   });
 };
 
-const VerificationRequestList = () => {
+const VerificationRequestList = ({ itemsPerPage }) => {
   const headerNames = [
     "Verification Requests",
     "Name",
@@ -69,13 +75,30 @@ const VerificationRequestList = () => {
 
   //LOCAL STATES
   const [show, setShow] = useState(false);
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
 
   const { verificationData, success, error, successMessage } = useSelector(
     (state) => state.verification
   );
+  
+
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + itemsPerPage;
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(verificationData.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(verificationData.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, verificationData]);
 
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % verificationData.length;
+    setItemOffset(newOffset);
+  };
 
   const handleRemove = (id) => {
     dispatch(removeSpecificVerification(id));
@@ -84,8 +107,8 @@ const VerificationRequestList = () => {
   };
 
   useEffect(() => {
-    dispatch(getVerificationList());
-  }, []);
+      dispatch(getVerificationList());
+  }, [dispatch]);
 
   useEffect(() => {
     if (success) {
@@ -144,13 +167,40 @@ const VerificationRequestList = () => {
           tableTitle="All Requests"
           headerNames={headerNames}
           renderData={() =>
-            renderVerificationRequestList(verificationData, handleOpen)
+            renderVerificationRequestList(currentItems, handleOpen)
           }
         />
+        <div className={style.paginateContainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={'pagination'} /* as this work same as bootstrap class */
+            subContainerClassName={'pages pagination'} /* as this work same as bootstrap class */
+            activeClassName={'active'} /* as this work same as bootstrap class */
+            // className={style.paginationContainer}
+          />
+        </div>
       </div>
       <ToastContainer />
     </>
   );
+  
 };
 
-export default VerificationRequestList;
+const PaginatedVerificationRequestList = () => {
+  return (
+    <div>
+      {
+          <VerificationRequestList itemsPerPage={1} />
+      }
+    </div>
+    
+  );
+}
+
+export default PaginatedVerificationRequestList;

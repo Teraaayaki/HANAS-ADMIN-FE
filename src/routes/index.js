@@ -8,7 +8,7 @@ import AuthRoute from './middleware/AuthRoute';
 //Admin Components
 import Login from '../pages/Login';
 import Overview from '../pages/Overview';
-import VerificationRequestList from '../pages/verification/VerificationRequestList';
+import PaginatedVerificationRequestList from '../pages/verification/VerificationRequestList';
 import VerificationRequestDetail from '../pages/verification/VerificationRequestDetail';
 import ClientList from '../pages/client/ClientList';
 import ClientDetail from '../pages/client/ClientDetail';
@@ -37,7 +37,7 @@ const Routes = () => {
         path="/verification-requests"
         pageTitle="Verification Requests"
         exact
-        component={VerificationRequestList}
+        component={PaginatedVerificationRequestList}
       ></AdminRoute>
 
       <AdminRoute
