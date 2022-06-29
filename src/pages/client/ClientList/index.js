@@ -19,7 +19,6 @@ const ClientList = () => {
   useEffect(() => {
     dispatch(getClientList());
   }, [dispatch]);
-  console.log("clientListData", clientListData);
 
   const renderClientList = () => {
     return clientListData.map((client, idx) => {
@@ -46,11 +45,7 @@ const ClientList = () => {
           </td>
           <td className={style.tableData}>
             <StatusBadge
-              status={
-                client.verificationData[0].verify_status
-                  ? client.verificationData[0].verify_status.toUpperCase()
-                  : "MISSING DATA"
-              }
+              status={client.verificationData[0].verify_status.toUpperCase()}
             />
           </td>
           <td className={style.tableData}>
