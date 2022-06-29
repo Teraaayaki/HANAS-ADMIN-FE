@@ -45,7 +45,7 @@ const ClientList = () => {
           </td>
           <td className={style.tableData}>
             <StatusBadge
-              status={client.verificationData[0].verify_status.toUpperCase()}
+              status={client.is_deactivated ? "DEACTIVATED" : "ACTIVE"}
             />
           </td>
           <td className={style.tableData}>

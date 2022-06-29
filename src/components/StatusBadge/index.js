@@ -1,17 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import style from './index.module.scss';
+import style from "./index.module.scss";
 
 const StatusBadge = ({ status }) => {
   const badgeColor = () => {
     switch (status) {
-      case 'VERIFIED':
-      case 'ACCEPTED':
-      case 'FINISHED':
-      case 'RESOLVED':
+      case "VERIFIED":
+      case "ACCEPTED":
+      case "FINISHED":
+      case "RESOLVED":
+      case "ACTIVE":
         return style.green;
-      case 'UNVERIFIED':
-      case 'REJECTED':
+      case "UNVERIFIED":
+      case "REJECTED":
+      case "DEACTIVATED":
         return style.red;
       default:
         return style.yellow;
