@@ -33,7 +33,7 @@
 }
 
 .transactionDetails {
-  @include flex(space-between, center, row, none);
+  @include flex(space-between, none, row, none);
 }
 
 .firstColumnDetails,
@@ -50,6 +50,11 @@
 }
 
 .info {
+  @include text-style($color-black-1, $font-size-lg, $font-weight-semibold);
+}
+
+.address {
+  max-width: 35ch;
   @include text-style($color-black-1, $font-size-lg, $font-weight-semibold);
 }
 

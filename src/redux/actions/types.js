@@ -1,6 +1,12 @@
-export const SIGN_IN = "SIGN_IN";
-export const SIGN_IN_ERROR = "SIGN_IN_ERROR";
-export const SIGN_OUT = "SIGN_OUT";
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
+export const SIGN_OUT = 'SIGN_OUT';
+
+export const transactionActions = {
+    TRANSACTION_SUCCESS: "TRANSACTION_SUCCESS",
+    TRANSACTION_ERROR: "TRANSACTION_ERROR",
+    TRANSACTION_DETAILS: "TRANSACTION_DETAILS",
+};
 
 export const ClientActions = {
   GET_CLIENTS: "GET_CLIENTS",
