@@ -1,11 +1,11 @@
-@use '../../styles/variables' as *;
-@use '../../styles/globalMixins' as *;
+@use "../../styles/variables" as *;
+@use "../../styles/globalMixins" as *;
 
 @mixin bg-color($bg-color) {
   background-color: $bg-color;
   border-radius: 100px;
   margin: 0px;
-  width: 88px;
+  width: 105px;
   height: 24px;
 
   @include flex(center, center, row, none);
