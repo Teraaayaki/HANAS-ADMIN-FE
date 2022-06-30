@@ -1,14 +1,14 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const TOKEN = Cookies.get('access_token');
+const TOKEN = Cookies.get("access_token");
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api/',
+  baseURL: "http://localhost:8000/api/",
   headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${TOKEN}`
-  }
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${TOKEN}`,
+  },
 });
 
 export default API;
