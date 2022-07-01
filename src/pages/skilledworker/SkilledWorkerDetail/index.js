@@ -1,25 +1,32 @@
-import React from 'react';
-import ContainerCard from '../../../components/ContainerCard';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const userInfo = {
-  name: 'Tom Luis Cruis',
-  email: 'tomcruise@gmail.com',
-  address: 'P2, BLK3, LOT18, Deca Homes, Tungkil, Minglanilla, Cebu',
-  sex: 'Male',
-  birthdate: 'July 3, 1962',
-  mobile_no: '09655867131',
-  services: 'Plumbing, Electrical',
-  member_since: 'May 26, 2019',
-  valid_id: "Driver's License",
-  isVerified: true
-};
+import { getWorker } from "../../../redux/actions/workerActions";
+import ContainerCard from "../../../components/ContainerCard";
 
 const SkilledWorkerDetail = () => {
-  return (
-    <div className="main-content">
-      <ContainerCard link="skilledworkers" userInfo={userInfo}></ContainerCard>
-    </div>
-  );
+  let { workerID } = useParams();
+
+  const dispatch = useDispatch();
+  const { workerData, error } = useSelector((state) => state.worker);
+
+  useEffect(() => {
+    dispatch(getWorker(workerID));
+  }, []);
+
+  if (workerData[0] !== undefined) {
+    return (
+      <div className="main-content">
+        <ContainerCard
+          link="skilledworkers"
+          userInfo={workerData[0]}
+        ></ContainerCard>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 export default SkilledWorkerDetail;
