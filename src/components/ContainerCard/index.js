@@ -90,7 +90,7 @@ const ContainerCard = ({ link, userInfo }) => {
               </span>
             </div>
           </section>
-          {link === "verification-requests" ? (
+          {link === "verification-requests" || link === "skilledworkers" ? (
             <section className={style.userDetailRow}>
               <div className={style.container}>
                 <span className={style.infoLabel}>
