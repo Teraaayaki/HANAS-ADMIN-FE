@@ -5,17 +5,6 @@ import { useParams } from "react-router-dom";
 import { getClient } from "../../../redux/actions/clientActions";
 import ContainerCard from "../../../components/ContainerCard";
 
-const userInfo = {
-  name: "Tom Luis Cruis",
-  email: "tomcruise@gmail.com",
-  address: "P2, BLK3, LOT18, Deca Homes, Tungkil, Minglanilla, Cebu",
-  sex: "Male",
-  birthdate: "July 3, 1962",
-  mobile_no: "09655867131",
-  member_since: "May 26, 2019",
-  valid_id: "Driver's License",
-};
-
 const ClientDetail = () => {
   let { clientID } = useParams();
 
@@ -24,15 +13,21 @@ const ClientDetail = () => {
 
   useEffect(() => {
     dispatch(getClient(clientID));
-    console.log(typeof clientID);
-    console.log("clientData", clientData);
   }, []);
 
-  return (
-    <div className="main-content">
-      <ContainerCard link="clients" userInfo={clientData}></ContainerCard>
-    </div>
-  );
+  console.log("clientID:", clientID);
+  console.log("clientData:", clientData);
+  console.log("clientData[0]:", clientData[0]);
+
+  if (clientData[0] !== undefined) {
+    return (
+      <div className="main-content">
+        <ContainerCard link="clients" userInfo={clientData[0]}></ContainerCard>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 export default ClientDetail;

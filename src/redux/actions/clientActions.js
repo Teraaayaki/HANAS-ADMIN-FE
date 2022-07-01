@@ -1,7 +1,7 @@
 import { ClientActions } from "./types";
 import ClientAPI from "../../api/Client";
 
-export const getClientList = () => (dispatch) => {
+export const getClientList = () => async (dispatch) => {
   ClientAPI.getClientList()
     .then(({ data }) => {
       dispatch({
@@ -18,10 +18,9 @@ export const getClientList = () => (dispatch) => {
     });
 };
 
-export const getClient = (clientID) => (dispatch) => {
+export const getClient = (clientID) => async (dispatch) => {
   ClientAPI.getClient(clientID)
     .then(({ data }) => {
-      console.log(data);
       dispatch({
         type: ClientActions.GET_CLIENT,
         payload: data.client,
