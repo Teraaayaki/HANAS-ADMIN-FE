@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ReactDOM from 'react-dom';
 
 import ReactPaginate from 'react-paginate';
 import DataTable from "../../../components/Table";
@@ -114,7 +113,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
         onClose: () => dispatch(resetSuccess()),
       });
     }
-  }, [success]);
+  }, [success, successMessage, dispatch]);
 
   useEffect(() => {
     if (error) {
@@ -129,7 +128,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
         onClose: () => dispatch(resetError()),
       });
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   useEffect(() => {
     // Fetch items from another resources.
@@ -195,7 +194,7 @@ const PaginatedVerificationRequestList = () => {
   return (
     <div>
       {
-          <VerificationRequestList itemsPerPage={1} />
+          <VerificationRequestList itemsPerPage={10} />
       }
     </div>
     

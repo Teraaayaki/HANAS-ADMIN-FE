@@ -74,7 +74,6 @@ a:hover {
   padding: 6px 12px;
   line-height: 1.42857143;
   text-decoration: none;
-  color: #2c689c;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -1px;
@@ -82,20 +81,20 @@ a:hover {
 
 .pagination>li.active>a {
   color: #F6F3E4 ;
-  background-color: #E69FB4;
-  /* border-color: #403F3C ; */
+  background-color: #41424b;
 }
 
 /* Style the active class (and buttons on mouse-over) */
 .pagination > li > a:hover {
-  background-color:  #FF5E84 ;
-  color: #F6F3E4 ;
+  background-color:  #363740 ;
+  color: #fff !important ;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
   color: #403F3C ;
 }
+
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  color: #403F3C ;
+  color: #403F3C;
 }

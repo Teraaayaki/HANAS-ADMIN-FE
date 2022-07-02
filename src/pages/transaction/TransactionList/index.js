@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoKebabVertical } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ReactPaginate from 'react-paginate';
 import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
 import TransactionDetail from '../TransactionDetail';
@@ -9,102 +10,15 @@ import style from './index.module.scss';
 import { getTransactionList } from "../../../redux/actions/transactionActions";
 import moment from 'moment';
 
-// const transactions = [
-//   {
-//     id: 1,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 2,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   },
-//   {
-//     id: 3,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 4,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   },
-//   {
-//     id: 5,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 6,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   },
-//   {
-//     id: 7,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 8,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 9,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   }
-// ];
-
-const TransactionList = () => {
+const TransactionList = ({ itemsPerPage }) => {
   const [showTransactionDets, setShowTransactionDets] = useState(false);
   const [specificDetail, setSpecificDetail] = useState([]);
+
+  //PAGINATION STATES
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+
   const { transactions } = useSelector((state) => state.transaction);
 
   const dispatch = useDispatch();
@@ -118,9 +32,13 @@ const TransactionList = () => {
     'Status'
   ];
 
-  console.log("TRANSACTION", transactions);
+  //PAGINATION HANDLE
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % transactions.length;
+    setItemOffset(newOffset);
+  };
 
-  const renderTransactionsList = () => {
+  const renderTransactionsList = (transactions) => {
     return transactions.map((transaction, idx) => {
       return (
         <tr
@@ -160,9 +78,15 @@ const TransactionList = () => {
 
   useEffect(() => {
     dispatch(getTransactionList());
-   }, []);
-  
-  console.log("SPECIFIC DETAIL FROM LIST", specificDetail);
+   }, [dispatch]);
+
+  useEffect(() => {
+  // Fetch items from another resources.
+  const endOffset = itemOffset + itemsPerPage;
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  setCurrentItems(transactions.slice(itemOffset, endOffset));
+  setPageCount(Math.ceil(transactions.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, transactions]);
 
     return (
       <div className="main-content">
@@ -174,10 +98,35 @@ const TransactionList = () => {
         <DataTable
           tableTitle="Details"
           headerNames={headerNames}
-          renderData={renderTransactionsList}
+          renderData={() => renderTransactionsList(currentItems)}
         />
+        <div className={style.paginateContainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={'pagination'} /* as this work same as bootstrap class */
+            subContainerClassName={'pages pagination'} /* as this work same as bootstrap class */
+            activeClassName={'active'} /* as this work same as bootstrap class */
+          />
+        </div>
       </div>
     );
 };
 
-export default TransactionList;
+const PaginatedTransactionList = () => {
+  return (
+    <div>
+      {
+          <TransactionList itemsPerPage={10} />
+      }
+    </div>
+    
+  );
+}
+
+export default PaginatedTransactionList;

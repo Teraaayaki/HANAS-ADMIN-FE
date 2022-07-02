@@ -2,7 +2,6 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT';
 
-<<<<<<< HEAD
 export const VerificationActions = {
     VERIFICATION_LOADING: "VERIFICATION_LOADING",
     VERIFICATION_SUCCESS: "VERIFICATION_SUCCESS",
@@ -11,7 +10,6 @@ export const VerificationActions = {
     VERIFICATION_RESET_SUCCESS: "VERIFICATION_RESET_SUCCESS",
     VERIFICATION_RESET_ERROR: "VERIFICATION_RESET_ERROR",
   };
-=======
 export const transactionActions = {
     TRANSACTION_SUCCESS: "TRANSACTION_SUCCESS",
     TRANSACTION_ERROR: "TRANSACTION_ERROR",
@@ -31,4 +29,3 @@ export const WorkerActions = {
   GET_WORKER: "GET_WORKER",
   GET_WORKER_ERROR: "GET_WORKER_ERROR",
 };
->>>>>>> 6c4a326fc90a2ac4bbabddcc59d95d2d440b55ad
