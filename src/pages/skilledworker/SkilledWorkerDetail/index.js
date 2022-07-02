@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getWorker } from "../../../redux/actions/workerActions";
-import ContainerCard from "../../../components/ContainerCard";
+import UserContainerCard from "../../../components/UserContainerCard";
 
 const SkilledWorkerDetail = () => {
   let { workerID } = useParams();
@@ -18,10 +18,10 @@ const SkilledWorkerDetail = () => {
   if (workerData[0] !== undefined) {
     return (
       <div className="main-content">
-        <ContainerCard
+        <UserContainerCard
           link="skilledworkers"
           userInfo={workerData[0]}
-        ></ContainerCard>
+        ></UserContainerCard>
       </div>
     );
   } else {
