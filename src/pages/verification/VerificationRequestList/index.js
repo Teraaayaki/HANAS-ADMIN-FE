@@ -1,127 +1,205 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import DataTable from '../../../components/Table';
-import StatusBadge from '../../../components/StatusBadge';
-import { MdOutlineDeleteOutline } from 'react-icons/md';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import ReactDOM from 'react-dom';
 
-import style from './index.module.scss';
+import ReactPaginate from 'react-paginate';
+import DataTable from "../../../components/Table";
+import StatusBadge from "../../../components/StatusBadge";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import {
+  getVerificationList,
+  removeSpecificVerification,
+  resetSuccess,
+  resetError,
+} from "../../../redux/actions/verificationActions.js";
+import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const requests = [
-  {
-    id: 1,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Mary Therese Sun Alegre',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'ACCEPTED'
-  },
-  {
-    id: 2,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'John Angelo S. Alegre',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  },
-  {
-    id: 3,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'James Karl Sia',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'ACCEPTED'
-  },
-  {
-    id: 4,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Hosea Barriga',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  },
-  {
-    id: 5,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'James Bond',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'REJECTED'
-  },
-  {
-    id: 2,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Louise Lane',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  },
-  {
-    id: 3,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Peter Parker',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'REJECTED'
-  },
-  {
-    id: 4,
-    pp: 'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-    name: 'Russel John De Castro',
-    date: 'May 26, 2019',
-    time: '6:30 PM',
-    status: 'PENDING'
-  }
-];
+import style from "./index.module.scss";
 
-const renderVerificationRequestList = () => {
-  return requests.map((request, idx) => {
+/*bootstrap module for easier styling for the pagination*/
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const renderVerificationRequestList = (verificationData, handleOpen) => {
+  return verificationData.map((verificationData, idx) => {
     return (
-      <tr key={idx} className={style.tableDataRow}>
+      <tr key={verificationData._id} className={style.tableDataRow}>
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={request.pp}
+            src={verificationData.workerData[0].profile_pic}
             alt="&nbsp; Profile Pic"
           />
-          <Link to={`/verification-requests/${request.id}`}>
+          <Link to={`/verification-requests/${verificationData.user_id}`}>
             <span className={style.truncate}>Request for Verification</span>
           </Link>
         </td>
         <td className={style.tableData}>
-          <span>{request.name}</span>
+          <span>{verificationData.workerData[0].name}</span>
         </td>
         <td className={style.tableData}>
-          <span>{request.date}</span> <br />
-          <span className={style.time}>{request.time}</span>
+          <span>{moment(verificationData.createdAt).format("LL")}</span> <br />
+          <span className={style.time}>
+            {moment(verificationData.createdAt).format("LT")}
+          </span>
         </td>
         <td className={style.tableData}>
-          <StatusBadge status={request.status} />
+          <StatusBadge
+            status={verificationData.verify_status.toUpperCase()}
+          />
         </td>
         <td className={style.tableData}>
-          <MdOutlineDeleteOutline size={25} className={style.deleteIcon} />
+          <MdOutlineDeleteOutline
+            size={25}
+            className={style.deleteIcon}
+            onClick={handleOpen}
+          />
         </td>
       </tr>
     );
   });
 };
 
-const VerificationRequestList = () => {
+const VerificationRequestList = ({ itemsPerPage }) => {
   const headerNames = [
-    'Verification Requests',
-    'Name',
-    'Date',
-    'Request Status'
+    "Verification Requests",
+    "Name",
+    "Date",
+    "Request Status",
   ];
 
-  return (
-    <div className="main-content">
-      <DataTable
-        tableTitle="All Requests"
-        headerNames={headerNames}
-        renderData={renderVerificationRequestList}
-      />
-    </div>
+  const dispatch = useDispatch();
+
+  //LOCAL STATES
+  const [show, setShow] = useState(false);
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const { verificationData, success, error, successMessage } = useSelector(
+    (state) => state.verification
   );
+
+  const handleClose = () => setShow(false);
+  const handleOpen = () => setShow(true);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % verificationData.length;
+    setItemOffset(newOffset);
+  };
+
+  const handleRemove = (id) => {
+    dispatch(removeSpecificVerification(id));
+    dispatch(resetSuccess());
+    handleClose();
+  };
+
+  useEffect(() => {
+      dispatch(getVerificationList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      toast.success(successMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => dispatch(resetSuccess()),
+      });
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => dispatch(resetError()),
+      });
+    }
+  }, [error]);
+
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + itemsPerPage;
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(verificationData.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(verificationData.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, verificationData]);
+  
+  return (
+    <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Remove Verification</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to remove this from the list of verification?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            No
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => handleRemove(verificationData[0].workerData[0]._id)}
+          >
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <div className="main-content">
+        <DataTable
+          tableTitle="All Requests"
+          headerNames={headerNames}
+          renderData={() =>
+            renderVerificationRequestList(currentItems, handleOpen)
+          }
+        />
+        <div className={style.paginateContainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={'pagination'} /* as this work same as bootstrap class */
+            subContainerClassName={'pages pagination'} /* as this work same as bootstrap class */
+            activeClassName={'active'} /* as this work same as bootstrap class */
+            // className={style.paginationContainer}
+          />
+        </div>
+      </div>
+      <ToastContainer />
+    </>
+  );
+  
 };
 
-export default VerificationRequestList;
+const PaginatedVerificationRequestList = () => {
+  return (
+    <div>
+      {
+          <VerificationRequestList itemsPerPage={1} />
+      }
+    </div>
+    
+  );
+}
+
+export default PaginatedVerificationRequestList;
