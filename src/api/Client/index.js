@@ -1,21 +1,18 @@
 import API from "../Base";
 
 const ClientAPI = {
-  getClients: () => {
+  getClientList: () => {
     const options = {
       method: "GET",
-      url: `/admin/get-clients`,
+      url: `/admin/get-client-list`,
     };
     return API.request(options);
   },
 
-  getClient: ({ user_id }) => {
+  getClient: (clientID) => {
     const options = {
       method: "GET",
-      url: `/admin/get-client/${user_id}`,
-      params: {
-        id: user_id,
-      },
+      url: `/admin/get-client/${clientID}`,
     };
     return API.request(options);
   },
