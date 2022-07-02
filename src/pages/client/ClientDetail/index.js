@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getClient } from "../../../redux/actions/clientActions";
-import ContainerCard from "../../../components/ContainerCard";
+import UserContainerCard from "../../../components/UserContainerCard";
 
 const ClientDetail = () => {
   let { clientID } = useParams();
@@ -15,14 +15,13 @@ const ClientDetail = () => {
     dispatch(getClient(clientID));
   }, []);
 
-  console.log("clientID:", clientID);
-  console.log("clientData:", clientData);
-  console.log("clientData[0]:", clientData[0]);
-
   if (clientData[0] !== undefined) {
     return (
       <div className="main-content">
-        <ContainerCard link="clients" userInfo={clientData[0]}></ContainerCard>
+        <UserContainerCard
+          link="clients"
+          userInfo={clientData[0]}
+        ></UserContainerCard>
       </div>
     );
   } else {
