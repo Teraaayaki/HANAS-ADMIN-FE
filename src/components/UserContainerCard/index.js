@@ -7,19 +7,26 @@ import Button from "react-bootstrap/Button";
 import style from "./index.module.scss";
 
 const renderMyServicesList = (myServicesData) => {
-  let last = myServicesData.length - 1;
-  if (last > 0) {
-    return myServicesData.map((myService, idx) => {
-      if (idx < last) {
-        return (
-          <span key={idx}>{myService.servicesData[0].service_type}, </span>
-        );
-      } else {
-        return <span key={idx}>{myService.servicesData[0].service_type}</span>;
-      }
-    });
-  } else if (last > -1) {
-    return <span>{myServicesData[0].servicesData[0].service_type}</span>;
+  let last = -1;
+  if (myServicesData !== undefined) {
+    last = myServicesData.length - 1;
+    if (last > 0) {
+      return myServicesData.map((myService, idx) => {
+        if (idx < last) {
+          return (
+            <span key={idx}>{myService.servicesData[0].service_type}, </span>
+          );
+        } else {
+          return (
+            <span key={idx}>{myService.servicesData[0].service_type}</span>
+          );
+        }
+      });
+    } else if (last > -1) {
+      return <span>{myServicesData[0].servicesData[0].service_type}</span>;
+    } else {
+      return;
+    }
   } else {
     return;
   }
