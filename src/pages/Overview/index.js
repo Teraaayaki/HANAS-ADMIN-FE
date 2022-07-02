@@ -37,7 +37,7 @@ const Overview = () => {
           <OverviewCard cardTitle="Pending Verifications" count={pendingVerifications} />
           <OverviewCard cardTitle="Pending Reports" count="43" />
           <OverviewCard cardTitle="Total Users" count={totalUser} />
-          <OverviewCard cardTitle="Total Visits" count="155" />
+          {/* <OverviewCard cardTitle="Total Visits" count="155" /> */}
         </section>
         <section className={style.mainCard}>
           {/*LINE GRAPH*/}
