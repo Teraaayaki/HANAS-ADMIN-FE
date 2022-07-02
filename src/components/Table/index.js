@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -7,7 +7,8 @@ import { FaFilter } from 'react-icons/fa';
 
 import style from './index.module.scss';
 
-const DataTable = ({ tableTitle, headerNames, renderData }) => {
+const DataTable = ({ tableTitle, headerNames, renderData, sortItems }) => {
+
   return (
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
@@ -23,9 +24,11 @@ const DataTable = ({ tableTitle, headerNames, renderData }) => {
               <span className={style.conditionsText}>Sort</span>
             </Dropdown.Toggle>
             <Dropdown.Menu className={style.conditionMenu}>
-              <Dropdown.Item> Option 1</Dropdown.Item>
-              <Dropdown.Item>Option 2</Dropdown.Item>
-              <Dropdown.Item>Option 3</Dropdown.Item>
+              { sortItems.map( (item) => {
+                return (
+                  <Dropdown.Item key={item.event_key} onClick={item.onClick}> {item.name} </Dropdown.Item>
+                )
+              })}
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown>
