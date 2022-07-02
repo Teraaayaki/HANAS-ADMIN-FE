@@ -59,7 +59,7 @@ const SkilledWorkerList = () => {
               src={skilledworker.pp}
               alt="&nbsp; Profile Pic"
             />
-            <Link to={`/skilledworkers/${skilledworker.id}`}>
+            <Link to={`/skilledworkers/${skilledworker._id}`}>
               <span className={style.truncate}>{skilledworker.name}</span>
             </Link>
           </td>

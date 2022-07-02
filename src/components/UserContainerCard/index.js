@@ -6,6 +6,104 @@ import Button from "react-bootstrap/Button";
 
 import style from "./index.module.scss";
 
+const renderMyServicesList = (myServicesData) => {
+  let last = -1;
+  if (myServicesData !== undefined) {
+    last = myServicesData.length - 1;
+    if (last > 0) {
+      return myServicesData.map((myService, idx) => {
+        if (idx < last) {
+          return (
+            <span key={idx}>{myService.servicesData[0].service_type}, </span>
+          );
+        } else {
+          return (
+            <span key={idx}>{myService.servicesData[0].service_type}</span>
+          );
+        }
+      });
+    } else if (last > -1) {
+      return <span>{myServicesData[0].servicesData[0].service_type}</span>;
+    } else {
+      return;
+    }
+  } else {
+    return;
+  }
+};
+
+const renderValidIDList = (validIDData, is_verified) => {
+  let last = -1;
+  if (validIDData !== undefined) {
+    last = validIDData.length - 1;
+  }
+  if (last > 0) {
+    return validIDData.map((valid_id, idx) => {
+      if (idx < last) {
+        return (
+          <div className={style.container}>
+            <span className={style.infoLabel}>
+              VALID ID PRESENTED
+              {is_verified ? (
+                <span className="mx-3 text-success">Verified</span>
+              ) : (
+                <span className="mx-3 text-danger">Not Verified</span>
+              )}
+            </span>
+            <img
+              src={valid_id}
+              alt="&nbsp; Valid ID"
+              width={350}
+              height={200}
+            />
+          </div>
+        );
+      } else {
+        return (
+          <div className={style.container}>
+            <span className={`${style.infoLabel} invisible`}>_</span>
+            <img
+              src={valid_id}
+              alt="&nbsp; Valid ID"
+              width={350}
+              height={200}
+            />
+          </div>
+        );
+      }
+    });
+  } else if (last > -1) {
+    return (
+      <div className={style.container}>
+        <span className={style.infoLabel}>
+          VALID ID PRESENTED
+          {is_verified ? (
+            <span className="mx-3 text-success">Verified</span>
+          ) : (
+            <span className="mx-3 text-danger">Not Verified</span>
+          )}
+        </span>
+        <img
+          src={validIDData[0].valid_id}
+          alt="&nbsp; Valid ID"
+          width={350}
+          height={200}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className={style.container}>
+        <span className={style.infoLabel}>
+          VALID ID PRESENTED
+          <span className="mx-3 text-danger">Not Verified</span>
+        </span>
+        <span className={style.info}>No Data</span>
+      </div>
+    );
+  }
+};
+
 const UserContainerCard = ({ link, userInfo }) => {
   return (
     <Card className={style.card}>
@@ -78,7 +176,9 @@ const UserContainerCard = ({ link, userInfo }) => {
             {link === "skilledworkers" ? (
               <div className={style.container}>
                 <span className={style.infoLabel}>SERVICE/S OFFERED</span>
-                <span className={style.info}>{userInfo.services}</span>
+                <span className={style.info}>
+                  {renderMyServicesList(userInfo.myServicesData)}
+                </span>
               </div>
             ) : (
               ""
@@ -92,41 +192,22 @@ const UserContainerCard = ({ link, userInfo }) => {
           </section>
           {link === "verification-requests" || link === "skilledworkers" ? (
             <section className={style.userDetailRow}>
-              <div className={style.container}>
-                <span className={style.infoLabel}>
-                  VALID ID PRESENTED
-                  {userInfo.isVerified ? (
-                    <span className="mx-3 text-success">Verified</span>
-                  ) : (
-                    <span className="mx-3 text-danger">Not Verified</span>
-                  )}
-                </span>
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwPXgF-CoOqxHlNPkKSjzelM_kh6bcxHSUkQ&usqp=CAU"
-                  alt="&nbsp; Valid ID"
-                  width={350}
-                  height={200}
-                />
-              </div>
-              <div className={style.container}>
-                <span className={`${style.infoLabel} invisible`}>
-                  VALID ID PRESENTED
-                </span>
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0R9dMhaJkiNudJ0UZFmerq-rGBCem5df6VHPExtoe03ELyZeFv1Cl4NJzuzmS3avo_yc&usqp=CAU"
-                  alt="&nbsp; Valid ID"
-                  width={350}
-                  height={200}
-                />
-              </div>
+              {renderValidIDList(
+                userInfo.verificationData.valid_id,
+                userInfo.is_verified
+              )}
               <div className={style.container}>
                 <span className={style.infoLabel}>NBI / POLICE CLEARANCE</span>
-                <img
-                  src="https://i0.wp.com/governmentph.com/wp-content/uploads/2018/05/Sample-NBI-Clearance.jpg?ssl=1"
-                  alt="&nbsp; Valid ID"
-                  width={350}
-                  height={200}
-                />
+                {userInfo.verificationData.nbi_brgy_clearance ? (
+                  <img
+                    src={userInfo.verificationData.nbi_brgy_clearance}
+                    alt="&nbsp; NBI/Brgy Clearance"
+                    width={350}
+                    height={200}
+                  />
+                ) : (
+                  <span className={style.info}>No Data</span>
+                )}
               </div>
             </section>
           ) : (
