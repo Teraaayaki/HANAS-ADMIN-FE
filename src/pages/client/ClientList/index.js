@@ -20,8 +20,6 @@ const ClientList = () => {
     dispatch(getClientList());
   }, [dispatch]);
 
-  console.log("clientListData", clientListData);
-
   const renderClientList = () => {
     return clientListData.map((client, idx) => {
       return (

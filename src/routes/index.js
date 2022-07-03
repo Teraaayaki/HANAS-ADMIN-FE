@@ -12,7 +12,7 @@ import PaginatedVerificationRequestList from "../pages/verification/Verification
 import VerificationRequestDetail from "../pages/verification/VerificationRequestDetail";
 import ClientList from "../pages/client/ClientList";
 import ClientDetail from "../pages/client/ClientDetail";
-import SkilledWorkerList from "../pages/skilledworker/SkilledWorkerList";
+import PaginatedSkilledWorkerList from "../pages/skilledworker/SkilledWorkerList";
 import SkilledWorkerDetail from "../pages/skilledworker/SkilledWorkerDetail";
 import Transaction from "../pages/transaction/TransactionList";
 import UserReport from "../pages/UserReport";
@@ -65,7 +65,7 @@ const Routes = () => {
         path="/skilledworkers"
         pageTitle="Skilled Workers"
         exact
-        component={SkilledWorkerList}
+        component={PaginatedSkilledWorkerList}
       ></AdminRoute>
 
       <AdminRoute
