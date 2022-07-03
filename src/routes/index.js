@@ -10,7 +10,7 @@ import Login from "../pages/Login";
 import Overview from "../pages/Overview";
 import PaginatedVerificationRequestList from "../pages/verification/VerificationRequestList";
 import VerificationRequestDetail from "../pages/verification/VerificationRequestDetail";
-import ClientList from "../pages/client/ClientList";
+import PaginatedClientList from "../pages/client/ClientList";
 import ClientDetail from "../pages/client/ClientDetail";
 import PaginatedSkilledWorkerList from "../pages/skilledworker/SkilledWorkerList";
 import SkilledWorkerDetail from "../pages/skilledworker/SkilledWorkerDetail";
@@ -51,7 +51,7 @@ const Routes = () => {
         path="/clients"
         pageTitle="Clients"
         exact
-        component={ClientList}
+        component={PaginatedClientList}
       ></AdminRoute>
 
       <AdminRoute

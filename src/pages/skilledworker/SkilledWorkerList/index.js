@@ -112,34 +112,38 @@ const SkilledWorkerList = ({ itemsPerPage }) => {
     setItemOffset(newOffset);
   };
 
-  return (
-    <div className="main-content">
-      <DataTable
-        tableTitle="Details"
-        headerNames={headerNames}
-        renderData={() => renderSkilledWorkersList(currentItems)}
-      />
-
-      <div className={style.paginateContainer}>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="Next"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={1}
-          pageCount={pageCount}
-          previousLabel="Previous"
-          renderOnZeroPageCount={null}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
+  if (currentItems !== null && currentItems[0] !== undefined) {
+    return (
+      <div className="main-content">
+        <DataTable
+          tableTitle="Details"
+          headerNames={headerNames}
+          renderData={() => renderSkilledWorkersList(currentItems)}
         />
+
+        <div className={style.paginateContainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return "";
+  }
 };
 
 const PaginatedSkilledWorkerList = () => {
-  return <div>{<SkilledWorkerList itemsPerPage={2} />}</div>;
+  return <div>{<SkilledWorkerList itemsPerPage={1} />}</div>;
 };
 
 export default PaginatedSkilledWorkerList;
