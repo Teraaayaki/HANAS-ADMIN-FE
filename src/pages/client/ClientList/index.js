@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactDOM from "react-dom";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
 import { Link } from "react-router-dom";
-
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
