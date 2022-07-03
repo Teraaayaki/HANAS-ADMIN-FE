@@ -68,8 +68,6 @@ const ClientList = ({ itemsPerPage }) => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(clientListData.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(clientListData.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, clientListData]);
@@ -79,29 +77,33 @@ const ClientList = ({ itemsPerPage }) => {
     setItemOffset(newOffset);
   };
 
-  return (
-    <div className="main-content">
-      <DataTable
-        tableTitle="Details"
-        headerNames={headerNames}
-        renderData={() => renderClientList(clientListData)}
-      />
-      <div className={style.paginateContainer}>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="Next"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={1}
-          pageCount={pageCount}
-          previousLabel="Previous"
-          renderOnZeroPageCount={null}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
+  if (currentItems !== null && currentItems[0] !== undefined) {
+    return (
+      <div className="main-content">
+        <DataTable
+          tableTitle="Details"
+          headerNames={headerNames}
+          renderData={() => renderClientList(currentItems)}
         />
+        <div className={style.paginateContainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return "";
+  }
 };
 
 const PaginatedClientList = () => {
