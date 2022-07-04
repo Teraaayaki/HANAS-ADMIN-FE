@@ -141,7 +141,7 @@ const SkilledWorkerList = ({ itemsPerPage }) => {
 };
 
 const PaginatedSkilledWorkerList = () => {
-  return <div>{<SkilledWorkerList itemsPerPage={1} />}</div>;
+  return <div>{<SkilledWorkerList itemsPerPage={10} />}</div>;
 };
 
 export default PaginatedSkilledWorkerList;

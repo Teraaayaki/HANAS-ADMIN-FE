@@ -105,7 +105,7 @@ const ClientList = ({ itemsPerPage }) => {
 };
 
 const PaginatedClientList = () => {
-  return <div>{<ClientList itemsPerPage={1} />}</div>;
+  return <div>{<ClientList itemsPerPage={10} />}</div>;
 };
 
 export default PaginatedClientList;
