@@ -1,25 +1,36 @@
 import { ClientActions } from "./types";
 import ClientAPI from "../../api/Client";
 
-export const getClients = () => (dispatch) => {
-  ClientAPI.getClients()
+export const getClientList = () => async (dispatch) => {
+  ClientAPI.getClientList()
     .then(({ data }) => {
-      dispatch({ type: ClientActions.GET_CLIENTS, payload: data.clients });
+      dispatch({
+        type: ClientActions.GET_CLIENT_LIST,
+        payload: data.clientList,
+      });
     })
     .catch((error) => {
-      console.log("Error: getClients\n-" + error);
+      console.log("GetClientList " + error);
       dispatch({
-        type: ClientActions.GET_CLIENTS_ERROR,
+        type: ClientActions.GET_CLIENT_LIST_ERROR,
         payload: error?.response?.data?.error,
       });
     });
 };
 
-export const getClient = (user_id) => (dispatch) => {
-  ClientAPI.getClient({ user_id }).then(({ data }) => {
-    dispatch({
-      type: ClientActions.GET_CLIENT,
-      payload: data,
+export const getClient = (clientID) => async (dispatch) => {
+  ClientAPI.getClient(clientID)
+    .then(({ data }) => {
+      dispatch({
+        type: ClientActions.GET_CLIENT,
+        payload: data.client,
+      });
+    })
+    .catch((error) => {
+      console.log("GetClient " + error);
+      dispatch({
+        type: ClientActions.GET_CLIENT_ERROR,
+        payload: error?.response?.data?.error,
+      });
     });
-  });
 };

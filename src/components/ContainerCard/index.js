@@ -70,7 +70,7 @@ const ContainerCard = ({ link, userInfo }) => {
     }
   }, [error]);
 
-  if(!userInfo){
+  if (!userInfo) {
     return (
       <>
         <Card className={style.card}>

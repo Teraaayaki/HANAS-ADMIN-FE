@@ -1,23 +1,32 @@
-import React from 'react';
-import ContainerCard from '../../../components/ContainerCard';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const userInfo = {
-  name: 'Tom Luis Cruis',
-  email: 'tomcruise@gmail.com',
-  address: 'P2, BLK3, LOT18, Deca Homes, Tungkil, Minglanilla, Cebu',
-  sex: 'Male',
-  birthdate: 'July 3, 1962',
-  mobile_no: '09655867131',
-  member_since: 'May 26, 2019',
-  valid_id: "Driver's License"
-};
+import { getClient } from "../../../redux/actions/clientActions";
+import UserContainerCard from "../../../components/UserContainerCard";
 
 const ClientDetail = () => {
-  return (
-    <div className="main-content">
-      <ContainerCard link="clients" userInfo={userInfo}></ContainerCard>
-    </div>
-  );
+  let { clientID } = useParams();
+
+  const dispatch = useDispatch();
+  const { clientData, error } = useSelector((state) => state.client);
+
+  useEffect(() => {
+    dispatch(getClient(clientID));
+  }, []);
+
+  if (clientData[0] !== undefined) {
+    return (
+      <div className="main-content">
+        <UserContainerCard
+          link="clients"
+          userInfo={clientData[0]}
+        ></UserContainerCard>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 export default ClientDetail;
