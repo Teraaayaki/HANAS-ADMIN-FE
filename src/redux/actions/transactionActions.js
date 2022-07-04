@@ -9,3 +9,12 @@ export const getTransactionList = () => async (dispatch) => {
         dispatch({ type: transactionActions.TRANSACTION_ERROR, payload: error?.response?.data?.error });
       });
 };
+
+export const sortTransaction = (DATA) => async (dispatch) => {
+    transactionAPI.sortTransaction(DATA).then( ({ data }) => {
+        dispatch({ type: transactionActions.TRANSACTION_DETAILS, payload: data.transactions});
+    }).catch( (error) => {
+        console.log(error);
+        dispatch({ type: transactionActions.TRANSACTION_ERROR, payload: error?.response?.data?.error });
+    });
+};

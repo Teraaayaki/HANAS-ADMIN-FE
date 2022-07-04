@@ -8,7 +8,20 @@ const transactionAPI = {
     };
 
     return API.request(options);
-  }
+  },
+
+  sortTransaction: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: '/admin/sort-transaction',
+      data : {
+        choice: DATA,
+      }
+    };
+
+    return API.request(options);
+  },
+
 };
 
 export default transactionAPI;
