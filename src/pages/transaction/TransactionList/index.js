@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoKebabVertical } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ReactPaginate from 'react-paginate';
 import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
 import TransactionDetail from '../TransactionDetail';
@@ -9,9 +10,19 @@ import style from './index.module.scss';
 import { getTransactionList, sortTransaction} from "../../../redux/actions/transactionActions";
 import moment from 'moment';
 
+<<<<<<< HEAD
+const TransactionList = ({ itemsPerPage }) => {
+=======
 const TransactionList = () => {
+>>>>>>> ffec4efdcfc6df746c50ef7c720b5c3c77a2d4f2
   const [showTransactionDets, setShowTransactionDets] = useState(false);
   const [specificDetail, setSpecificDetail] = useState([]);
+
+  //PAGINATION STATES
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+
   const { transactions } = useSelector((state) => state.transaction);
 
   const dispatch = useDispatch();
@@ -25,6 +36,12 @@ const TransactionList = () => {
     'Status'
   ];
 
+  //PAGINATION HANDLE
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % transactions.length;
+    setItemOffset(newOffset);
+  };
+  
   const handleSortTransaction = (e) => {
     dispatch(sortTransaction(e));
   };
@@ -49,7 +66,7 @@ const TransactionList = () => {
 
   const filterItems = []
 
-  const renderTransactionsList = () => {
+  const renderTransactionsList = (transactions) => {
     return transactions.map((transaction, idx) => {
       return (
         <tr
@@ -89,8 +106,21 @@ const TransactionList = () => {
 
   useEffect(() => {
     dispatch(getTransactionList());
+<<<<<<< HEAD
+   }, [dispatch]);
+
+  useEffect(() => {
+  // Fetch items from another resources.
+  const endOffset = itemOffset + itemsPerPage;
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  setCurrentItems(transactions.slice(itemOffset, endOffset));
+  setPageCount(Math.ceil(transactions.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, transactions]);
+
+=======
    }, []);
   
+>>>>>>> ffec4efdcfc6df746c50ef7c720b5c3c77a2d4f2
     return (
       <div className="main-content">
         <TransactionDetail
@@ -101,12 +131,41 @@ const TransactionList = () => {
         <DataTable
           tableTitle="Details"
           headerNames={headerNames}
+<<<<<<< HEAD
+          renderData={() => renderTransactionsList(currentItems)}
+=======
           renderData={renderTransactionsList}
           sortItems={sortItems}
           filterItems={filterItems}
+>>>>>>> ffec4efdcfc6df746c50ef7c720b5c3c77a2d4f2
         />
+        <div className={style.paginateContainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={'pagination'} /* as this work same as bootstrap class */
+            subContainerClassName={'pages pagination'} /* as this work same as bootstrap class */
+            activeClassName={'active'} /* as this work same as bootstrap class */
+          />
+        </div>
       </div>
     );
 };
 
-export default TransactionList;
+const PaginatedTransactionList = () => {
+  return (
+    <div>
+      {
+          <TransactionList itemsPerPage={10} />
+      }
+    </div>
+    
+  );
+}
+
+export default PaginatedTransactionList;

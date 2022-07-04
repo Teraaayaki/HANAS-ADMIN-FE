@@ -154,7 +154,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
         onClose: () => dispatch(resetSuccess()),
       });
     }
-  }, [success]);
+  }, [success, successMessage, dispatch]);
 
   useEffect(() => {
     if (error) {
@@ -169,7 +169,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
         onClose: () => dispatch(resetError()),
       });
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   useEffect(() => {
     // Fetch items from another resources.
@@ -239,7 +239,14 @@ const VerificationRequestList = ({ itemsPerPage }) => {
 };
 
 const PaginatedVerificationRequestList = () => {
-  return <div>{<VerificationRequestList itemsPerPage={1} />}</div>;
-};
+  return (
+    <div>
+      {
+          <VerificationRequestList itemsPerPage={10} />
+      }
+    </div>
+    
+  );
+}
 
 export default PaginatedVerificationRequestList;
