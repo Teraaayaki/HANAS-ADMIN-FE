@@ -47,6 +47,8 @@ const TransactionList = () => {
     }
   ];
 
+  const filterItems = []
+
   const renderTransactionsList = () => {
     return transactions.map((transaction, idx) => {
       return (
@@ -101,6 +103,7 @@ const TransactionList = () => {
           headerNames={headerNames}
           renderData={renderTransactionsList}
           sortItems={sortItems}
+          filterItems={filterItems}
         />
       </div>
     );

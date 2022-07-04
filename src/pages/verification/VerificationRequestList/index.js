@@ -13,6 +13,7 @@ import {
   resetSuccess,
   resetError,
   sortVerification,
+  filterVerification,
 } from "../../../redux/actions/verificationActions.js";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
@@ -74,8 +75,11 @@ const VerificationRequestList = ({ itemsPerPage }) => {
 
   const handleSortVerification = (e) => {
     dispatch(sortVerification(e));
-    // dispatch(sortTransaction(e));
   };
+
+  const handleFilterVerification = (e) => {
+    dispatch(filterVerification(e));
+  }
 
   const sortItems = [
     {
@@ -84,11 +88,29 @@ const VerificationRequestList = ({ itemsPerPage }) => {
       onClick: () => { dispatch(handleSortVerification('name'))}
     },
     {
-      name: 'Date of Creation',
+      name: 'Date of Account Creation',
       event_key: 'date',
       onClick: () => { dispatch(handleSortVerification('date'))}
     }
   ];
+
+  const filterItems = [
+    {
+      name: 'Pending',
+      event_key: 'pending',
+      onClick: () => { dispatch(handleFilterVerification('Pending'))}
+    },
+    {
+      name: 'Accepted',
+      event_key: 'accepted',
+      onClick: () => { dispatch(handleFilterVerification('Accepted'))}
+    },
+    {
+      name: 'Rejected',
+      event_key: 'rejected',
+      onClick: () => { dispatch(handleFilterVerification('Rejected'))}
+    },
+  ]
     
 
   const dispatch = useDispatch();
@@ -102,7 +124,6 @@ const VerificationRequestList = ({ itemsPerPage }) => {
   const { verificationData, success, error, successMessage } = useSelector(
     (state) => state.verification
   );
-  
 
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
@@ -190,6 +211,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
             renderVerificationRequestList(currentItems, handleOpen)
           }
           sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate

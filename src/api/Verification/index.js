@@ -57,6 +57,18 @@ export const VerificationAPI = {
     };
 
     return API.request(options);
+  },
+
+  filterVerification: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: `/admin/filter-verification`,
+      data: {
+        choice: DATA,
+      }
+    };
+
+    return API.request(options);
   }
 
 };

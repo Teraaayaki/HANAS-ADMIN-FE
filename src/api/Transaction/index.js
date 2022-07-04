@@ -20,7 +20,8 @@ const transactionAPI = {
     };
 
     return API.request(options);
-  }
+  },
+
 };
 
 export default transactionAPI;
