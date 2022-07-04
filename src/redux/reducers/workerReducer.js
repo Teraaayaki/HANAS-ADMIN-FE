@@ -10,6 +10,7 @@ const workerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case WorkerActions.GET_WORKER_LIST:
       return {
+        ...state,
         workerListData: action.payload,
         error: null,
       };
@@ -20,6 +21,7 @@ const workerReducer = (state = INITIAL_STATE, action) => {
       };
     case WorkerActions.GET_WORKER:
       return {
+        ...state,
         workerData: action.payload,
         error: null,
       };

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { MdOutlineDeleteOutline } from "react-icons/md";
@@ -22,7 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import style from "./index.module.scss";
 
 /*bootstrap module for easier styling for the pagination*/
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const renderVerificationRequestList = (verificationData, handleOpen) => {
   return verificationData.map((verificationData, idx) => {
@@ -48,9 +48,7 @@ const renderVerificationRequestList = (verificationData, handleOpen) => {
           </span>
         </td>
         <td className={style.tableData}>
-          <StatusBadge
-            status={verificationData.verify_status.toUpperCase()}
-          />
+          <StatusBadge status={verificationData.verify_status.toUpperCase()} />
         </td>
         <td className={style.tableData}>
           <MdOutlineDeleteOutline
@@ -140,7 +138,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
   };
 
   useEffect(() => {
-      dispatch(getVerificationList());
+    dispatch(getVerificationList());
   }, [dispatch]);
 
   useEffect(() => {
@@ -180,7 +178,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
     setCurrentItems(verificationData.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(verificationData.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, verificationData]);
-  
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -222,9 +220,15 @@ const VerificationRequestList = ({ itemsPerPage }) => {
             pageCount={pageCount}
             previousLabel="Previous"
             renderOnZeroPageCount={null}
-            containerClassName={'pagination'} /* as this work same as bootstrap class */
-            subContainerClassName={'pages pagination'} /* as this work same as bootstrap class */
-            activeClassName={'active'} /* as this work same as bootstrap class */
+            containerClassName={
+              "pagination"
+            } /* as this work same as bootstrap class */
+            subContainerClassName={
+              "pages pagination"
+            } /* as this work same as bootstrap class */
+            activeClassName={
+              "active"
+            } /* as this work same as bootstrap class */
             // className={style.paginationContainer}
           />
         </div>
@@ -232,18 +236,10 @@ const VerificationRequestList = ({ itemsPerPage }) => {
       <ToastContainer />
     </>
   );
-  
 };
 
 const PaginatedVerificationRequestList = () => {
-  return (
-    <div>
-      {
-          <VerificationRequestList itemsPerPage={1} />
-      }
-    </div>
-    
-  );
-}
+  return <div>{<VerificationRequestList itemsPerPage={1} />}</div>;
+};
 
 export default PaginatedVerificationRequestList;

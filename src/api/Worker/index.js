@@ -9,13 +9,10 @@ const WorkerAPI = {
     return API.request(options);
   },
 
-  getWorker: ({ user_id }) => {
+  getWorker: (workerID) => {
     const options = {
       method: "GET",
-      url: `/admin/get-worker/${user_id}`,
-      params: {
-        id: user_id,
-      },
+      url: `/admin/get-worker/${workerID}`,
     };
     return API.request(options);
   },

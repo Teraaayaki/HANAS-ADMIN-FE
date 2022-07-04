@@ -10,7 +10,7 @@ export const getWorkerList = () => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log("GetWorkerList\n-" + error);
+      console.log("GetWorkerList " + error);
       dispatch({
         type: WorkerActions.GET_WORKER_LIST_ERROR,
         payload: error?.response?.data?.error,
@@ -18,16 +18,16 @@ export const getWorkerList = () => (dispatch) => {
     });
 };
 
-export const getWorker = (user_id) => (dispatch) => {
-  WorkerAPI.getWorker({ user_id })
+export const getWorker = (workerID) => (dispatch) => {
+  WorkerAPI.getWorker(workerID)
     .then(({ data }) => {
       dispatch({
         type: WorkerActions.GET_WORKER,
-        payload: data,
+        payload: data.worker,
       });
     })
     .catch((error) => {
-      console.log("Error: getWorker\n-" + error);
+      console.log("getWorker " + error);
       dispatch({
         type: WorkerActions.GET_WORKER_ERROR,
         payload: error?.response?.data?.error,
