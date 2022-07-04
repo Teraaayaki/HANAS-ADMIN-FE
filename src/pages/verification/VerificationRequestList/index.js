@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ReactDOM from "react-dom";
 
 import ReactPaginate from "react-paginate";
 import DataTable from "../../../components/Table";
@@ -13,6 +12,8 @@ import {
   removeSpecificVerification,
   resetSuccess,
   resetError,
+  sortVerification,
+  filterVerification,
 } from "../../../redux/actions/verificationActions.js";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
@@ -65,9 +66,50 @@ const VerificationRequestList = ({ itemsPerPage }) => {
   const headerNames = [
     "Verification Requests",
     "Name",
-    "Date",
+    "Verification Date",
     "Request Status",
   ];
+
+
+  const handleSortVerification = (e) => {
+    dispatch(sortVerification(e));
+  };
+
+  const handleFilterVerification = (e) => {
+    dispatch(filterVerification(e));
+  }
+
+  const sortItems = [
+    {
+      name: 'Name (A-Z)',
+      event_key: 'name',
+      onClick: () => { dispatch(handleSortVerification('name'))}
+    },
+    {
+      name: 'Date of Account Creation',
+      event_key: 'date',
+      onClick: () => { dispatch(handleSortVerification('date'))}
+    }
+  ];
+
+  const filterItems = [
+    {
+      name: 'Pending',
+      event_key: 'pending',
+      onClick: () => { dispatch(handleFilterVerification('Pending'))}
+    },
+    {
+      name: 'Accepted',
+      event_key: 'accepted',
+      onClick: () => { dispatch(handleFilterVerification('Accepted'))}
+    },
+    {
+      name: 'Rejected',
+      event_key: 'rejected',
+      onClick: () => { dispatch(handleFilterVerification('Rejected'))}
+    },
+  ]
+    
 
   const dispatch = useDispatch();
 
@@ -166,6 +208,8 @@ const VerificationRequestList = ({ itemsPerPage }) => {
           renderData={() =>
             renderVerificationRequestList(currentItems, handleOpen)
           }
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate

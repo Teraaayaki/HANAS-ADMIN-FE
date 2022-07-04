@@ -6,101 +6,8 @@ import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
 import TransactionDetail from '../TransactionDetail';
 import style from './index.module.scss';
-import { getTransactionList } from "../../../redux/actions/transactionActions";
+import { getTransactionList, sortTransaction} from "../../../redux/actions/transactionActions";
 import moment from 'moment';
-
-// const transactions = [
-//   {
-//     id: 1,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 2,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   },
-//   {
-//     id: 3,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 4,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   },
-//   {
-//     id: 5,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 6,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   },
-//   {
-//     id: 7,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 8,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'FINISHED'
-//   },
-//   {
-//     id: 9,
-//     client_name: 'José Protacio Rizal Mercado',
-//     worker_name: 'Mary Therese Sun Alegre',
-//     address: 'Deca Homes, Tungkil, Minglanilla, Cebu',
-//     service: 'Plumbing',
-//     payment: 1500,
-//     time: '6:30 PM',
-//     status: 'ONGOING'
-//   }
-// ];
 
 const TransactionList = () => {
   const [showTransactionDets, setShowTransactionDets] = useState(false);
@@ -118,7 +25,29 @@ const TransactionList = () => {
     'Status'
   ];
 
-  console.log("TRANSACTION", transactions);
+  const handleSortTransaction = (e) => {
+    dispatch(sortTransaction(e));
+  };
+
+  const sortItems = [
+    {
+      name: 'Total Cost',
+      event_key: 'cost',
+      onClick: () => { dispatch(handleSortTransaction('cost'))}
+    },
+    {
+      name: 'Booking Start Date',
+      event_key: 'date',
+      onClick: () => { dispatch(handleSortTransaction('date'))}
+    },
+    {
+      name: 'Service Type',
+      event_key: 'service',
+      onClick: () => { dispatch(handleSortTransaction('service'))}
+    }
+  ];
+
+  const filterItems = []
 
   const renderTransactionsList = () => {
     return transactions.map((transaction, idx) => {
@@ -162,8 +91,6 @@ const TransactionList = () => {
     dispatch(getTransactionList());
    }, []);
   
-  console.log("SPECIFIC DETAIL FROM LIST", specificDetail);
-
     return (
       <div className="main-content">
         <TransactionDetail
@@ -175,6 +102,8 @@ const TransactionList = () => {
           tableTitle="Details"
           headerNames={headerNames}
           renderData={renderTransactionsList}
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
       </div>
     );
