@@ -15,7 +15,7 @@ import ClientDetail from "../pages/client/ClientDetail";
 import SkilledWorkerList from "../pages/skilledworker/SkilledWorkerList";
 import SkilledWorkerDetail from "../pages/skilledworker/SkilledWorkerDetail";
 import Transaction from "../pages/transaction/TransactionList";
-import UserReport from "../pages/UserReport";
+import PaginatedReportList from "../pages/UserReport";
 
 const Routes = () => {
   return (
@@ -86,7 +86,7 @@ const Routes = () => {
         path="/user-reports"
         pageTitle="User Reports"
         exact
-        component={UserReport}
+        component={PaginatedReportList}
       ></AdminRoute>
     </Switch>
   );
