@@ -4,55 +4,13 @@ import ReactPaginate from "react-paginate";
 import moment from "moment";
 import { Link } from "react-router-dom";
 /*bootstrap module for easier styling for the pagination*/
-
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import { getReportList } from "../../redux/actions/reportActions";
 import DataTable from "../../components/Table";
 import StatusBadge from "../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
-
 import style from "./index.module.scss";
-
-const reports = [
-  {
-    id: 1,
-    reporter: [
-      {
-        _id: "a",
-        name: "Mary Therese Sun Alegre",
-        profile_pic:
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      },
-    ],
-    reported_user: [
-      {
-        _id: "a",
-        name: "Mary Therese Sun Alegre",
-        profile_pic:
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      },
-    ],
-    concern: "Adding images to featured posts",
-    date: "May 26, 2019",
-    time: "6:30 PM",
-    status: "PENDING",
-  },
-  {
-    id: 1,
-    reporter: [
-      {
-        _id: "a",
-        name: "Hosea Mendez Barriga",
-        profile_pic:
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      },
-    ],
-    reported_user: [],
-    concern: "Adding images to featured posts",
-    date: "May 26, 2019",
-    time: "6:30 PM",
-    status: "PENDING",
-  },
-];
 
 const renderReportList = (reportListData) => {
   return reportListData.map((report, idx) => {
@@ -64,20 +22,28 @@ const renderReportList = (reportListData) => {
             src={report.pp}
             alt="&nbsp; Profile Pic"
           />
-          <Link to={`/user-reports/${report.reporter[0]._id}`}>
-            <span className={style.truncate}>{report.reporter[0].name}</span>
+          <Link to={`/clients/${report.reporterData[0]._id}`}>
+            <span className={style.truncate}>
+              {report.reporterData[0].first_name + " "}
+              {report.reporterData[0].middle_name + " "}
+              {report.reporterData[0].family_name + " "}
+              {report.reporterData[0].suffix}
+            </span>
           </Link>
         </td>
-        {report.reported_user && report.reported_user[0] !== undefined ? (
+        {report.reported_user && report.reportedUserData[0] !== undefined ? (
           <td className={style.tableData}>
             <img
               className={style.profilePic}
               src={report.pp}
               alt="&nbsp; Profile Pic"
             />
-            <Link to={`/user-reports/${report.reported_user[0]._id}`}>
+            <Link to={`/clients/${report.reported_user[0]._id}`}>
               <span className={style.truncate}>
-                {report.reported_user[0].name}
+                {report.reportedUserData[0].first_name + " "}
+                {report.reportedUserData[0].middle_name + " "}
+                {report.reportedUserData[0].family_name + " "}
+                {report.reportedUserData[0].suffix}
               </span>
             </Link>
           </td>
@@ -90,8 +56,10 @@ const renderReportList = (reportListData) => {
           <span>{report.concern}</span>
         </td>
         <td className={style.tableData}>
-          <span>{report.date}</span> <br />
-          <span className={style.time}> {report.time}</span>
+          <span>{moment(report.createdAt).format("LL")}</span> <br />
+          <span className={style.time}>
+            {moment(report.createdAt).format("LT")}
+          </span>
         </td>
         <td className={style.tableData}>
           <StatusBadge status={report.status} />
@@ -107,6 +75,13 @@ const renderReportList = (reportListData) => {
 const ReportList = ({ itemsPerPage }) => {
   const headerNames = ["Reporter", "Reportee", "Concern", "Date", "Status"];
 
+  const dispatch = useDispatch();
+  const { reportListData, error } = useSelector((state) => state.report);
+
+  useEffect(() => {
+    dispatch(getReportList());
+  }, [dispatch]);
+
   // Pagination States & Hooks
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
@@ -114,14 +89,16 @@ const ReportList = ({ itemsPerPage }) => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(reports.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(reports.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, reports]);
+    setCurrentItems(reportListData.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(reportListData.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, reportListData]);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % reports.length;
+    const newOffset = (event.selected * itemsPerPage) % reportListData.length;
     setItemOffset(newOffset);
   };
+
+  console.log("List", reportListData);
 
   if (currentItems !== null && currentItems[0] !== undefined) {
     return (
