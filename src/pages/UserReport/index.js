@@ -17,6 +17,12 @@ const renderReportList = (reportListData) => {
     return (
       <tr key={idx} className={style.tableDataRow}>
         <td className={style.tableData}>
+          <Link to={`/user-reports/${report._id}`}>
+            <span>{report.concern}</span>
+          </Link>
+        </td>
+
+        <td className={style.tableData}>
           <img
             className={style.profilePic}
             src={report.pp}
@@ -53,16 +59,13 @@ const renderReportList = (reportListData) => {
           </td>
         )}
         <td className={style.tableData}>
-          <span>{report.concern}</span>
-        </td>
-        <td className={style.tableData}>
           <span>{moment(report.createdAt).format("LL")}</span> <br />
           <span className={style.time}>
             {moment(report.createdAt).format("LT")}
           </span>
         </td>
         <td className={style.tableData}>
-          <StatusBadge status={report.status} />
+          <StatusBadge status={report.status.toUpperCase()} />
         </td>
         <td className={style.tableData}>
           <GoKebabVertical />
@@ -73,7 +76,7 @@ const renderReportList = (reportListData) => {
 };
 
 const ReportList = ({ itemsPerPage }) => {
-  const headerNames = ["Reporter", "Reportee", "Concern", "Date", "Status"];
+  const headerNames = ["Concern", "Reporter", "Reportee", "Date", "Status"];
 
   const dispatch = useDispatch();
   const { reportListData, error } = useSelector((state) => state.report);
