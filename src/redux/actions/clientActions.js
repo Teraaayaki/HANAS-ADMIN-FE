@@ -34,3 +34,29 @@ export const getClient = (clientID) => async (dispatch) => {
       });
     });
 };
+
+export const sortClient = (DATA) => async (dispatch) => {
+  ClientAPI.sortClient(DATA).then( ({data}) => {
+    dispatch({ type: ClientActions.GET_CLIENT_LIST, payload: data.clientList});
+  })
+  .catch( (error) => {
+    console.log(error);
+    dispatch({
+      type: ClientActions.GET_CLIENT_ERROR,
+      payload: error?.response?.data?.error,
+    });
+  });
+};
+
+export const filterClient = (DATA) => async (dispatch) => {
+  ClientAPI.filterClient(DATA).then( ({data}) => {
+    dispatch({ type: ClientActions.GET_CLIENT_LIST, payload: data.clientList});
+  })
+  .catch( (error) => {
+    console.log(error);
+    dispatch({
+      type: ClientActions.GET_CLIENT_ERROR,
+      payload: error?.response?.data?.error,
+    });
+  });
+}

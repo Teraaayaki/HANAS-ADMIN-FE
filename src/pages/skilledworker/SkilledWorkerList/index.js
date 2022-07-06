@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { getWorkerList } from "../../../redux/actions/workerActions";
+import { filterWorker, getWorkerList, sortWorker } from "../../../redux/actions/workerActions";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
@@ -60,11 +60,7 @@ const renderSkilledWorkersList = (workerListData) => {
         <td className={style.tableData}>
           <StatusBadge
             status={
-              skilledworker.is_deactivated
-                ? "DEACTIVATED"
-                : skilledworker.verificationData.verify_status
-                ? skilledworker.verificationData.verify_status.toUpperCase()
-                : "MISSING DATA"
+              skilledworker.is_deactivated ? "DEACTIVATED" : "ACTIVE"
             }
           />
         </td>
@@ -85,8 +81,43 @@ const SkilledWorkerList = ({ itemsPerPage }) => {
     "Account Status",
   ];
 
+  const handleSortClient= (e) => {
+    dispatch(sortWorker(e));
+  };
+
+  const handleFilterClient = (e) => {
+    dispatch(filterWorker(e));
+  }
+
+  const sortItems = [
+    {
+      name: 'Name (A-Z)',
+      event_key: 'name',
+      onClick: () => { dispatch(handleSortClient('name'))}
+    },
+    {
+      name: 'Date of Account Creation',
+      event_key: 'date',
+      onClick: () => { dispatch(handleSortClient('date'))}
+    }
+  ];
+
+  const filterItems = [
+    {
+      name: 'Active',
+      event_key: 'active',
+      onClick: () => { dispatch(handleFilterClient('active'))}
+    },
+    {
+      name: 'Deactivated',
+      event_key: 'deactivated',
+      onClick: () => { dispatch(handleFilterClient('deactivated'))}
+    },
+  ];
+
+
   const dispatch = useDispatch();
-  const { workerListData, error } = useSelector((state) => state.worker);
+  const { workerListData } = useSelector((state) => state.worker);
 
   useEffect(() => {
     dispatch(getWorkerList());
@@ -117,6 +148,8 @@ const SkilledWorkerList = ({ itemsPerPage }) => {
           tableTitle="Details"
           headerNames={headerNames}
           renderData={() => renderSkilledWorkersList(currentItems)}
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
 
         <div className={style.paginateContainer}>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { getClientList } from "../../../redux/actions/clientActions";
+import { getClientList, sortClient, filterClient } from "../../../redux/actions/clientActions";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
@@ -52,8 +52,43 @@ const renderClientList = (clientListData) => {
 const ClientList = ({ itemsPerPage }) => {
   const headerNames = ["Name", "Address", "Member Since", "Account Status"];
 
+  const handleSortClient= (e) => {
+    dispatch(sortClient(e));
+  };
+
+  const handleFilterClient = (e) => {
+    dispatch(filterClient(e));
+  }
+
+  const sortItems = [
+    {
+      name: 'Name (A-Z)',
+      event_key: 'name',
+      onClick: () => { dispatch(handleSortClient('name'))}
+    },
+    {
+      name: 'Date of Account Creation',
+      event_key: 'date',
+      onClick: () => { dispatch(handleSortClient('date'))}
+    }
+  ];
+
+  const filterItems = [
+    {
+      name: 'Active',
+      event_key: 'active',
+      onClick: () => { dispatch(handleFilterClient('active'))}
+    },
+    {
+      name: 'Deactivated',
+      event_key: 'deactivated',
+      onClick: () => { dispatch(handleFilterClient('deactivated'))}
+    },
+  ];
+
+
   const dispatch = useDispatch();
-  const { clientListData, error } = useSelector((state) => state.client);
+  const { clientListData} = useSelector((state) => state.client);
 
   useEffect(() => {
     dispatch(getClientList());
@@ -82,6 +117,8 @@ const ClientList = ({ itemsPerPage }) => {
           tableTitle="Details"
           headerNames={headerNames}
           renderData={() => renderClientList(currentItems)}
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate
