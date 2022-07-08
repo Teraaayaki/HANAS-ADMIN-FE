@@ -35,7 +35,7 @@ const renderSkilledWorkersList = (workerListData) => {
   return workerListData.map((skilledworker, idx) => {
     return (
       <tr key={idx} className={style.tableDataRow}>
-        <td className={style.tableData}>
+          <td className={style.tableData}>
           <img
             className={style.profilePic}
             src={skilledworker.pp}
@@ -103,6 +103,11 @@ const SkilledWorkerList = ({ itemsPerPage }) => {
   ];
 
   const filterItems = [
+    {
+      name: 'All',
+      event_key: 'all',
+      onClick: () => { dispatch(handleFilterClient('all'))}
+    },
     {
       name: 'Active',
       event_key: 'active',

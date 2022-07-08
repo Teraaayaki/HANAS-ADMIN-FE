@@ -75,6 +75,11 @@ const ClientList = ({ itemsPerPage }) => {
 
   const filterItems = [
     {
+      name: 'All',
+      event_key: 'all',
+      onClick: () => { dispatch(handleFilterClient('all'))}
+    },
+    {
       name: 'Active',
       event_key: 'active',
       onClick: () => { dispatch(handleFilterClient('active'))}
@@ -88,7 +93,7 @@ const ClientList = ({ itemsPerPage }) => {
 
 
   const dispatch = useDispatch();
-  const { clientListData} = useSelector((state) => state.client);
+  const { clientListData } = useSelector((state) => state.client);
 
   useEffect(() => {
     dispatch(getClientList());
