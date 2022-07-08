@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { getReportList } from "../../redux/actions/reportActions";
-import DataTable from "../../components/Table";
-import StatusBadge from "../../components/StatusBadge";
+import { getReportList } from "../../../redux/actions/reportActions";
+import DataTable from "../../../components/Table";
+import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
 import style from "./index.module.scss";
 
@@ -28,7 +28,13 @@ const renderReportList = (reportListData) => {
             src={report.pp}
             alt="&nbsp; Profile Pic"
           />
-          <Link to={`/clients/${report.reporterData[0]._id}`}>
+          <Link
+            to={
+              report.reporter[0].is_worker
+                ? `/skilledworkers/${report.reporterData[0]._id}`
+                : `/clients/${report.reporterData[0]._id}`
+            }
+          >
             <span className={style.truncate}>
               {report.reporterData[0].first_name + " "}
               {report.reporterData[0].middle_name + " "}
@@ -44,7 +50,13 @@ const renderReportList = (reportListData) => {
               src={report.pp}
               alt="&nbsp; Profile Pic"
             />
-            <Link to={`/clients/${report.reported_user[0]._id}`}>
+            <Link
+              to={
+                report.reportedUserData[0].is_worker
+                  ? `/skilledworkers/${report.reportedUserData[0]._id}`
+                  : `/clients/${report.reportedUserData[0]._id}`
+              }
+            >
               <span className={style.truncate}>
                 {report.reportedUserData[0].first_name + " "}
                 {report.reportedUserData[0].middle_name + " "}
@@ -100,8 +112,6 @@ const ReportList = ({ itemsPerPage }) => {
     const newOffset = (event.selected * itemsPerPage) % reportListData.length;
     setItemOffset(newOffset);
   };
-
-  console.log("List", reportListData);
 
   if (currentItems !== null && currentItems[0] !== undefined) {
     return (

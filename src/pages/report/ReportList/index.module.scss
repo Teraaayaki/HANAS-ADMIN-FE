@@ -1,0 +1,7 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/tableGlobalStyles" as *;
+
+.paginateContainer {
+  display: flex;
+  justify-content: flex-end;
+}

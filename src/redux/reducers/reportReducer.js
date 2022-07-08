@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   error: null,
 };
 
-const clientReducer = (state = INITIAL_STATE, action) => {
+const reportReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ReportActions.GET_REPORT_LIST:
       return {
@@ -35,4 +35,4 @@ const clientReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default clientReducer;
+export default reportReducer;
