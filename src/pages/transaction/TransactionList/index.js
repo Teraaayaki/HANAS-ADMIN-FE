@@ -10,11 +10,7 @@ import style from './index.module.scss';
 import { getTransactionList, sortTransaction} from "../../../redux/actions/transactionActions";
 import moment from 'moment';
 
-<<<<<<< HEAD
 const TransactionList = ({ itemsPerPage }) => {
-=======
-const TransactionList = () => {
->>>>>>> ffec4efdcfc6df746c50ef7c720b5c3c77a2d4f2
   const [showTransactionDets, setShowTransactionDets] = useState(false);
   const [specificDetail, setSpecificDetail] = useState([]);
 
@@ -106,7 +102,6 @@ const TransactionList = () => {
 
   useEffect(() => {
     dispatch(getTransactionList());
-<<<<<<< HEAD
    }, [dispatch]);
 
   useEffect(() => {
@@ -117,10 +112,6 @@ const TransactionList = () => {
   setPageCount(Math.ceil(transactions.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, transactions]);
 
-=======
-   }, []);
-  
->>>>>>> ffec4efdcfc6df746c50ef7c720b5c3c77a2d4f2
     return (
       <div className="main-content">
         <TransactionDetail
@@ -131,13 +122,9 @@ const TransactionList = () => {
         <DataTable
           tableTitle="Details"
           headerNames={headerNames}
-<<<<<<< HEAD
           renderData={() => renderTransactionsList(currentItems)}
-=======
-          renderData={renderTransactionsList}
           sortItems={sortItems}
           filterItems={filterItems}
->>>>>>> ffec4efdcfc6df746c50ef7c720b5c3c77a2d4f2
         />
         <div className={style.paginateContainer}>
           <ReactPaginate

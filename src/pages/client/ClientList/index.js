@@ -53,7 +53,7 @@ const ClientList = ({ itemsPerPage }) => {
   const headerNames = ["Name", "Address", "Member Since", "Account Status"];
 
   const dispatch = useDispatch();
-  const { clientListData, error } = useSelector((state) => state.client);
+  const { clientListData } = useSelector((state) => state.client);
 
   useEffect(() => {
     dispatch(getClientList());
