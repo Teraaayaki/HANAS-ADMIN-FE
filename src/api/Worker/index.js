@@ -16,6 +16,30 @@ const WorkerAPI = {
     };
     return API.request(options);
   },
+
+  sortWorker: (DATA) => {
+    const options = {
+      method: "PATCH",
+      url: `/admin/sort-worker`,
+      data: {
+        choice: DATA
+      }
+    };
+
+    return API.request(options);
+  },
+
+  filterWorker: (DATA) => {
+    const options = {
+      method: "PATCH",
+      url: `/admin/filter-worker`,
+      data: {
+        choice: DATA
+      }
+    };
+
+    return API.request(options);
+  }
 };
 
 export default WorkerAPI;

@@ -34,3 +34,35 @@ export const getWorker = (workerID) => (dispatch) => {
       });
     });
 };
+
+export const sortWorker = (DATA) => (dispatch) => {
+  WorkerAPI.sortWorker(DATA).then( ({ data }) => {
+    dispatch({
+      type: WorkerActions.GET_WORKER_LIST,
+      payload: data.workerList,
+    });
+  })
+  .catch( (error) => {
+    console.log(error);
+    dispatch({
+      type: WorkerActions.GET_WORKER_ERROR,
+      payload: error?.response?.data?.error,
+    });
+  });
+};
+
+export const filterWorker = (DATA) => (dispatch) => {
+  WorkerAPI.filterWorker(DATA).then( ({data}) => {
+    dispatch({
+      type: WorkerActions.GET_WORKER_LIST,
+      payload: data.workerList,
+    });
+  })
+  .catch( (error) => {
+    console.log(error);
+    dispatch({
+      type: WorkerActions.GET_WORKER_ERROR,
+      payload: error?.response?.data?.error,
+    });
+  });
+};
