@@ -77,13 +77,7 @@ const SkilledWorkerList = () => {
           </td>
           <td className={style.tableData}>
             <StatusBadge
-              status={
-                skilledworker.is_deactivated
-                  ? "DEACTIVATED"
-                  : skilledworker.verificationData.verify_status
-                  ? skilledworker.verificationData.verify_status.toUpperCase()
-                  : "MISSING DATA"
-              }
+              status={skilledworker.is_deactivated ? "DEACTIVATED" : "ACTIVE"}
             />
           </td>
           <td className={style.tableData}>

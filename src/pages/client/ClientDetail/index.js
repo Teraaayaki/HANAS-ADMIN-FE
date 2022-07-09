@@ -13,19 +13,23 @@ const ClientDetail = () => {
 
   useEffect(() => {
     dispatch(getClient(clientID));
-  }, []);
+  }, [clientData]);
 
-  if (clientData[0] !== undefined) {
+  console.log("Params", clientID);
+  console.log("ClientData", clientData);
+
+  if (clientData && clientData[0] !== undefined) {
     return (
       <div className="main-content">
         <UserContainerCard
           link="clients"
           userInfo={clientData[0]}
+          dispatch={dispatch}
         ></UserContainerCard>
       </div>
     );
   } else {
-    return <div></div>;
+    return "";
   }
 };
 

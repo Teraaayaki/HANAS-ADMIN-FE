@@ -34,3 +34,35 @@ export const getClient = (clientID) => async (dispatch) => {
       });
     });
 };
+
+export const activateClient = (clientID) => async (dispatch) => {
+  ClientAPI.activateClient(clientID)
+    .then(({ data }) => {
+      dispatch({
+        type: ClientActions.ACTIVATE_CLIENT,
+      });
+    })
+    .catch((error) => {
+      console.log("ActivateClient " + error);
+      dispatch({
+        type: ClientActions.ACTIVATE_CLIENT_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
+
+export const deactivateClient = (clientID) => async (dispatch) => {
+  ClientAPI.deactivateClient(clientID)
+    .then(({ data }) => {
+      dispatch({
+        type: ClientActions.DEACTIVATE_CLIENT,
+      });
+    })
+    .catch((error) => {
+      console.log("DeactivateClient " + error);
+      dispatch({
+        type: ClientActions.DEACTIVATE_CLIENT_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};

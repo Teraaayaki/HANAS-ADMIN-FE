@@ -16,6 +16,22 @@ const ClientAPI = {
     };
     return API.request(options);
   },
+
+  activateClient: (clientID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/activate-client/${clientID}`,
+    };
+    return API.request(options);
+  },
+
+  deactivateClient: (clientID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/deactivate-client/${clientID}`,
+    };
+    return API.request(options);
+  },
 };
 
 export default ClientAPI;
