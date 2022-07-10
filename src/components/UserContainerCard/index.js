@@ -1,10 +1,15 @@
 import React from "react";
 import moment from "moment";
-
+import { useDispatch } from "react-redux";
 import {
   activateClient,
   deactivateClient,
 } from "../../redux/actions/clientActions.js";
+import {
+  activateWorker,
+  deactivateWorker,
+} from "../../redux/actions/workerActions.js";
+
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -109,21 +114,20 @@ const renderValidIDList = (validIDData, is_verified) => {
   }
 };
 
-const UserContainerCard = ({ dispatch, link, userInfo }) => {
+const UserContainerCard = ({ link, userInfo }) => {
+  const dispatch = useDispatch();
   const handleActivateOnClick = () => {
     if (userInfo.is_worker) {
-      console.log("Activate Worker");
+      dispatch(activateWorker(userInfo._id));
     } else {
-      console.log("Activate Client", userInfo._id);
       dispatch(activateClient(userInfo._id));
     }
   };
 
   const handleDeactivateOnClick = () => {
     if (userInfo.is_worker) {
-      console.log("Deactivate Worker");
+      dispatch(deactivateWorker(userInfo._id));
     } else {
-      console.log("Deactivate Client");
       dispatch(deactivateClient(userInfo._id));
     }
   };

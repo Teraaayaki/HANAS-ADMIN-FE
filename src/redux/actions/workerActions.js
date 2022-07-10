@@ -34,3 +34,35 @@ export const getWorker = (workerID) => (dispatch) => {
       });
     });
 };
+
+export const activateWorker = (workerID) => async (dispatch) => {
+  WorkerAPI.activateWorker(workerID)
+    .then(({ data }) => {
+      dispatch({
+        type: WorkerActions.ACTIVATE_WORKER,
+      });
+    })
+    .catch((error) => {
+      console.log("ActivateWorker " + error);
+      dispatch({
+        type: WorkerActions.ACTIVATE_WORKER_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
+
+export const deactivateWorker = (workerID) => async (dispatch) => {
+  WorkerAPI.deactivateWorker(workerID)
+    .then(({ data }) => {
+      dispatch({
+        type: WorkerActions.DEACTIVATE_WORKER,
+      });
+    })
+    .catch((error) => {
+      console.log("DeactivateWorker " + error);
+      dispatch({
+        type: WorkerActions.DEACTIVATE_WORKER_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};

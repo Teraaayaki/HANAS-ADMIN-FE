@@ -12,19 +12,20 @@ const ClientDetail = () => {
   const { clientData, error } = useSelector((state) => state.client);
 
   useEffect(() => {
-    dispatch(getClient(clientID));
+    if (clientData === undefined || clientData[0] === undefined) {
+      dispatch(getClient(clientID));
+    }
   }, [clientData]);
 
-  console.log("Params", clientID);
-  console.log("ClientData", clientData);
+  if (clientData !== undefined && clientData[0] !== undefined) {
+    console.log("Params", clientID);
+    console.log("ClientData", clientData);
 
-  if (clientData && clientData[0] !== undefined) {
     return (
       <div className="main-content">
         <UserContainerCard
           link="clients"
           userInfo={clientData[0]}
-          dispatch={dispatch}
         ></UserContainerCard>
       </div>
     );

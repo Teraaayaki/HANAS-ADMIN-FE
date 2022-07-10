@@ -16,6 +16,22 @@ const WorkerAPI = {
     };
     return API.request(options);
   },
+
+  activateWorker: (workerID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/activate-worker/${workerID}`,
+    };
+    return API.request(options);
+  },
+
+  deactivateWorker: (workerID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/deactivate-worker/${workerID}`,
+    };
+    return API.request(options);
+  },
 };
 
 export default WorkerAPI;
