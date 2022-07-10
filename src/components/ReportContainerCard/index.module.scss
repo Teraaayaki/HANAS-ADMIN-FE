@@ -25,13 +25,19 @@
   @extend %reset-button-style;
 }
 
-.acceptButton {
+.pendingButton {
   color: $verified-color;
 
   @extend %reset-button-style;
 }
 
-.deactButton {
+.resolveButton {
+  color: $verified-color;
+
+  @extend %reset-button-style;
+}
+
+.rejectButton {
   color: $rejected-color;
 
   @extend %reset-button-style;

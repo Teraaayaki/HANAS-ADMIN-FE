@@ -1,5 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+
+import {
+  resolveReport,
+  rejectReport,
+  setPendingReport,
+} from "../../redux/actions/reportActions.js";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -85,6 +92,34 @@ const renderAttachedImages2 = (imageData) => {
   }
 };
 
+const renderHeaderButtons = (resolved) => {
+  switch (resolved) {
+    case "Pending":
+      return (
+        <div>
+          <Button className={style.resolveButton}>RESOLVE</Button>
+          <Button className={style.rejectButton}>REJECT</Button>
+        </div>
+      );
+    case "Resolved":
+      return (
+        <div>
+          <Button className={style.pendingButton}>REOPEN</Button>
+          <Button className={style.rejectButton}>REJECT</Button>
+        </div>
+      );
+    case "Rejected":
+      return (
+        <div>
+          <Button className={style.pendingButton}>REOPEN</Button>
+          <Button className={style.resolveButton}>RESOLVE</Button>
+        </div>
+      );
+    default:
+      return;
+  }
+};
+
 const ReportContainerCard = ({ link, reportInfo }) => {
   return (
     <Card className={style.card}>
@@ -92,7 +127,7 @@ const ReportContainerCard = ({ link, reportInfo }) => {
         <Link to={`/${link}`} className={style.backButton}>
           BACK
         </Link>
-        <Button className={style.deactButton}>RESOLVED</Button>
+        {renderHeaderButtons(reportInfo.resolved)}
       </Card.Header>
       <Card.Body className={style.cardBody}>
         <section className={style.userDetails}>

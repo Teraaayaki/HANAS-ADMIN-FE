@@ -12,12 +12,20 @@ const SkilledWorkerDetail = () => {
   const { workerData, error } = useSelector((state) => state.worker);
 
   useEffect(() => {
-    if (workerData === undefined || workerData[0] === undefined) {
+    if (
+      workerData === undefined ||
+      workerData[0] === undefined ||
+      workerData[0]._id !== workerID
+    ) {
       dispatch(getWorker(workerID));
     }
   }, [workerData]);
 
-  if (workerData !== undefined && workerData[0] !== undefined) {
+  if (
+    workerData !== undefined &&
+    workerData[0] !== undefined &&
+    workerData[0]._id === workerID
+  ) {
     console.log("Params", workerID);
     console.log("workerData", workerData);
     return (
