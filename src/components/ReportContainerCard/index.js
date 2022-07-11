@@ -92,27 +92,69 @@ const renderAttachedImages2 = (imageData) => {
   }
 };
 
-const renderHeaderButtons = (resolved) => {
-  switch (resolved) {
+const renderHeaderButtons = (dispatch, reportInfo) => {
+  const handleResolveOnClick = () => {
+    dispatch(resolveReport(reportInfo._id));
+  };
+
+  const handleRejectOnClick = () => {
+    dispatch(rejectReport(reportInfo._id));
+  };
+
+  const handleReopenOnClick = () => {
+    dispatch(setPendingReport(reportInfo._id));
+  };
+
+  switch (reportInfo.status) {
     case "Pending":
       return (
         <div>
-          <Button className={style.resolveButton}>RESOLVE</Button>
-          <Button className={style.rejectButton}>REJECT</Button>
+          <Button
+            className={style.resolveButton}
+            onClick={() => handleResolveOnClick()}
+          >
+            RESOLVE
+          </Button>
+          <Button
+            className={style.rejectButton}
+            onClick={() => handleRejectOnClick()}
+          >
+            REJECT
+          </Button>
         </div>
       );
     case "Resolved":
       return (
         <div>
-          <Button className={style.pendingButton}>REOPEN</Button>
-          <Button className={style.rejectButton}>REJECT</Button>
+          <Button
+            className={style.pendingButton}
+            onClick={() => handleReopenOnClick()}
+          >
+            REOPEN
+          </Button>
+          <Button
+            className={style.rejectButton}
+            onClick={() => handleRejectOnClick()}
+          >
+            REJECT
+          </Button>
         </div>
       );
     case "Rejected":
       return (
         <div>
-          <Button className={style.pendingButton}>REOPEN</Button>
-          <Button className={style.resolveButton}>RESOLVE</Button>
+          <Button
+            className={style.pendingButton}
+            onClick={() => handleReopenOnClick()}
+          >
+            REOPEN
+          </Button>
+          <Button
+            className={style.resolveButton}
+            onClick={() => handleResolveOnClick()}
+          >
+            RESOLVE
+          </Button>
         </div>
       );
     default:
@@ -121,13 +163,14 @@ const renderHeaderButtons = (resolved) => {
 };
 
 const ReportContainerCard = ({ link, reportInfo }) => {
+  const dispatch = useDispatch();
   return (
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
         <Link to={`/${link}`} className={style.backButton}>
           BACK
         </Link>
-        {renderHeaderButtons(reportInfo.resolved)}
+        {renderHeaderButtons(dispatch, reportInfo)}
       </Card.Header>
       <Card.Body className={style.cardBody}>
         <section className={style.userDetails}>

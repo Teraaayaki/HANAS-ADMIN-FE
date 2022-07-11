@@ -26,8 +26,6 @@ const SkilledWorkerDetail = () => {
     workerData[0] !== undefined &&
     workerData[0]._id === workerID
   ) {
-    console.log("Params", workerID);
-    console.log("workerData", workerData);
     return (
       <div className="main-content">
         <UserContainerCard

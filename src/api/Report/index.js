@@ -32,6 +32,14 @@ const ReportAPI = {
     };
     return API.request(options);
   },
+
+  setPendingReport: (reportID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/set-pending-report/${reportID}`,
+    };
+    return API.request(options);
+  },
 };
 
 export default ReportAPI;

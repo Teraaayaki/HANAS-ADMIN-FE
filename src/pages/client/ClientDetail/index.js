@@ -26,9 +26,6 @@ const ClientDetail = () => {
     clientData[0] !== undefined &&
     clientData[0]._id === clientID
   ) {
-    console.log("Params", clientID);
-    console.log("ClientData", clientData);
-
     return (
       <div className="main-content">
         <UserContainerCard

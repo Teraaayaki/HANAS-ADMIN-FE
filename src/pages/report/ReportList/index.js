@@ -143,7 +143,7 @@ const ReportList = ({ itemsPerPage }) => {
 };
 
 const PaginatedReportList = () => {
-  return <div>{<ReportList itemsPerPage={1} />}</div>;
+  return <div>{<ReportList itemsPerPage={3} />}</div>;
 };
 
 export default PaginatedReportList;

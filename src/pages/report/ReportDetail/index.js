@@ -12,13 +12,20 @@ const ReportDetail = () => {
   const { reportData, error } = useSelector((state) => state.report);
 
   useEffect(() => {
-    dispatch(getReport(reportID));
-  }, []);
+    if (
+      reportData === undefined ||
+      reportData[0] === undefined ||
+      reportData[0]._id !== reportID
+    ) {
+      dispatch(getReport(reportID));
+    }
+  }, [reportID, reportData]);
 
-  if (reportData && reportData[0] !== undefined) {
-    console.log("ID", reportID);
-    console.log("data", reportData);
-
+  if (
+    reportData !== undefined &&
+    reportData[0] !== undefined &&
+    reportData[0]._id === reportID
+  ) {
     return (
       <div className="main-content">
         <ReportContainerCard

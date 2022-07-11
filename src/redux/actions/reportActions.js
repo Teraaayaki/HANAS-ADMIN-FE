@@ -34,3 +34,51 @@ export const getReport = (reportID) => async (dispatch) => {
       });
     });
 };
+
+export const resolveReport = (reportID) => async (dispatch) => {
+  ReportAPI.resolveReport(reportID)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.RESOLVE_REPORT,
+      });
+    })
+    .catch((error) => {
+      console.log("ResolveReport " + error);
+      dispatch({
+        type: ReportActions.RESOLVE_REPORT_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
+
+export const rejectReport = (reportID) => async (dispatch) => {
+  ReportAPI.rejectReport(reportID)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.REJECT_REPORT,
+      });
+    })
+    .catch((error) => {
+      console.log("ResolveReport " + error);
+      dispatch({
+        type: ReportActions.REJECT_REPORT_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
+
+export const setPendingReport = (reportID) => async (dispatch) => {
+  ReportAPI.setPendingReport(reportID)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.RESOLVE_REPORT,
+      });
+    })
+    .catch((error) => {
+      console.log("ResolveReport " + error);
+      dispatch({
+        type: ReportActions.RESOLVE_REPORT_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};

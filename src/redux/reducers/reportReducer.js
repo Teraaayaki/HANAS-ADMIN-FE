@@ -30,6 +30,39 @@ const reportReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: action.payload,
       };
+    case ReportActions.RESOLVE_REPORT:
+      return {
+        ...state,
+        reportData: action.payload,
+        error: null,
+      };
+    case ReportActions.RESOLVE_REPORT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case ReportActions.REJECT_REPORT:
+      return {
+        ...state,
+        reportData: action.payload,
+        error: null,
+      };
+    case ReportActions.REJECT_REPORT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case ReportActions.SET_PENDING_REPORT:
+      return {
+        ...state,
+        reportData: action.payload,
+        error: null,
+      };
+    case ReportActions.SET_PENDING_REPORT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
     default:
       return state;
   }
