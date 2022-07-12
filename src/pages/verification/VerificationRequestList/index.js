@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ReactDOM from 'react-dom';
 
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { MdOutlineDeleteOutline } from "react-icons/md";
@@ -13,6 +12,8 @@ import {
   removeSpecificVerification,
   resetSuccess,
   resetError,
+  sortVerification,
+  filterVerification,
 } from "../../../redux/actions/verificationActions.js";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,7 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import style from "./index.module.scss";
 
 /*bootstrap module for easier styling for the pagination*/
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const renderVerificationRequestList = (verificationData, handleOpen) => {
   return verificationData.map((verificationData, idx) => {
@@ -47,9 +48,7 @@ const renderVerificationRequestList = (verificationData, handleOpen) => {
           </span>
         </td>
         <td className={style.tableData}>
-          <StatusBadge
-            status={verificationData.verify_status.toUpperCase()}
-          />
+          <StatusBadge status={verificationData.verify_status.toUpperCase()} />
         </td>
         <td className={style.tableData}>
           <MdOutlineDeleteOutline
@@ -67,9 +66,50 @@ const VerificationRequestList = ({ itemsPerPage }) => {
   const headerNames = [
     "Verification Requests",
     "Name",
-    "Date",
+    "Verification Date",
     "Request Status",
   ];
+
+
+  const handleSortVerification = (e) => {
+    dispatch(sortVerification(e));
+  };
+
+  const handleFilterVerification = (e) => {
+    dispatch(filterVerification(e));
+  }
+
+  const sortItems = [
+    {
+      name: 'Name (A-Z)',
+      event_key: 'name',
+      onClick: () => { dispatch(handleSortVerification('name'))}
+    },
+    {
+      name: 'Date of Account Creation',
+      event_key: 'date',
+      onClick: () => { dispatch(handleSortVerification('date'))}
+    }
+  ];
+
+  const filterItems = [
+    {
+      name: 'Pending',
+      event_key: 'pending',
+      onClick: () => { dispatch(handleFilterVerification('Pending'))}
+    },
+    {
+      name: 'Accepted',
+      event_key: 'accepted',
+      onClick: () => { dispatch(handleFilterVerification('Accepted'))}
+    },
+    {
+      name: 'Rejected',
+      event_key: 'rejected',
+      onClick: () => { dispatch(handleFilterVerification('Rejected'))}
+    },
+  ]
+    
 
   const dispatch = useDispatch();
 
@@ -98,7 +138,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
   };
 
   useEffect(() => {
-      dispatch(getVerificationList());
+    dispatch(getVerificationList());
   }, [dispatch]);
 
   useEffect(() => {
@@ -114,7 +154,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
         onClose: () => dispatch(resetSuccess()),
       });
     }
-  }, [success]);
+  }, [success, successMessage, dispatch]);
 
   useEffect(() => {
     if (error) {
@@ -129,7 +169,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
         onClose: () => dispatch(resetError()),
       });
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   useEffect(() => {
     // Fetch items from another resources.
@@ -138,7 +178,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
     setCurrentItems(verificationData.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(verificationData.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, verificationData]);
-  
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -168,6 +208,8 @@ const VerificationRequestList = ({ itemsPerPage }) => {
           renderData={() =>
             renderVerificationRequestList(currentItems, handleOpen)
           }
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate
@@ -178,9 +220,15 @@ const VerificationRequestList = ({ itemsPerPage }) => {
             pageCount={pageCount}
             previousLabel="Previous"
             renderOnZeroPageCount={null}
-            containerClassName={'pagination'} /* as this work same as bootstrap class */
-            subContainerClassName={'pages pagination'} /* as this work same as bootstrap class */
-            activeClassName={'active'} /* as this work same as bootstrap class */
+            containerClassName={
+              "pagination"
+            } /* as this work same as bootstrap class */
+            subContainerClassName={
+              "pages pagination"
+            } /* as this work same as bootstrap class */
+            activeClassName={
+              "active"
+            } /* as this work same as bootstrap class */
             // className={style.paginationContainer}
           />
         </div>
@@ -188,14 +236,13 @@ const VerificationRequestList = ({ itemsPerPage }) => {
       <ToastContainer />
     </>
   );
-  
 };
 
 const PaginatedVerificationRequestList = () => {
   return (
     <div>
       {
-          <VerificationRequestList itemsPerPage={1} />
+          <VerificationRequestList itemsPerPage={10} />
       }
     </div>
     

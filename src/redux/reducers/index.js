@@ -5,6 +5,7 @@ import workerReducer from "./workerReducer";
 import transactionReducer from "./transactionReducer";
 import verificationReducer from "./verificationReducer";
 import reportReducer from "./reportReducer";
+import overviewReducer from "./overviewReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   transaction: transactionReducer,
   verification: verificationReducer,
   report: reportReducer,
+  overview: overviewReducer,
 });

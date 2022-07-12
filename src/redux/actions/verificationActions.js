@@ -117,3 +117,31 @@ export const removeSpecificVerification = (id) => async (dispatch) => {
       });
     });
 };
+
+export const sortVerification = (DATA) => async (dispatch) => {
+  dispatch({
+    type: VerificationActions.VERIFICATION_LOADING
+  });
+
+  VerificationAPI.sortVerification(DATA).then( ({data}) => {
+    dispatch({ type: VerificationActions.VERIFICATION_DETAILS, payload: data.verifications});
+  })
+  .catch( (error) => {
+    console.log(error);
+    dispatch({ type: VerificationActions.VERIFICATION_FAIL, payload: error?.response?.data?.error});
+  });
+
+};
+
+export const filterVerification = (DATA) => async (dispatch) => {
+  dispatch({ type: VerificationActions.VERIFICATION_LOADING});
+
+  VerificationAPI.filterVerification(DATA).then( ({data}) => {
+    console.log("RECEIVED DATA", data.verifications);
+    dispatch({ type: VerificationActions.VERIFICATION_DETAILS, payload: data.verifications});
+  })
+  .catch( (error) => {
+    console.log(error);
+    dispatch({ type: VerificationActions.VERIFICATION_FAIL, payload: error?.response?.data?.error});
+  })
+};

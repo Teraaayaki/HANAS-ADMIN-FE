@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -7,13 +7,15 @@ import { FaFilter } from 'react-icons/fa';
 
 import style from './index.module.scss';
 
-const DataTable = ({ tableTitle, headerNames, renderData }) => {
+const DataTable = ({ tableTitle, headerNames, renderData, sortItems, filterItems }) => {
+
   return (
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
         <h6 className={style.cardHeaderTitle}>{tableTitle}</h6>
         <div className={style.listConditions}>
-          <Dropdown>
+          {sortItems.length === 0 ? '': 
+            <Dropdown>
             <Dropdown.Toggle
               className={style.conditionButtons}
               bsPrefix="none"
@@ -23,12 +25,17 @@ const DataTable = ({ tableTitle, headerNames, renderData }) => {
               <span className={style.conditionsText}>Sort</span>
             </Dropdown.Toggle>
             <Dropdown.Menu className={style.conditionMenu}>
-              <Dropdown.Item> Option 1</Dropdown.Item>
-              <Dropdown.Item>Option 2</Dropdown.Item>
-              <Dropdown.Item>Option 3</Dropdown.Item>
+              { sortItems.map( (item) => {
+                return (
+                  <Dropdown.Item key={item.event_key} onClick={item.onClick}> {item.name} </Dropdown.Item>
+                )
+              })}
             </Dropdown.Menu>
           </Dropdown>
-          <Dropdown>
+          }
+
+          {filterItems.length === 0 ? '': 
+            <Dropdown>
             <Dropdown.Toggle
               className={style.conditionButtons}
               bsPrefix="none"
@@ -38,11 +45,14 @@ const DataTable = ({ tableTitle, headerNames, renderData }) => {
               <span className={style.conditionsText}>Filter</span>
             </Dropdown.Toggle>
             <Dropdown.Menu className={style.conditionMenu}>
-              <Dropdown.Item>Option 1</Dropdown.Item>
-              <Dropdown.Item>Option 2</Dropdown.Item>
-              <Dropdown.Item>Option 3</Dropdown.Item>
+            { filterItems.map( (item) => {
+                return (
+                  <Dropdown.Item key={item.event_key} onClick={item.onClick}> {item.name} </Dropdown.Item>
+                )
+              })}
             </Dropdown.Menu>
           </Dropdown>
+          }
         </div>
       </Card.Header>
       <Card.Body className={style.cardBody}>

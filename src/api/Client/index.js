@@ -32,6 +32,29 @@ const ClientAPI = {
     };
     return API.request(options);
   },
+  sortClient: (DATA) => {
+    const options = {
+      method: "PATCH",
+      url: `/admin/sort-client`,
+      data: {
+        choice: DATA,
+      },
+    };
+
+    return API.request(options);
+  },
+
+  filterClient: (DATA) => {
+    const options = {
+      method: "PATCH",
+      url: `/admin/filter-client`,
+      data: {
+        choice: DATA,
+      },
+    };
+
+    return API.request(options);
+  },
 };
 
 export default ClientAPI;

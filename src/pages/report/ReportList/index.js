@@ -93,6 +93,8 @@ const ReportList = ({ itemsPerPage }) => {
   const dispatch = useDispatch();
   const { reportListData, error } = useSelector((state) => state.report);
 
+  console.log(error);
+
   useEffect(() => {
     dispatch(getReportList());
   }, [dispatch]);
