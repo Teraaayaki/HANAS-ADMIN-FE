@@ -116,12 +116,16 @@ const ReportList = ({ itemsPerPage }) => {
   };
 
   if (currentItems !== null && currentItems[0] !== undefined) {
+    const sortItems = [];
+    const filterItems = [];
     return (
       <div className="main-content">
         <DataTable
           tableTitle="Reports and Concerns"
           headerNames={headerNames}
           renderData={() => renderReportList(currentItems)}
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate
