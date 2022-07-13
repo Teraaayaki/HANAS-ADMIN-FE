@@ -1,26 +1,24 @@
-import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import OverviewCard from '../../components/Card';
-import LineGraph from '../../components/LineGraph';
-import ActivePieChart from '../../components/ActivePieChart';
-import ColoredPieChart from '../../components/ColoredPieChart';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import OverviewCard from "../../components/Card";
+import LineGraph from "../../components/LineGraph";
+import ActivePieChart from "../../components/ActivePieChart";
+import ColoredPieChart from "../../components/ColoredPieChart";
 import moment from "moment";
 
-import style from './index.module.scss';
-import { 
-  hanasIncome, 
-  hanasVerifiedWorkers, 
-  hanasUserTypes, 
-  hanasTotalusers, 
-  hanasPendingVerifications
-} from '../../redux/actions/overviewActions';
-
-
+import style from "./index.module.scss";
+import {
+  hanasIncome,
+  hanasVerifiedWorkers,
+  hanasUserTypes,
+  hanasTotalusers,
+  hanasPendingVerifications,
+} from "../../redux/actions/overviewActions";
 
 const Overview = () => {
-
   const dispatch = useDispatch();
-  const {verifiedData, typeOfUserData, totalUser, pendingVerifications} = useSelector((state) => state.overview);
+  const { verifiedData, typeOfUserData, totalUser, pendingVerifications } =
+    useSelector((state) => state.overview);
 
   useEffect(() => {
     dispatch(hanasIncome());
@@ -34,14 +32,17 @@ const Overview = () => {
     <div className="main-content">
       <div className={style.container}>
         <section className={style.upperCards}>
-          <OverviewCard cardTitle="Pending Verifications" count={pendingVerifications} />
+          <OverviewCard
+            cardTitle="Pending Verifications"
+            count={pendingVerifications}
+          />
           <OverviewCard cardTitle="Pending Reports" count="43" />
           <OverviewCard cardTitle="Total Users" count={totalUser} />
           {/* <OverviewCard cardTitle="Total Visits" count="155" /> */}
         </section>
         <section className={style.mainCard}>
           {/*LINE GRAPH*/}
-          <div className={style.graphContainer}>
+          <div className={style.lineGraphContainer}>
             <h6 className={style.graphTitle}>Income Evaluation</h6>
             <div className={style.timeInfo}>
               <span className={style.graphTime}>
@@ -54,28 +55,31 @@ const Overview = () => {
           <div className={style.flexedRow}>
             {/*ACTIVE PIE CHART*/}
             <div className={style.graphContainer}>
-              <h6 className={style.graphTitle}>Percentage of Verified Skilled Workers</h6>
+              <h6 className={style.graphTitle}>
+                Percentage of Verified Skilled Workers
+              </h6>
               <div className={style.timeInfo}>
                 <span className={style.graphTime}>
                   as of {moment().calendar()}
                 </span>
               </div>
-              <ActivePieChart data={verifiedData}/>
+              <ActivePieChart data={verifiedData} />
             </div>
 
             {/*COLORED PIE CHART*/}
             <div className={style.graphContainer}>
-              <h6 className={style.graphTitle}>Percentage of Workers and Clients</h6>
+              <h6 className={style.graphTitle}>
+                Percentage of Workers and Clients
+              </h6>
               <div className={style.timeInfo}>
                 <span className={style.graphTime}>
                   as of {moment().calendar()}
                 </span>
               </div>
-              <ColoredPieChart data={typeOfUserData}/>
+              <ColoredPieChart data={typeOfUserData} />
             </div>
           </div>
-          
-          
+
           {/* <div className={style.analytics}>
             <div className={style.analyticCard}>
               <h6 className={style.analyticTitle}>Total Visits (Today)</h6>
