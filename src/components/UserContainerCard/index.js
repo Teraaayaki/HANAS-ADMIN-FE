@@ -1,5 +1,15 @@
 import React from "react";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import {
+  activateClient,
+  deactivateClient,
+} from "../../redux/actions/clientActions.js";
+import {
+  activateWorker,
+  deactivateWorker,
+} from "../../redux/actions/workerActions.js";
+
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -8,7 +18,7 @@ import style from "./index.module.scss";
 
 const renderMyServicesList = (myServicesData) => {
   let last = -1;
-  if (myServicesData !== undefined) {
+  if (myServicesData && myServicesData !== undefined) {
     last = myServicesData.length - 1;
     if (last > 0) {
       return myServicesData.map((myService, idx) => {
@@ -105,6 +115,23 @@ const renderValidIDList = (validIDData, is_verified) => {
 };
 
 const UserContainerCard = ({ link, userInfo }) => {
+  const dispatch = useDispatch();
+  const handleActivateOnClick = () => {
+    if (userInfo.is_worker) {
+      dispatch(activateWorker(userInfo._id));
+    } else {
+      dispatch(activateClient(userInfo._id));
+    }
+  };
+
+  const handleDeactivateOnClick = () => {
+    if (userInfo.is_worker) {
+      dispatch(deactivateWorker(userInfo._id));
+    } else {
+      dispatch(deactivateClient(userInfo._id));
+    }
+  };
+
   return (
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
@@ -112,15 +139,20 @@ const UserContainerCard = ({ link, userInfo }) => {
           BACK
         </Link>
 
-        {link === "verification-requests" ? (
-          <div>
-            <Button className={style.acceptButton}>ACCEPT</Button>
-            <Button className={style.deactButton}>DECLINE</Button>
-          </div>
-        ) : userInfo.is_deactivated ? (
-          <Button className={style.deactButton}>ACTIVATE</Button>
+        {userInfo.is_deactivated ? (
+          <Button
+            className={style.acceptButton}
+            onClick={() => handleActivateOnClick()}
+          >
+            ACTIVATE
+          </Button>
         ) : (
-          <Button className={style.deactButton}>DEACTIVATE</Button>
+          <Button
+            className={style.deactButton}
+            onClick={() => handleDeactivateOnClick()}
+          >
+            DEACTIVATE
+          </Button>
         )}
       </Card.Header>
       <Card.Body className={style.cardBody}>
@@ -165,14 +197,6 @@ const UserContainerCard = ({ link, userInfo }) => {
             </div>
           </section>
           <section className={style.userDetailRow}>
-            {link === "verification-requests" ? (
-              <div className={style.container}>
-                <span className={style.infoLabel}>USER TYPE</span>
-                <span className={style.info}>{userInfo.user_type}</span>
-              </div>
-            ) : (
-              ""
-            )}
             {link === "skilledworkers" ? (
               <div className={style.container}>
                 <span className={style.infoLabel}>SERVICE/S OFFERED</span>
@@ -190,7 +214,7 @@ const UserContainerCard = ({ link, userInfo }) => {
               </span>
             </div>
           </section>
-          {link === "verification-requests" || link === "skilledworkers" ? (
+          {link === "skilledworkers" ? (
             <section className={style.userDetailRow}>
               {renderValidIDList(
                 userInfo.verificationData.valid_id,

@@ -17,13 +17,28 @@ const ClientAPI = {
     return API.request(options);
   },
 
+  activateClient: (clientID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/activate-client/${clientID}`,
+    };
+    return API.request(options);
+  },
+
+  deactivateClient: (clientID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/deactivate-client/${clientID}`,
+    };
+    return API.request(options);
+  },
   sortClient: (DATA) => {
     const options = {
       method: "PATCH",
       url: `/admin/sort-client`,
       data: {
-        choice: DATA
-      }
+        choice: DATA,
+      },
     };
 
     return API.request(options);
@@ -34,12 +49,12 @@ const ClientAPI = {
       method: "PATCH",
       url: `/admin/filter-client`,
       data: {
-        choice: DATA
-      }
+        choice: DATA,
+      },
     };
 
     return API.request(options);
-  }
+  },
 };
 
 export default ClientAPI;

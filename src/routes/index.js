@@ -15,7 +15,8 @@ import ClientDetail from "../pages/client/ClientDetail";
 import PaginatedSkilledWorkerList from "../pages/skilledworker/SkilledWorkerList";
 import SkilledWorkerDetail from "../pages/skilledworker/SkilledWorkerDetail";
 import Transaction from "../pages/transaction/TransactionList";
-import UserReport from "../pages/UserReport";
+import PaginatedReportList from "../pages/report/ReportList";
+import ReportDetail from "../pages/report/ReportDetail";
 
 const Routes = () => {
   return (
@@ -86,7 +87,14 @@ const Routes = () => {
         path="/user-reports"
         pageTitle="User Reports"
         exact
-        component={UserReport}
+        component={PaginatedReportList}
+      ></AdminRoute>
+
+      <AdminRoute
+        path="/user-reports/:reportID"
+        pageTitle="User Reports"
+        exact
+        component={ReportDetail}
       ></AdminRoute>
     </Switch>
   );

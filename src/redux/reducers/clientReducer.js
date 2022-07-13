@@ -30,6 +30,28 @@ const clientReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: action.payload,
       };
+    case ClientActions.ACTIVATE_CLIENT:
+      return {
+        ...state,
+        clientData: action.payload,
+        error: null,
+      };
+    case ClientActions.ACTIVATE_CLIENT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case ClientActions.DEACTIVATE_CLIENT:
+      return {
+        ...state,
+        clientData: action.payload,
+        error: null,
+      };
+    case ClientActions.DEACTIVATE_CLIENT_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
     default:
       return state;
   }

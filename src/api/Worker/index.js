@@ -17,13 +17,28 @@ const WorkerAPI = {
     return API.request(options);
   },
 
+  activateWorker: (workerID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/activate-worker/${workerID}`,
+    };
+    return API.request(options);
+  },
+
+  deactivateWorker: (workerID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/deactivate-worker/${workerID}`,
+    };
+    return API.request(options);
+  },
   sortWorker: (DATA) => {
     const options = {
       method: "PATCH",
       url: `/admin/sort-worker`,
       data: {
-        choice: DATA
-      }
+        choice: DATA,
+      },
     };
 
     return API.request(options);
@@ -34,12 +49,12 @@ const WorkerAPI = {
       method: "PATCH",
       url: `/admin/filter-worker`,
       data: {
-        choice: DATA
-      }
+        choice: DATA,
+      },
     };
 
     return API.request(options);
-  }
+  },
 };
 
 export default WorkerAPI;

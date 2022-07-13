@@ -2,9 +2,10 @@ import { combineReducers } from "redux";
 import authReducer from "./authReducer";
 import clientReducer from "./clientReducer";
 import workerReducer from "./workerReducer";
-import transactionReducer from './transactionReducer';
-import verificationReducer from './verificationReducer';
-import overviewReducer from './overviewReducer';
+import transactionReducer from "./transactionReducer";
+import verificationReducer from "./verificationReducer";
+import reportReducer from "./reportReducer";
+import overviewReducer from "./overviewReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,9 +13,6 @@ export default combineReducers({
   worker: workerReducer,
   transaction: transactionReducer,
   verification: verificationReducer,
+  report: reportReducer,
   overview: overviewReducer,
 });
-  
-
-
-

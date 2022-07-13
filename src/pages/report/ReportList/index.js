@@ -1,0 +1,155 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ReactPaginate from "react-paginate";
+import moment from "moment";
+import { Link } from "react-router-dom";
+/*bootstrap module for easier styling for the pagination*/
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { getReportList } from "../../../redux/actions/reportActions";
+import DataTable from "../../../components/Table";
+import StatusBadge from "../../../components/StatusBadge";
+import { GoKebabVertical } from "react-icons/go";
+import style from "./index.module.scss";
+
+const renderReportList = (reportListData) => {
+  return reportListData.map((report, idx) => {
+    return (
+      <tr key={idx} className={style.tableDataRow}>
+        <td className={style.tableData}>
+          <Link to={`/user-reports/${report._id}`}>
+            <span>{report.concern}</span>
+          </Link>
+        </td>
+
+        <td className={style.tableData}>
+          <img
+            className={style.profilePic}
+            src={report.pp}
+            alt="&nbsp; Profile Pic"
+          />
+          <Link
+            to={
+              report.reporter[0].is_worker
+                ? `/skilledworkers/${report.reporterData[0]._id}`
+                : `/clients/${report.reporterData[0]._id}`
+            }
+          >
+            <span className={style.truncate}>
+              {report.reporterData[0].first_name + " "}
+              {report.reporterData[0].middle_name + " "}
+              {report.reporterData[0].family_name + " "}
+              {report.reporterData[0].suffix}
+            </span>
+          </Link>
+        </td>
+        {report.reported_user && report.reportedUserData[0] !== undefined ? (
+          <td className={style.tableData}>
+            <img
+              className={style.profilePic}
+              src={report.pp}
+              alt="&nbsp; Profile Pic"
+            />
+            <Link
+              to={
+                report.reportedUserData[0].is_worker
+                  ? `/skilledworkers/${report.reportedUserData[0]._id}`
+                  : `/clients/${report.reportedUserData[0]._id}`
+              }
+            >
+              <span className={style.truncate}>
+                {report.reportedUserData[0].first_name + " "}
+                {report.reportedUserData[0].middle_name + " "}
+                {report.reportedUserData[0].family_name + " "}
+                {report.reportedUserData[0].suffix}
+              </span>
+            </Link>
+          </td>
+        ) : (
+          <td className={style.tableData}>
+            <span className={style.truncate}>N/A</span>
+          </td>
+        )}
+        <td className={style.tableData}>
+          <span>{moment(report.createdAt).format("LL")}</span> <br />
+          <span className={style.time}>
+            {moment(report.createdAt).format("LT")}
+          </span>
+        </td>
+        <td className={style.tableData}>
+          <StatusBadge status={report.status.toUpperCase()} />
+        </td>
+        <td className={style.tableData}>
+          <GoKebabVertical />
+        </td>
+      </tr>
+    );
+  });
+};
+
+const ReportList = ({ itemsPerPage }) => {
+  const headerNames = ["Concern", "Reporter", "Reportee", "Date", "Status"];
+
+  const dispatch = useDispatch();
+  const { reportListData, error } = useSelector((state) => state.report);
+
+  console.log(error);
+
+  useEffect(() => {
+    dispatch(getReportList());
+  }, [dispatch]);
+
+  // Pagination States & Hooks
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(reportListData.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(reportListData.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, reportListData]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % reportListData.length;
+    setItemOffset(newOffset);
+  };
+
+  if (currentItems !== null && currentItems[0] !== undefined) {
+    const sortItems = [];
+    const filterItems = [];
+    return (
+      <div className="main-content">
+        <DataTable
+          tableTitle="Reports and Concerns"
+          headerNames={headerNames}
+          renderData={() => renderReportList(currentItems)}
+          sortItems={sortItems}
+          filterItems={filterItems}
+        />
+        <div className={style.paginateContainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="Next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="Previous"
+            renderOnZeroPageCount={null}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
+      </div>
+    );
+  } else {
+    return "";
+  }
+};
+
+const PaginatedReportList = () => {
+  return <div>{<ReportList itemsPerPage={3} />}</div>;
+};
+
+export default PaginatedReportList;
