@@ -40,6 +40,32 @@ const ReportAPI = {
     };
     return API.request(options);
   },
+
+  sortReport: (DATA) => {
+
+    const options = {
+      method: "PATCH",
+      url: `/admin/sort-report`,
+      data: {
+        choice: DATA
+      }
+    };
+
+    return API.request(options);
+  },
+
+  filterReport: (DATA) => {
+    const options = {
+      method: "PATCH",
+      url: `/admin/filter-report`,
+      data: {
+        choice: DATA
+      }
+    };
+
+    return API.request(options);
+  },
+  
 };
 
 export default ReportAPI;
