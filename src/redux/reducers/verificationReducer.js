@@ -29,12 +29,12 @@ const verificationReducer = (state = verificationInitialState, action) => {
         error: undefined,
       };
     case VerificationActions.VERIFICATION_RESET_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          success: false,
-          successMessage: '',
-        };
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        successMessage: '',
+      };
     case VerificationActions.VERIFICATION_DETAILS:
       return { ...state, loading: false, verificationData: action.payload };
     default:

@@ -44,6 +44,11 @@ const TransactionList = ({ itemsPerPage }) => {
 
   const sortItems = [
     {
+      name: 'Default',
+      event_key: 'all',
+      onClick: () => { dispatch(handleSortTransaction('all'))}
+    },
+    {
       name: 'Total Cost',
       event_key: 'cost',
       onClick: () => { dispatch(handleSortTransaction('cost'))}
@@ -60,7 +65,7 @@ const TransactionList = ({ itemsPerPage }) => {
     }
   ];
 
-  const filterItems = []
+  const filterItems = [];
 
   const renderTransactionsList = (transactions) => {
     return transactions.map((transaction, idx) => {

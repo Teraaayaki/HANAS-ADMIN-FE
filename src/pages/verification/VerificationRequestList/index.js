@@ -81,6 +81,11 @@ const VerificationRequestList = ({ itemsPerPage }) => {
 
   const sortItems = [
     {
+      name: 'Default',
+      event_key: 'all',
+      onClick: () => { dispatch(handleSortVerification('all'))}
+    },
+    {
       name: 'Name (A-Z)',
       event_key: 'name',
       onClick: () => { dispatch(handleSortVerification('name'))}
@@ -93,6 +98,11 @@ const VerificationRequestList = ({ itemsPerPage }) => {
   ];
 
   const filterItems = [
+    {
+      name: 'Default',
+      event_key: 'all',
+      onClick: () => { dispatch(handleSortVerification('all'))}
+    },
     {
       name: 'Pending',
       event_key: 'pending',
@@ -200,6 +210,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+
 
       <div className="main-content">
         <DataTable
