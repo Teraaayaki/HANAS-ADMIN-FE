@@ -70,6 +70,7 @@ const ContainerCard = ({ link, userInfo }) => {
     }
   }, [error]);
 
+
   if (!userInfo) {
     return (
       <>

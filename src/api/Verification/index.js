@@ -11,7 +11,7 @@ export const VerificationAPI = {
     return API.request(options);
   },
 
-  getSpecificVerification: ({id}) => {
+  getSpecificVerification: (id) => {
     const options = {
       method: 'GET',
       url: `/admin/get-verification/${id}`,
