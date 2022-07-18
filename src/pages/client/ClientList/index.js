@@ -42,9 +42,9 @@ const renderClientList = (clientListData) => {
             status={client.is_deactivated ? "DEACTIVATED" : "ACTIVE"}
           />
         </td>
-        <td className={style.tableData}>
+        {/* <td className={style.tableData}>
           <GoKebabVertical />
-        </td>
+        </td> */}
       </tr>
     );
   });

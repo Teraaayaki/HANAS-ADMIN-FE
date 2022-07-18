@@ -33,18 +33,19 @@ const renderMyServicesList = (myServicesData) => {
   } else if (last > -1) {
     return <span>{myServicesData[0].servicesData[0].service_type}</span>;
   } else {
-    return;
+    return <span>N/A</span>;
   }
 };
 
 const renderSkilledWorkersList = (workerListData) => {
   return workerListData.map((skilledworker, idx) => {
+    console.log("SKILLED WORKER DATA", skilledworker);
     return (
       <tr key={idx} className={style.tableDataRow}>
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={skilledworker.pp}
+            src={skilledworker.profile_pic}
             alt="&nbsp; Profile Pic"
           />
           <Link to={`/skilledworkers/${skilledworker._id}`}>

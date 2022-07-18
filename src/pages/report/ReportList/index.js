@@ -26,7 +26,7 @@ const renderReportList = (reportListData) => {
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={report.pp}
+            src={report.reporterData[0].profile_pic}
             alt="&nbsp; Profile Pic"
           />
           <Link
@@ -44,33 +44,6 @@ const renderReportList = (reportListData) => {
             </span>
           </Link>
         </td>
-        {report.reported_user && report.reportedUserData[0] !== undefined ? (
-          <td className={style.tableData}>
-            <img
-              className={style.profilePic}
-              src={report.pp}
-              alt="&nbsp; Profile Pic"
-            />
-            <Link
-              to={
-                report.reportedUserData[0].is_worker
-                  ? `/skilledworkers/${report.reportedUserData[0]._id}`
-                  : `/clients/${report.reportedUserData[0]._id}`
-              }
-            >
-              <span className={style.truncate}>
-                {report.reportedUserData[0].first_name + " "}
-                {report.reportedUserData[0].middle_name + " "}
-                {report.reportedUserData[0].family_name + " "}
-                {report.reportedUserData[0].suffix}
-              </span>
-            </Link>
-          </td>
-        ) : (
-          <td className={style.tableData}>
-            <span className={style.truncate}>N/A</span>
-          </td>
-        )}
         <td className={style.tableData}>
           <span>{moment(report.createdAt).format("LL")}</span> <br />
           <span className={style.time}>
@@ -80,16 +53,16 @@ const renderReportList = (reportListData) => {
         <td className={style.tableData}>
           <StatusBadge status={report.status.toUpperCase()} />
         </td>
-        <td className={style.tableData}>
+        {/* <td className={style.tableData}>
           <GoKebabVertical />
-        </td>
+        </td> */}
       </tr>
     );
   });
 };
 
 const ReportList = ({ itemsPerPage }) => {
-  const headerNames = ["Concern", "Reporter", "Reportee", "Date", "Status"];
+  const headerNames = ["Concern", "Reporter", "Date", "Status"];
 
   const handleSortReport = (e) => {
     dispatch(sortReport(e));

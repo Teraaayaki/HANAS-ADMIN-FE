@@ -20,8 +20,6 @@ const VerificationRequestDetail = () => {
     dispatch(getSpecificVerification(requestID));
   }, [dispatch, requestID]);
 
-  console.log("VERIFICATION DATA RECEIVED", verificationData);
-
   return (
     <div className="main-content">
       <ContainerCard
