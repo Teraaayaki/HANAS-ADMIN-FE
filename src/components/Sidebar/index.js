@@ -8,7 +8,8 @@ import {
   FaTicketAlt,
   FaUserTie,
   FaBook,
-  FaClipboardList
+  FaClipboardList,
+  FaCoins
 } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
 import { BiLogOutCircle } from 'react-icons/bi';
@@ -53,6 +54,11 @@ const Sidebar = () => {
       name: 'User Reports',
       path: '/user-reports',
       icon: <FaClipboardList className={style.icon} />
+    },
+    {
+      name: 'Convenience Fees',
+      path: '/convenience-fee',
+      icon: <FaCoins className={style.icon} />
     }
   ];
 
