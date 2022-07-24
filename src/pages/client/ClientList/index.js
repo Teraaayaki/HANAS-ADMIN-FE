@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { getClientList, sortClient, filterClient } from "../../../redux/actions/clientActions";
+import {
+  getClientList,
+  sortClient,
+  filterClient,
+} from "../../../redux/actions/clientActions";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
@@ -53,50 +57,61 @@ const renderClientList = (clientListData) => {
 const ClientList = ({ itemsPerPage }) => {
   const headerNames = ["Name", "Address", "Member Since", "Account Status"];
 
-  const handleSortClient= (e) => {
+  const handleSortClient = (e) => {
     dispatch(sortClient(e));
   };
 
   const handleFilterClient = (e) => {
     dispatch(filterClient(e));
-  }
+  };
 
   const sortItems = [
     {
-      name: 'Default',
-      event_key: 'all',
-      onClick: () => { dispatch(handleSortClient('all'))}
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleSortClient("all"));
+      },
     },
     {
-      name: 'Name (A-Z)',
-      event_key: 'name',
-      onClick: () => { dispatch(handleSortClient('name'))}
+      name: "Name (A-Z)",
+      event_key: "name",
+      onClick: () => {
+        dispatch(handleSortClient("name"));
+      },
     },
     {
-      name: 'Date of Account Creation',
-      event_key: 'date',
-      onClick: () => { dispatch(handleSortClient('date'))}
-    }
+      name: "Date of Account Creation",
+      event_key: "date",
+      onClick: () => {
+        dispatch(handleSortClient("date"));
+      },
+    },
   ];
 
   const filterItems = [
     {
-      name: 'All',
-      event_key: 'all',
-      onClick: () => { dispatch(handleFilterClient('all'))}
+      name: "All",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleFilterClient("all"));
+      },
     },
     {
-      name: 'Active',
-      event_key: 'active',
-      onClick: () => { dispatch(handleFilterClient('active'))}
+      name: "Active",
+      event_key: "active",
+      onClick: () => {
+        dispatch(handleFilterClient("active"));
+      },
     },
     {
-      name: 'Deactivated',
-      event_key: 'deactivated',
-      onClick: () => { dispatch(handleFilterClient('deactivated'))}
+      name: "Deactivated",
+      event_key: "deactivated",
+      onClick: () => {
+        dispatch(handleFilterClient("deactivated"));
+      },
     },
   ];
-
 
   const dispatch = useDispatch();
   const { clientListData } = useSelector((state) => state.client);
@@ -152,7 +167,13 @@ const ClientList = ({ itemsPerPage }) => {
       <div className="main-content">
         <div className={style.flexedContainer}>
           <h1 className="m-auto">No Data Preview Available</h1>
-          <Button className="m-auto" variant="dark" href="/admin/skilledworkers">Go Back</Button>
+          <Button
+            className="m-auto"
+            variant="dark"
+            href="/admin/skilledworkers"
+          >
+            Go Back
+          </Button>
         </div>
       </div>
     );

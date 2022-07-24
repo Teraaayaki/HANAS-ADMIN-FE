@@ -18,6 +18,8 @@ import Transaction from "../pages/transaction/TransactionList";
 import PaginatedReportList from "../pages/report/ReportList";
 import PaginatedTransactionFeeList from "../pages/transactionFee/transactionFeeList";
 import ReportDetail from "../pages/report/ReportDetail";
+import PaginatedCertificationList from "../pages/certification/CertificationList";
+import CertificationDetail from "../pages/certification/CertificationDetail";
 
 const Routes = () => {
   return (
@@ -47,6 +49,20 @@ const Routes = () => {
         pageTitle="Verification Request Detail"
         exact
         component={VerificationRequestDetail}
+      ></AdminRoute>
+
+      <AdminRoute
+        path="/certification-requests"
+        pageTitle="Certification Requests"
+        exact
+        component={PaginatedCertificationList}
+      ></AdminRoute>
+
+      <AdminRoute
+        path="/certification-requests/:certificationID"
+        pageTitle="Certification Request Detail"
+        exact
+        component={CertificationDetail}
       ></AdminRoute>
 
       <AdminRoute

@@ -33,22 +33,21 @@ const ReportAPI = {
     return API.request(options);
   },
 
-  setPendingReport: (reportID) => {
+  reopenReport: (reportID) => {
     const options = {
       method: "GET",
-      url: `/admin/set-pending-report/${reportID}`,
+      url: `/admin/reopen-report/${reportID}`,
     };
     return API.request(options);
   },
 
   sortReport: (DATA) => {
-
     const options = {
       method: "PATCH",
       url: `/admin/sort-report`,
       data: {
-        choice: DATA
-      }
+        choice: DATA,
+      },
     };
 
     return API.request(options);
@@ -59,13 +58,12 @@ const ReportAPI = {
       method: "PATCH",
       url: `/admin/filter-report`,
       data: {
-        choice: DATA
-      }
+        choice: DATA,
+      },
     };
 
     return API.request(options);
   },
-  
 };
 
 export default ReportAPI;

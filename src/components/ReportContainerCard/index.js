@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   resolveReport,
   rejectReport,
-  setPendingReport,
+  reopenReport,
   resetError,
   resetSuccess,
 } from "../../redux/actions/reportActions.js";
@@ -111,7 +111,7 @@ const renderHeaderButtons = (dispatch, reportInfo) => {
   };
 
   const handleReopenOnClick = () => {
-    dispatch(setPendingReport(reportInfo._id));
+    dispatch(reopenReport(reportInfo._id));
   };
 
   switch (reportInfo.status) {
