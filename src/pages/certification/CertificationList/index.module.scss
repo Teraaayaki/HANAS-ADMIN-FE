@@ -1,0 +1,11 @@
+@use "../../../styles/tableGlobalStyles" as *;
+
+.paginateContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.flexedContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}

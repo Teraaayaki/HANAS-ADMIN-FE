@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -16,7 +16,6 @@ import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
 import style from "./index.module.scss";
-
 
 const renderMyServicesList = (myServicesData) => {
   let last = myServicesData.length - 1;
@@ -192,7 +191,13 @@ const SkilledWorkerList = ({ itemsPerPage }) => {
       <div className="main-content">
         <div className={style.flexedContainer}>
           <h1 className="m-auto">No Data Preview Available</h1>
-          <Button className="m-auto" variant="dark" href="/admin/skilledworkers">Go Back</Button>
+          <Button
+            className="m-auto"
+            variant="dark"
+            href="/admin/skilledworkers"
+          >
+            Go Back
+          </Button>
         </div>
       </div>
     );
