@@ -1,0 +1,20 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/tableGlobalStyles' as *;
+
+.clickable {
+  cursor: pointer;
+}
+
+.paginateContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.iconGreen{
+  color: green;
+  font-size: 25px;
+}
+
+.iconGreen:hover{
+  font-size: 30px;
+}
