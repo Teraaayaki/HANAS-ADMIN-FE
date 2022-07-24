@@ -93,7 +93,7 @@ const renderReportList = (reportListData) => {
 };
 
 const ReportList = ({ itemsPerPage }) => {
-  const headerNames = ["Concern", "Reporter", "Date", "Status"];
+  const headerNames = ["Concern", "Reporter", "Reportee", "Date", "Status"];
 
   const handleSortReport = (e) => {
     dispatch(sortReport(e));
@@ -222,7 +222,7 @@ const ReportList = ({ itemsPerPage }) => {
 };
 
 const PaginatedReportList = () => {
-  return <div>{<ReportList itemsPerPage={10} />}</div>;
+  return <div>{<ReportList itemsPerPage={2} />}</div>;
 };
 
 export default PaginatedReportList;
