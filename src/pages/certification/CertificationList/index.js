@@ -212,7 +212,7 @@ const CertificationList = ({ itemsPerPage }) => {
 };
 
 const PaginatedCertificationList = () => {
-  return <div>{<CertificationList itemsPerPage={2} />}</div>;
+  return <div>{<CertificationList itemsPerPage={10} />}</div>;
 };
 
 export default PaginatedCertificationList;
