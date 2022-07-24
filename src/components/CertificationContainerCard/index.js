@@ -137,8 +137,8 @@ const renderCertificatesList = (certificatesData, is_certified) => {
           <div className={style.container}>
             <span className={style.infoLabel}>
               CERTIFICATES PRESENTED
-              {is_certified === "Certified" ? (
-                <span className="mx-3 text-success">Verified</span>
+              {is_certified === "Accepted" ? (
+                <span className="mx-3 text-success">Certified</span>
               ) : is_certified === "Rejected" ? (
                 <span className="mx-3 text-danger">Rejected</span>
               ) : (
@@ -172,8 +172,8 @@ const renderCertificatesList = (certificatesData, is_certified) => {
       <div className={style.container}>
         <span className={style.infoLabel}>
           CERTIFICATES PRESENTED
-          {is_certified === "Certified" ? (
-            <span className="mx-3 text-success">Verified</span>
+          {is_certified === "Accepted" ? (
+            <span className="mx-3 text-success">Certified</span>
           ) : is_certified === "Rejected" ? (
             <span className="mx-3 text-danger">Rejected</span>
           ) : (
