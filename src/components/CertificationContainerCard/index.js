@@ -255,7 +255,7 @@ const CertificationContainerCard = ({ link, certificationInfo }) => {
                 <div className={style.container}>
                   <span className={style.infoLabel}>VOTED</span>
                   <span className={style.info}>
-                    PHP {certificationInfo.feedbackData[0].jobs}
+                    {certificationInfo.feedbackData[0].jobs}
                   </span>
                 </div>
               </section>
