@@ -69,23 +69,22 @@ export const rejectCertification = (certificationID) => async (dispatch) => {
     });
 };
 
-export const setPendingCertification =
-  (certificationID) => async (dispatch) => {
-    CertificationAPI.setPendingCertification(certificationID)
-      .then(({ data }) => {
-        dispatch({
-          type: CertificationActions.SET_PENDING_CERTIFICATION,
-          payload: data.certification,
-        });
-      })
-      .catch((error) => {
-        console.log("SetPendingCertification " + error);
-        dispatch({
-          type: CertificationActions.SET_PENDING_CERTIFICATION_ERROR,
-          payload: error?.response?.data?.error,
-        });
+export const reopenCertification = (certificationID) => async (dispatch) => {
+  CertificationAPI.reopenCertification(certificationID)
+    .then(({ data }) => {
+      dispatch({
+        type: CertificationActions.REOPEN_CERTIFICATION,
+        payload: data.certification,
       });
-  };
+    })
+    .catch((error) => {
+      console.log("ReopenCertification " + error);
+      dispatch({
+        type: CertificationActions.REOPEN_CERTIFICATION_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
 
 export const sortCertification = (DATA) => async (dispatch) => {
   CertificationAPI.sortCertification(DATA)

@@ -52,13 +52,13 @@ const certificationReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: action.payload,
       };
-    case CertificationActions.SET_PENDING_CERTIFICATION:
+    case CertificationActions.REOPEN_CERTIFICATION:
       return {
         ...state,
         certificationData: action.payload,
         error: null,
       };
-    case CertificationActions.SET_PENDING_CERTIFICATION_ERROR:
+    case CertificationActions.REOPEN_CERTIFICATION_ERROR:
       return {
         ...state,
         error: action.payload,

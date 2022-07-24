@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   acceptCertification,
   rejectCertification,
-  setPendingCertification,
+  reopenCertification,
 } from "../../redux/actions/certificationActions";
 
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ const renderHeaderButtons = (certificationInfo, dispatch) => {
   };
 
   const handleReopenOnClick = () => {
-    dispatch(setPendingCertification(certificationInfo._id));
+    dispatch(reopenCertification(certificationInfo._id));
   };
 
   console.log("CINF", certificationInfo);

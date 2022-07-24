@@ -9,6 +9,7 @@ import {
   FaUserTie,
   FaBook,
   FaClipboardList,
+  FaCoins,
 } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
 import { BiLogOutCircle } from "react-icons/bi";
@@ -53,6 +54,11 @@ const Sidebar = () => {
       name: "Transactions",
       path: "/transactions",
       icon: <FaBook className={style.icon} />,
+    },
+    {
+      name: "Convenience Fees",
+      path: "/convenience-fee",
+      icon: <FaCoins className={style.icon} />,
     },
     {
       name: "User Reports",

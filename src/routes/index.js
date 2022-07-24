@@ -16,6 +16,7 @@ import PaginatedSkilledWorkerList from "../pages/skilledworker/SkilledWorkerList
 import SkilledWorkerDetail from "../pages/skilledworker/SkilledWorkerDetail";
 import Transaction from "../pages/transaction/TransactionList";
 import PaginatedReportList from "../pages/report/ReportList";
+import PaginatedTransactionFeeList from "../pages/transactionFee/transactionFeeList";
 import ReportDetail from "../pages/report/ReportDetail";
 import PaginatedCertificationList from "../pages/certification/CertificationList";
 import CertificationDetail from "../pages/certification/CertificationDetail";
@@ -111,6 +112,13 @@ const Routes = () => {
         pageTitle="User Reports"
         exact
         component={ReportDetail}
+      ></AdminRoute>
+
+      <AdminRoute
+        path="/convenience-fee"
+        pageTitle="Convenience Fee"
+        exact
+        component={PaginatedTransactionFeeList}
       ></AdminRoute>
     </Switch>
   );

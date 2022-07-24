@@ -13,8 +13,6 @@ import {
 const LineGraph = () => {
   const { incomeData } = useSelector((state) => state.overview);
 
-  console.log("INCOME DATA", incomeData);
-
   return (
     //   <ResponsiveContainer width="100%" height="100%">
     <LineChart

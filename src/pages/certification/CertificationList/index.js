@@ -22,7 +22,6 @@ const renderRatingText = (feedbackData) => {
   if (feedbackData && feedbackData[0] !== undefined) {
     return <span>{feedbackData[0].rateAvg.toFixed(1)} / 5.0 ⭐</span>;
   } else {
-    console.log("feedbackData2", feedbackData);
     return <span> N/A</span>;
   }
 };
@@ -51,7 +50,6 @@ const renderCertificationList = (certificationListData) => {
           <span>{certification.serviceData[0].service_type}</span>
         </td>
         <td className={style.tableData}>
-          {console.log("feedbackData2", certification.feedbackData)}
           {renderRatingText(certification.feedbackData)}
         </td>
         <td className={style.tableData}>
@@ -151,8 +149,6 @@ const CertificationList = ({ itemsPerPage }) => {
   useEffect(() => {
     dispatch(getCertificationList());
   }, [dispatch]);
-
-  console.log("certificationListData", certificationListData);
 
   // Pagination States & Hooks
   const [currentItems, setCurrentItems] = useState(null);

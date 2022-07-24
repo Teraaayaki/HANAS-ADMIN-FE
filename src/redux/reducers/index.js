@@ -7,6 +7,7 @@ import verificationReducer from "./verificationReducer";
 import reportReducer from "./reportReducer";
 import overviewReducer from "./overviewReducer";
 import certificationReducer from "./certificationReducer";
+import convFeeReducer from "./convFeeReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   verification: verificationReducer,
   report: reportReducer,
   overview: overviewReducer,
+  convenience: convFeeReducer,
 });

@@ -33,10 +33,10 @@ const CertificationAPI = {
     return API.request(options);
   },
 
-  setPendingCertification: (certificationID) => {
+  reopenCertification: (certificationID) => {
     const options = {
       method: "GET",
-      url: `/admin/set-pending-certification/${certificationID}`,
+      url: `/admin/reopen-certification/${certificationID}`,
     };
     return API.request(options);
   },
