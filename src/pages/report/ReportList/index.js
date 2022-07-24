@@ -30,7 +30,7 @@ const renderReportList = (reportListData) => {
           />
           <Link
             to={
-              report.reporter[0].is_worker
+              report.reporterData[0].is_worker === true
                 ? `/skilledworkers/${report.reporterData[0]._id}`
                 : `/clients/${report.reporterData[0]._id}`
             }
@@ -52,7 +52,7 @@ const renderReportList = (reportListData) => {
             />
             <Link
               to={
-                report.reportedUserData[0].is_worker
+                report.reportedUserData[0].is_worker === true
                   ? `/skilledworkers/${report.reportedUserData[0]._id}`
                   : `/clients/${report.reportedUserData[0]._id}`
               }
