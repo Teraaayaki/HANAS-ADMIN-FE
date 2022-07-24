@@ -18,6 +18,15 @@ import { GoKebabVertical } from "react-icons/go";
 
 import style from "./index.module.scss";
 
+const renderRatingText = (feedbackData) => {
+  if (feedbackData && feedbackData[0] !== undefined) {
+    return <span>{feedbackData[0].rateAvg.toFixed(1)} / 5.0 ⭐</span>;
+  } else {
+    console.log("feedbackData2", feedbackData);
+    return <span> N/A</span>;
+  }
+};
+
 const renderCertificationList = (certificationListData) => {
   return certificationListData.map((certification, idx) => {
     return (
@@ -42,6 +51,18 @@ const renderCertificationList = (certificationListData) => {
           <span>{certification.serviceData[0].service_type}</span>
         </td>
         <td className={style.tableData}>
+          {console.log("feedbackData2", certification.feedbackData)}
+          {renderRatingText(certification.feedbackData)}
+        </td>
+        <td className={style.tableData}>
+          {certification.feedbackData &&
+          certification.feedbackData[0] !== undefined ? (
+            <span>{certification.feedbackData[0].jobs}</span>
+          ) : (
+            <span>0</span>
+          )}
+        </td>
+        <td className={style.tableData}>
           <span>{moment(certification.updatedAt).format("LL")}</span> <br />
           <span className={style.time}>
             {moment(certification.updatedAt).format("LT")}
@@ -59,7 +80,14 @@ const renderCertificationList = (certificationListData) => {
 };
 
 const CertificationList = ({ itemsPerPage }) => {
-  const headerNames = ["Name", "Service", "Last Updated", "Request Status"];
+  const headerNames = [
+    "Name",
+    "Service",
+    "Rating",
+    "Voted",
+    "Last Updated",
+    "Request Status",
+  ];
 
   const handleSortClient = (e) => {
     dispatch(sortCertification(e));

@@ -242,6 +242,26 @@ const CertificationContainerCard = ({ link, certificationInfo }) => {
                 </span>
               </div>
             </section>
+            {certificationInfo &&
+            certificationInfo.feedbackData[0] !== undefined ? (
+              <section className={style.userDetailRow}>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>RATING</span>
+                  <span className={style.info}>
+                    {certificationInfo.feedbackData[0].rateAvg.toFixed(1)} /
+                    5.0⭐
+                  </span>
+                </div>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>VOTED</span>
+                  <span className={style.info}>
+                    PHP {certificationInfo.feedbackData[0].jobs}
+                  </span>
+                </div>
+              </section>
+            ) : (
+              ""
+            )}
 
             <section className={style.userDetailRow}>
               {renderCertificatesList(
