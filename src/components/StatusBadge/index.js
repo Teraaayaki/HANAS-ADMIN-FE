@@ -15,6 +15,8 @@ const StatusBadge = ({ status }) => {
       case "REJECTED":
       case "DEACTIVATED":
         return style.red;
+      case "PAID":
+        return style.green;
       default:
         return style.yellow;
     }

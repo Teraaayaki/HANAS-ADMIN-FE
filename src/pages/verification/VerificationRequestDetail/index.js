@@ -12,13 +12,13 @@ const VerificationRequestDetail = () => {
 
   const dispatch = useDispatch();
 
-  const { verificationData} = useSelector(
+  const { verificationData } = useSelector(
     (state) => state.verification
   );
 
   useEffect(() => {
     dispatch(getSpecificVerification(requestID));
-  }, []);
+  }, [dispatch, requestID]);
 
   return (
     <div className="main-content">

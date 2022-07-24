@@ -1,15 +1,19 @@
-import React, { Fragment } from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   resolveReport,
   rejectReport,
   setPendingReport,
+  resetError,
+  resetSuccess,
 } from "../../redux/actions/reportActions.js";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import style from "./index.module.scss";
 
 const renderAttachedImages = (imageData) => {
@@ -63,7 +67,12 @@ const renderAttachedImages = (imageData) => {
       });
     }
   } else {
-    return "";
+    return (
+      <div className={style.container}>
+        <span className={style.infoLabel}>ATTACHED IMAGES</span>
+        <span className={style.info}>No Data</span>
+      </div>
+    );
   }
 };
 
@@ -132,12 +141,6 @@ const renderHeaderButtons = (dispatch, reportInfo) => {
           >
             REOPEN
           </Button>
-          <Button
-            className={style.rejectButton}
-            onClick={() => handleRejectOnClick()}
-          >
-            REJECT
-          </Button>
         </div>
       );
     case "Rejected":
@@ -149,12 +152,6 @@ const renderHeaderButtons = (dispatch, reportInfo) => {
           >
             REOPEN
           </Button>
-          <Button
-            className={style.resolveButton}
-            onClick={() => handleResolveOnClick()}
-          >
-            RESOLVE
-          </Button>
         </div>
       );
     default:
@@ -163,7 +160,41 @@ const renderHeaderButtons = (dispatch, reportInfo) => {
 };
 
 const ReportContainerCard = ({ link, reportInfo }) => {
+  const { success, error, successMessage } = useSelector(
+    (state) => state.report
+  );
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (success) {
+      toast.success(successMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => dispatch(resetSuccess()),
+      });
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => dispatch(resetError()),
+      });
+    }
+  }, [error]);
   return (
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
@@ -261,6 +292,17 @@ const ReportContainerCard = ({ link, reportInfo }) => {
           </section>
         </section>
       </Card.Body>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Card>
   );
 };

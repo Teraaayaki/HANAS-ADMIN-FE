@@ -10,12 +10,13 @@ import Login from "../pages/Login";
 import Overview from "../pages/Overview";
 import PaginatedVerificationRequestList from "../pages/verification/VerificationRequestList";
 import VerificationRequestDetail from "../pages/verification/VerificationRequestDetail";
-import ClientList from "../pages/client/ClientList";
+import PaginatedClientList from "../pages/client/ClientList";
 import ClientDetail from "../pages/client/ClientDetail";
-import SkilledWorkerList from "../pages/skilledworker/SkilledWorkerList";
+import PaginatedSkilledWorkerList from "../pages/skilledworker/SkilledWorkerList";
 import SkilledWorkerDetail from "../pages/skilledworker/SkilledWorkerDetail";
 import Transaction from "../pages/transaction/TransactionList";
 import PaginatedReportList from "../pages/report/ReportList";
+import PaginatedTransactionFeeList from "../pages/transactionFee/transactionFeeList";
 import ReportDetail from "../pages/report/ReportDetail";
 
 const Routes = () => {
@@ -52,7 +53,7 @@ const Routes = () => {
         path="/clients"
         pageTitle="Clients"
         exact
-        component={ClientList}
+        component={PaginatedClientList}
       ></AdminRoute>
 
       <AdminRoute
@@ -66,7 +67,7 @@ const Routes = () => {
         path="/skilledworkers"
         pageTitle="Skilled Workers"
         exact
-        component={SkilledWorkerList}
+        component={PaginatedSkilledWorkerList}
       ></AdminRoute>
 
       <AdminRoute
@@ -95,6 +96,13 @@ const Routes = () => {
         pageTitle="User Reports"
         exact
         component={ReportDetail}
+      ></AdminRoute>
+
+      <AdminRoute
+        path="/convenience-fee"
+        pageTitle="Convenience Fee"
+        exact
+        component={PaginatedTransactionFeeList}
       ></AdminRoute>
     </Switch>
   );

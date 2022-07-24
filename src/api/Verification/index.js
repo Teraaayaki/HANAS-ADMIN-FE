@@ -11,7 +11,7 @@ export const VerificationAPI = {
     return API.request(options);
   },
 
-  getSpecificVerification: ({id}) => {
+  getSpecificVerification: (id) => {
     const options = {
       method: 'GET',
       url: `/admin/get-verification/${id}`,
@@ -43,6 +43,30 @@ export const VerificationAPI = {
       method: 'POST',
       url: `/admin/remove-verification/${id}`,
     }
+
+    return API.request(options);
+  },
+
+  sortVerification: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: `/admin/sort-verification`,
+      data: {
+        choice: DATA,
+      }
+    };
+
+    return API.request(options);
+  },
+
+  filterVerification: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: `/admin/filter-verification`,
+      data: {
+        choice: DATA,
+      }
+    };
 
     return API.request(options);
   }

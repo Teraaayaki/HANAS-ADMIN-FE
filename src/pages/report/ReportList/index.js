@@ -6,11 +6,16 @@ import { Link } from "react-router-dom";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { getReportList } from "../../../redux/actions/reportActions";
+import {
+  filterReport,
+  getReportList,
+  sortReport,
+} from "../../../redux/actions/reportActions";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
 import style from "./index.module.scss";
+import { Button } from "react-bootstrap";
 
 const renderReportList = (reportListData) => {
   return reportListData.map((report, idx) => {
@@ -25,7 +30,7 @@ const renderReportList = (reportListData) => {
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={report.pp}
+            src={report.reporterData[0].profile_pic}
             alt="&nbsp; Profile Pic"
           />
           <Link
@@ -79,19 +84,82 @@ const renderReportList = (reportListData) => {
         <td className={style.tableData}>
           <StatusBadge status={report.status.toUpperCase()} />
         </td>
-        <td className={style.tableData}>
+        {/* <td className={style.tableData}>
           <GoKebabVertical />
-        </td>
+        </td> */}
       </tr>
     );
   });
 };
 
 const ReportList = ({ itemsPerPage }) => {
-  const headerNames = ["Concern", "Reporter", "Reportee", "Date", "Status"];
+  const headerNames = ["Concern", "Reporter", "Date", "Status"];
+
+  const handleSortReport = (e) => {
+    dispatch(sortReport(e));
+  };
+
+  const handleFilterReport = (e) => {
+    dispatch(filterReport(e));
+  };
+
+  const sortItems = [
+    {
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleSortReport("all"));
+      },
+    },
+    {
+      name: "Name (A-Z)",
+      event_key: "name",
+      onClick: () => {
+        dispatch(handleSortReport("name"));
+      },
+    },
+    {
+      name: "Date",
+      event_key: "date",
+      onClick: () => {
+        dispatch(handleSortReport("date"));
+      },
+    },
+  ];
+
+  const filterItems = [
+    {
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleFilterReport("all"));
+      },
+    },
+    {
+      name: "Resolved",
+      event_key: "resolved",
+      onClick: () => {
+        dispatch(handleFilterReport("resolved"));
+      },
+    },
+    {
+      name: "Pending",
+      event_key: "pending",
+      onClick: () => {
+        dispatch(handleFilterReport("pending"));
+      },
+    },
+    {
+      name: "Rejected",
+      event_key: "rejected",
+      onClick: () => {
+        dispatch(handleFilterReport("rejected"));
+      },
+    },
+  ];
 
   const dispatch = useDispatch();
-  const { reportListData, error } = useSelector((state) => state.report);
+  const { reportListData } = useSelector((state) => state.report);
 
   useEffect(() => {
     dispatch(getReportList());
@@ -120,6 +188,8 @@ const ReportList = ({ itemsPerPage }) => {
           tableTitle="Reports and Concerns"
           headerNames={headerNames}
           renderData={() => renderReportList(currentItems)}
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate
@@ -138,12 +208,21 @@ const ReportList = ({ itemsPerPage }) => {
       </div>
     );
   } else {
-    return "";
+    return (
+      <div className="main-content">
+        <div className={style.flexedContainer}>
+          <h1 className="m-auto">No Data Preview Available</h1>
+          <Button className="m-auto" variant="dark" href="/admin/user-reports">
+            Go Back
+          </Button>
+        </div>
+      </div>
+    );
   }
 };
 
 const PaginatedReportList = () => {
-  return <div>{<ReportList itemsPerPage={3} />}</div>;
+  return <div>{<ReportList itemsPerPage={10} />}</div>;
 };
 
 export default PaginatedReportList;
