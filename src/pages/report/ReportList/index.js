@@ -6,12 +6,16 @@ import { Link } from "react-router-dom";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { filterReport, getReportList, sortReport } from "../../../redux/actions/reportActions";
+import {
+  filterReport,
+  getReportList,
+  sortReport,
+} from "../../../redux/actions/reportActions";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
 import style from "./index.module.scss";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 
 const renderReportList = (reportListData) => {
   return reportListData.map((report, idx) => {
@@ -31,7 +35,7 @@ const renderReportList = (reportListData) => {
           />
           <Link
             to={
-              report.reporter[0].is_worker
+              report.reporterData[0].is_worker === true
                 ? `/skilledworkers/${report.reporterData[0]._id}`
                 : `/clients/${report.reporterData[0]._id}`
             }
@@ -44,6 +48,33 @@ const renderReportList = (reportListData) => {
             </span>
           </Link>
         </td>
+        {report.reported_user && report.reportedUserData[0] !== undefined ? (
+          <td className={style.tableData}>
+            <img
+              className={style.profilePic}
+              src={report.pp}
+              alt="&nbsp; Profile Pic"
+            />
+            <Link
+              to={
+                report.reportedUserData[0].is_worker === true
+                  ? `/skilledworkers/${report.reportedUserData[0]._id}`
+                  : `/clients/${report.reportedUserData[0]._id}`
+              }
+            >
+              <span className={style.truncate}>
+                {report.reportedUserData[0].first_name + " "}
+                {report.reportedUserData[0].middle_name + " "}
+                {report.reportedUserData[0].family_name + " "}
+                {report.reportedUserData[0].suffix}
+              </span>
+            </Link>
+          </td>
+        ) : (
+          <td className={style.tableData}>
+            <span className={style.truncate}>N/A</span>
+          </td>
+        )}
         <td className={style.tableData}>
           <span>{moment(report.createdAt).format("LL")}</span> <br />
           <span className={style.time}>
@@ -62,7 +93,7 @@ const renderReportList = (reportListData) => {
 };
 
 const ReportList = ({ itemsPerPage }) => {
-  const headerNames = ["Concern", "Reporter", "Date", "Status"];
+  const headerNames = ["Concern", "Reporter", "Reportee", "Date", "Status"];
 
   const handleSortReport = (e) => {
     dispatch(sortReport(e));
@@ -70,47 +101,60 @@ const ReportList = ({ itemsPerPage }) => {
 
   const handleFilterReport = (e) => {
     dispatch(filterReport(e));
-  }
+  };
 
   const sortItems = [
     {
-      name: 'Default',
-      event_key: 'all',
-      onClick: () => { dispatch(handleSortReport('all'))}
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleSortReport("all"));
+      },
     },
     {
-      name: 'Name (A-Z)',
-      event_key: 'name',
-      onClick: () => { dispatch(handleSortReport('name'))}
+      name: "Name (A-Z)",
+      event_key: "name",
+      onClick: () => {
+        dispatch(handleSortReport("name"));
+      },
     },
     {
-      name: 'Date',
-      event_key: 'date',
-      onClick: () => { dispatch(handleSortReport('date'))}
+      name: "Date",
+      event_key: "date",
+      onClick: () => {
+        dispatch(handleSortReport("date"));
+      },
     },
-   
   ];
 
   const filterItems = [
     {
-      name: 'Default',
-      event_key: 'all',
-      onClick: () => { dispatch(handleFilterReport('all'))}
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleFilterReport("all"));
+      },
     },
     {
-      name: 'Resolved',
-      event_key: 'resolved',
-      onClick: () => { dispatch(handleFilterReport('resolved'))}
+      name: "Resolved",
+      event_key: "resolved",
+      onClick: () => {
+        dispatch(handleFilterReport("resolved"));
+      },
     },
     {
-      name: 'Pending',
-      event_key: 'pending',
-      onClick: () => { dispatch(handleFilterReport('pending'))}
+      name: "Pending",
+      event_key: "pending",
+      onClick: () => {
+        dispatch(handleFilterReport("pending"));
+      },
     },
     {
-      name: 'Rejected',
-      event_key: 'rejected',
-      onClick: () => { dispatch(handleFilterReport('rejected'))}
+      name: "Rejected",
+      event_key: "rejected",
+      onClick: () => {
+        dispatch(handleFilterReport("rejected"));
+      },
     },
   ];
 
@@ -168,7 +212,9 @@ const ReportList = ({ itemsPerPage }) => {
       <div className="main-content">
         <div className={style.flexedContainer}>
           <h1 className="m-auto">No Data Preview Available</h1>
-          <Button className="m-auto" variant="dark" href="/admin/user-reports">Go Back</Button>
+          <Button className="m-auto" variant="dark" href="/admin/user-reports">
+            Go Back
+          </Button>
         </div>
       </div>
     );
@@ -176,7 +222,7 @@ const ReportList = ({ itemsPerPage }) => {
 };
 
 const PaginatedReportList = () => {
-  return <div>{<ReportList itemsPerPage={10} />}</div>;
+  return <div>{<ReportList itemsPerPage={2} />}</div>;
 };
 
 export default PaginatedReportList;

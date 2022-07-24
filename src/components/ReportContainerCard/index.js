@@ -67,7 +67,12 @@ const renderAttachedImages = (imageData) => {
       });
     }
   } else {
-    return "";
+    return (
+      <div className={style.container}>
+        <span className={style.infoLabel}>ATTACHED IMAGES</span>
+        <span className={style.info}>No Data</span>
+      </div>
+    );
   }
 };
 
@@ -95,7 +100,6 @@ const renderAttachedImages2 = (imageData) => {
     return "";
   }
 };
-
 
 const renderHeaderButtons = (dispatch, reportInfo) => {
   const handleResolveOnClick = () => {
@@ -155,9 +159,7 @@ const renderHeaderButtons = (dispatch, reportInfo) => {
   }
 };
 
-
 const ReportContainerCard = ({ link, reportInfo }) => {
-  
   const { success, error, successMessage } = useSelector(
     (state) => state.report
   );
@@ -178,7 +180,7 @@ const ReportContainerCard = ({ link, reportInfo }) => {
       });
     }
   }, [success]);
-  
+
   useEffect(() => {
     if (error) {
       toast.error(error, {
@@ -210,11 +212,19 @@ const ReportContainerCard = ({ link, reportInfo }) => {
             </div>
             <div className={style.container}>
               <span className={style.infoLabel}>DATE RAISED</span>
-              <span className={style.info}>{reportInfo.createdAt}</span>
+              <span className={style.info}>
+                {moment(reportInfo.createdAt).format("LL") +
+                  " " +
+                  moment(reportInfo.createdAt).format("LT")}
+              </span>
             </div>
             <div className={style.container}>
               <span className={style.infoLabel}>LAST UPDATED</span>
-              <span className={style.info}>{reportInfo.updatedAt}</span>
+              <span className={style.info}>
+                {moment(reportInfo.updatedAt).format("LL") +
+                  " " +
+                  moment(reportInfo.updatedAt).format("LT")}
+              </span>
             </div>
           </section>
           <section className={style.userDetailRow}>
@@ -226,20 +236,20 @@ const ReportContainerCard = ({ link, reportInfo }) => {
           <section className={style.userDetailRow}>
             <div className={style.container}>
               <span className={style.infoLabel}>REPORTER</span>
-              <Link
-                to={
-                  reportInfo.reporterData[0].is_worker
-                    ? `/skilledworkers/${reportInfo.reporterData[0]._id}`
-                    : `/clients/${reportInfo.reporterData[0]._id}`
-                }
-              >
-                <span className={style.info}>
+              <span className={style.info}>
+                <Link
+                  to={
+                    reportInfo.reporterData[0].is_worker
+                      ? `/skilledworkers/${reportInfo.reporterData[0]._id}`
+                      : `/clients/${reportInfo.reporterData[0]._id}`
+                  }
+                >
                   {reportInfo.reporterData[0].first_name + " "}
                   {reportInfo.reporterData[0].middle_name + " "}
                   {reportInfo.reporterData[0].family_name + " "}
                   {reportInfo.reporterData[0].suffix}
-                </span>
-              </Link>
+                </Link>
+              </span>
             </div>
             <div className={style.container}>
               <span className={style.infoLabel}>REPORTER TYPE</span>
@@ -254,20 +264,20 @@ const ReportContainerCard = ({ link, reportInfo }) => {
             <section className={style.userDetailRow}>
               <div className={style.container}>
                 <span className={style.infoLabel}>REPORTEE</span>
-                <Link
-                  to={
-                    reportInfo.reportedUserData[0].is_worker
-                      ? `/skilledworkers/${reportInfo.reportedUserData[0]._id}`
-                      : `/clients/${reportInfo.reportedUserData[0]._id}`
-                  }
-                >
-                  <span className={style.info}>
+                <span className={style.info}>
+                  <Link
+                    to={
+                      reportInfo.reportedUserData[0].is_worker
+                        ? `/skilledworkers/${reportInfo.reportedUserData[0]._id}`
+                        : `/clients/${reportInfo.reportedUserData[0]._id}`
+                    }
+                  >
                     {reportInfo.reportedUserData[0].first_name + " "}
                     {reportInfo.reportedUserData[0].middle_name + " "}
                     {reportInfo.reportedUserData[0].family_name + " "}
                     {reportInfo.reportedUserData[0].suffix}
-                  </span>
-                </Link>
+                  </Link>
+                </span>
               </div>
 
               <div className={style.container}>
@@ -291,16 +301,16 @@ const ReportContainerCard = ({ link, reportInfo }) => {
         </section>
       </Card.Body>
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Card>
   );
 };
