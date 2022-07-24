@@ -10,6 +10,18 @@ const convFeeAPI = {
     return API.request(options);
   },
 
+  setConvFeeToPaid: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: '/admin/set-to-paid',
+      data: {
+        DATA
+      }
+    };
+
+    return API.request(options);
+  },
+
 };
 
 export default convFeeAPI;

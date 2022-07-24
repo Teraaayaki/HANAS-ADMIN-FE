@@ -6,35 +6,17 @@ import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
 import style from './index.module.scss';
 import { FaCheckCircle } from 'react-icons/fa';
-import { getConvFeeList } from "../../../redux/actions/convFeeActions";
+import { getConvFeeList, setConvFeeToPaid, resetSuccess, resetError } from "../../../redux/actions/convFeeActions";
+import { ToastContainer, toast } from "react-toastify";
 import moment from 'moment';
 
-const transactions = [
-    {
-        name: 'Renzo Lebumfacil',
-        last_activity_date: 'June 6, 2022',
-        remaining_bal: '500.00',
-        time: '5:59 PM',
-        status: 'PENDING',
-    },
-    {
-        name: 'James Karl Sia',
-        last_activity_date: 'August 15, 2021',
-        remaining_bal: '300.00',
-        time: '6:21 PM',
-        status: 'PAID',
-    },
-  ];
 const TransactionFeeList = ({ itemsPerPage }) => {
   //PAGINATION STATES
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
-
-//   const { transactions } = useSelector((state) => state.transaction);
-
-const { convFeeListData } = useSelector((state) => state.convenience);
+const { convFeeListData, success, successMessage, error } = useSelector((state) => state.convenience);
 
   const dispatch = useDispatch();
 
@@ -48,7 +30,7 @@ const { convFeeListData } = useSelector((state) => state.convenience);
 
   //PAGINATION HANDLE
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % transactions.length;
+    const newOffset = (event.selected * itemsPerPage) % convFeeListData.length;
     setItemOffset(newOffset);
   };
   
@@ -56,37 +38,74 @@ const { convFeeListData } = useSelector((state) => state.convenience);
 //     dispatch(sortTransaction(e));
 //   };
 
+const handlePayment = (amount, id) => {
+  const DATA = {
+    amount,
+    id,
+  }
+  dispatch(setConvFeeToPaid(DATA));
+};
+
   const sortItems = [];
 
   const filterItems = [];
 
-  const renderTransactionFeeList = (transactions) => {
-    return transactions.map((transaction, idx) => {
+  const renderTransactionFeeList = (convFeeListData) => {
+    return convFeeListData.map((transaction, idx) => {
       return (
         <tr
           key={transaction._id}
           className={`${style.tableDataRow} ${style.clickable}`}
         >
           <td className={style.tableData}>
-            <span className={style.truncate}>{transaction.name}</span>
+            <span className={style.truncate}>{transaction.worker.first_name} {transaction.worker.middle_name} {transaction.worker.family_name}</span>
           </td>
           <td className={style.tableData}>
-            <span className={style.truncate}>{transaction.last_activity_date}</span>
+            <span className={style.truncate}>{moment(transaction.updatedAt).format('LL')}</span>
           </td>
           <td className={style.tableData}>
-            <span className={style.truncate}>{transaction.remaining_bal}</span>
-            <span className={style.time}>{transaction.time}</span>
+            <span className={style.truncate}>₱ {transaction.total_amount.toFixed(2)}</span>
           </td>
           <td className={style.tableData}>
-            <StatusBadge status={transaction.status} />
+            <StatusBadge status={transaction.total_amount === 0 ? 'PAID' : 'PENDING'} />
           </td>
           <td className={style.tableData}>
-            <FaCheckCircle className={style.iconGreen} onClick={ () => console.log("I was clicked")}/>
+            <FaCheckCircle className={style.iconGreen} onClick={() => handlePayment(transaction.total_amount, transaction._id)}/>
           </td>
         </tr>
       );
     });
   };
+
+  useEffect(() => {
+    if (success) {
+      toast.success(successMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => dispatch(resetSuccess()),
+      });
+    }
+  }, [dispatch, success, successMessage]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => dispatch(resetError()),
+      });
+    }
+  }, [dispatch, error]);
 
   useEffect(() => {
     dispatch(getConvFeeList());
@@ -96,9 +115,9 @@ const { convFeeListData } = useSelector((state) => state.convenience);
   // Fetch items from another resources.
   const endOffset = itemOffset + itemsPerPage;
   // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  setCurrentItems(transactions.slice(itemOffset, endOffset));
-  setPageCount(Math.ceil(transactions.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, transactions]);
+  setCurrentItems(convFeeListData.slice(itemOffset, endOffset));
+  setPageCount(Math.ceil(convFeeListData.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, convFeeListData]);
 
     return (
       <div className="main-content">
@@ -123,6 +142,17 @@ const { convFeeListData } = useSelector((state) => state.convenience);
             activeClassName={'active'} /* as this work same as bootstrap class */
           />
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     );
 };
