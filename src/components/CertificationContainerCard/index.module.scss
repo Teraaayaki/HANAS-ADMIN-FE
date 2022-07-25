@@ -103,7 +103,6 @@
 
 .column {
   width: 200px;
-  background-color: white;
   min-width: 100px;
   margin-right: 30px;
   @include flex(none, center, column, 15px);

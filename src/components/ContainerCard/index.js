@@ -70,7 +70,6 @@ const ContainerCard = ({ link, userInfo }) => {
     }
   }, [error]);
 
-
   if (!userInfo) {
     return (
       <>
@@ -162,120 +161,126 @@ const ContainerCard = ({ link, userInfo }) => {
           )}
         </Card.Header>
         <Card.Body className={style.cardBody}>
-          <img
-            className={style.profile}
-            src={userInfo[0].workerData[0].profile_pic}
-            alt="&nbsp; Profile Pic"
-          />
-          <section className={style.userDetails}>
-            <section className={style.userDetailRow}>
-              <div className={style.container}>
-                <span className={style.infoLabel}>NAME</span>
-                <span className={style.info}>
-                  {userInfo[0].workerData[0].name}
-                </span>
-              </div>
-              <div className={style.container}>
-                <span className={style.infoLabel}>EMAIL</span>
-                <span className={style.info}>
-                  {userInfo[0].workerData[0].email}
-                </span>
-              </div>
-              <div className={style.container}>
-                <span className={style.infoLabel}>ADDRESS</span>
-                <span className={style.info}>
-                  {userInfo[0].workerData[0].address}
-                </span>
-              </div>
-            </section>
-            <section className={style.userDetailRow}>
-              <div className={style.container}>
-                <span className={style.infoLabel}>SEX</span>
-                <span className={style.info}>
-                  {userInfo[0].workerData[0].sex}
-                </span>
-              </div>
-              <div className={style.container}>
-                <span className={style.infoLabel}>BIRTHDATE</span>
-                <span className={style.info}>
-                  {moment(userInfo[0].workerData[0].birthdate).format("ll")}
-                </span>
-              </div>
-              <div className={style.container}>
-                <span className={style.infoLabel}>
-                  MOBILE / TELEPHONE NUMBER
-                </span>
-                <span className={style.info}>
-                  0{userInfo[0].workerData[0].mobile_no}
-                </span>
-              </div>
-            </section>
-            <section className={style.userDetailRow}>
-              {link === "verification-requests" ? (
+          <div className={style.infoContainer}>
+            <div className={style.column}>
+              <img
+                className={style.profile}
+                src={userInfo[0].workerData[0].profile_pic}
+                alt="&nbsp; Profile Pic"
+              />
+            </div>
+            <section className={style.userDetails}>
+              <section className={style.userDetailRow}>
                 <div className={style.container}>
-                  <span className={style.infoLabel}>USER TYPE</span>
-                  <span className={style.info}>Skilled Worker</span>
+                  <span className={style.infoLabel}>NAME</span>
+                  <span className={style.info}>
+                    {userInfo[0].workerData[0].name}
+                  </span>
                 </div>
-              ) : (
-                ""
-              )}
-              {link === "skilledworkers" ? (
                 <div className={style.container}>
-                  <span className={style.infoLabel}>SERVICE/S OFFERED</span>
-                  <span className={style.info}>{userInfo.services}</span>
+                  <span className={style.infoLabel}>EMAIL</span>
+                  <span className={style.info}>
+                    {userInfo[0].workerData[0].email}
+                  </span>
                 </div>
-              ) : (
-                ""
-              )}
-              <div className={style.container}>
-                <span className={style.infoLabel}>MEMBER SINCE</span>
-                <span className={style.info}>
-                  {moment(userInfo[0].workerData[0].createdAt).format("ll")}
-                </span>
-              </div>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>ADDRESS</span>
+                  <span className={style.info}>
+                    {userInfo[0].workerData[0].address}
+                  </span>
+                </div>
+              </section>
+              <section className={style.userDetailRow}>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>SEX</span>
+                  <span className={style.info}>
+                    {userInfo[0].workerData[0].sex}
+                  </span>
+                </div>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>BIRTHDATE</span>
+                  <span className={style.info}>
+                    {moment(userInfo[0].workerData[0].birthdate).format("ll")}
+                  </span>
+                </div>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>
+                    MOBILE / TELEPHONE NUMBER
+                  </span>
+                  <span className={style.info}>
+                    0{userInfo[0].workerData[0].mobile_no}
+                  </span>
+                </div>
+              </section>
+              <section className={style.userDetailRow}>
+                {link === "verification-requests" ? (
+                  <div className={style.container}>
+                    <span className={style.infoLabel}>USER TYPE</span>
+                    <span className={style.info}>Skilled Worker</span>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {link === "skilledworkers" ? (
+                  <div className={style.container}>
+                    <span className={style.infoLabel}>SERVICE/S OFFERED</span>
+                    <span className={style.info}>{userInfo.services}</span>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <div className={style.container}>
+                  <span className={style.infoLabel}>MEMBER SINCE</span>
+                  <span className={style.info}>
+                    {moment(userInfo[0].workerData[0].createdAt).format("ll")}
+                  </span>
+                </div>
+              </section>
+              <section className={style.imagesOffsetContainer}>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>
+                    VALID ID PRESENTED
+                    {userInfo[0].workerData[0].is_verified ? (
+                      <span className="mx-3 text-success">Verified</span>
+                    ) : (
+                      <span className="mx-3 text-danger">Not Verified</span>
+                    )}
+                  </span>
+                  <span className={style.info}>(Front)</span>
+                  <Zoom
+                    img={userInfo[0].valid_id[0]}
+                    zoomScale={2}
+                    width={350}
+                    height={200}
+                  />
+                </div>
+                <div className={style.container}>
+                  <span className={`${style.infoLabel} invisible`}>
+                    VALID ID PRESENTED
+                  </span>
+                  <span className={style.info}>(Back)</span>
+                  <Zoom
+                    img={userInfo[0].valid_id[0]}
+                    zoomScale={2}
+                    width={350}
+                    height={200}
+                  />
+                </div>
+                <div className={style.container}>
+                  <span className={style.infoLabel}>
+                    NBI / POLICE CLEARANCE
+                  </span>
+                  <span className={style.info}>NBI Clearance</span>
+                  <Zoom
+                    img={userInfo[0].nbi_brgy_clearance[0]}
+                    zoomScale={2}
+                    width={350}
+                    height={200}
+                  />
+                </div>
+              </section>
             </section>
-            <section className={style.imagesOffsetContainer}>
-              <div className={style.container}>
-                <span className={style.infoLabel}>
-                  VALID ID PRESENTED
-                  {userInfo[0].workerData[0].is_verified ? (
-                    <span className="mx-3 text-success">Verified</span>
-                  ) : (
-                    <span className="mx-3 text-danger">Not Verified</span>
-                  )}
-                </span>
-                <span className={style.info}>(Front)</span>
-                <Zoom
-                  img={userInfo[0].valid_id[0]}
-                  zoomScale={2}
-                  width={350}
-                  height={200}
-                />
-              </div>
-              <div className={style.container}>
-                <span className={`${style.infoLabel} invisible`}>
-                  VALID ID PRESENTED
-                </span>
-                <span className={style.info}>(Back)</span>
-                <Zoom
-                  img={userInfo[0].valid_id[0]}
-                  zoomScale={2}
-                  width={350}
-                  height={200}
-                />
-              </div>
-              <div className={style.container}>
-                <span className={style.infoLabel}>NBI / POLICE CLEARANCE</span>
-                <span className={style.info}>NBI Clearance</span>
-                <Zoom
-                  img={userInfo[0].nbi_brgy_clearance[0]}
-                  zoomScale={2}
-                  width={350}
-                  height={200}
-                />
-              </div>
-            </section>
-          </section>
+          </div>
         </Card.Body>
         <ToastContainer
           position="top-right"

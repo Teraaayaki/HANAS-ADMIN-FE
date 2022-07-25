@@ -156,88 +156,96 @@ const UserContainerCard = ({ link, userInfo }) => {
         )}
       </Card.Header>
       <Card.Body className={style.cardBody}>
-        <img
-          className={style.profile}
-          src={
-            userInfo.profile_pic
-              ? userInfo.profile_pic
-              : "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
-          }
-          alt="&nbsp; Profile Pic"
-        />
-        <section className={style.userDetails}>
-          <section className={style.userDetailRow}>
-            <div className={style.container}>
-              <span className={style.infoLabel}>NAME</span>
-              <span className={style.info}>{userInfo.name}</span>
-            </div>
-            <div className={style.container}>
-              <span className={style.infoLabel}>EMAIL</span>
-              <span className={style.info}>{userInfo.email}</span>
-            </div>
-            <div className={style.container}>
-              <span className={style.infoLabel}>ADDRESS</span>
-              <span className={style.info}>{userInfo.address}</span>
-            </div>
-          </section>
-          <section className={style.userDetailRow}>
-            <div className={style.container}>
-              <span className={style.infoLabel}>SEX</span>
-              <span className={style.info}>{userInfo.sex}</span>
-            </div>
-            <div className={style.container}>
-              <span className={style.infoLabel}>BIRTHDATE</span>
-              <span className={style.info}>
-                {moment(userInfo.birthDate).format("LL")}
-              </span>
-            </div>
-            <div className={style.container}>
-              <span className={style.infoLabel}>MOBILE / TELEPHONE NUMBER</span>
-              <span className={style.info}>{userInfo.mobile_no}</span>
-            </div>
-          </section>
-          <section className={style.userDetailRow}>
-            {link === "skilledworkers" ? (
+        <div className={style.infoContainer}>
+          <div className={style.column}>
+            <img
+              className={style.profile}
+              src={
+                userInfo.profile_pic
+                  ? userInfo.profile_pic
+                  : "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
+              }
+              alt="&nbsp; Profile Pic"
+            />
+          </div>
+          <section className={style.userDetails}>
+            <section className={style.userDetailRow}>
               <div className={style.container}>
-                <span className={style.infoLabel}>SERVICE/S OFFERED</span>
+                <span className={style.infoLabel}>NAME</span>
+                <span className={style.info}>{userInfo.name}</span>
+              </div>
+              <div className={style.container}>
+                <span className={style.infoLabel}>EMAIL</span>
+                <span className={style.info}>{userInfo.email}</span>
+              </div>
+              <div className={style.container}>
+                <span className={style.infoLabel}>ADDRESS</span>
+                <span className={style.info}>{userInfo.address}</span>
+              </div>
+            </section>
+            <section className={style.userDetailRow}>
+              <div className={style.container}>
+                <span className={style.infoLabel}>SEX</span>
+                <span className={style.info}>{userInfo.sex}</span>
+              </div>
+              <div className={style.container}>
+                <span className={style.infoLabel}>BIRTHDATE</span>
                 <span className={style.info}>
-                  {renderMyServicesList(userInfo.myServicesData)}
+                  {moment(userInfo.birthDate).format("LL")}
                 </span>
               </div>
+              <div className={style.container}>
+                <span className={style.infoLabel}>
+                  MOBILE / TELEPHONE NUMBER
+                </span>
+                <span className={style.info}>{userInfo.mobile_no}</span>
+              </div>
+            </section>
+            <section className={style.userDetailRow}>
+              {link === "skilledworkers" ? (
+                <div className={style.container}>
+                  <span className={style.infoLabel}>SERVICE/S OFFERED</span>
+                  <span className={style.info}>
+                    {renderMyServicesList(userInfo.myServicesData)}
+                  </span>
+                </div>
+              ) : (
+                ""
+              )}
+              <div className={style.container}>
+                <span className={style.infoLabel}>MEMBER SINCE</span>
+                <span className={style.info}>
+                  {moment(userInfo.createdAt).format("LL")}
+                </span>
+              </div>
+            </section>
+            {link === "skilledworkers" ? (
+              <section className={style.userDetailRow}>
+                {renderValidIDList(
+                  userInfo.verificationData.valid_id,
+                  userInfo.is_verified
+                )}
+                <div className={style.container}>
+                  <span className={style.infoLabel}>
+                    NBI / POLICE CLEARANCE
+                  </span>
+                  {userInfo.verificationData.nbi_brgy_clearance ? (
+                    <img
+                      src={userInfo.verificationData.nbi_brgy_clearance}
+                      alt="&nbsp; NBI/Brgy Clearance"
+                      width={350}
+                      height={200}
+                    />
+                  ) : (
+                    <span className={style.info}>No Data</span>
+                  )}
+                </div>
+              </section>
             ) : (
               ""
             )}
-            <div className={style.container}>
-              <span className={style.infoLabel}>MEMBER SINCE</span>
-              <span className={style.info}>
-                {moment(userInfo.createdAt).format("LL")}
-              </span>
-            </div>
           </section>
-          {link === "skilledworkers" ? (
-            <section className={style.userDetailRow}>
-              {renderValidIDList(
-                userInfo.verificationData.valid_id,
-                userInfo.is_verified
-              )}
-              <div className={style.container}>
-                <span className={style.infoLabel}>NBI / POLICE CLEARANCE</span>
-                {userInfo.verificationData.nbi_brgy_clearance ? (
-                  <img
-                    src={userInfo.verificationData.nbi_brgy_clearance}
-                    alt="&nbsp; NBI/Brgy Clearance"
-                    width={350}
-                    height={200}
-                  />
-                ) : (
-                  <span className={style.info}>No Data</span>
-                )}
-              </div>
-            </section>
-          ) : (
-            ""
-          )}
-        </section>
+        </div>
       </Card.Body>
     </Card>
   );

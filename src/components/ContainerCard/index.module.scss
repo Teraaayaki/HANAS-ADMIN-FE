@@ -62,14 +62,14 @@
     background: $color-gray-3;
   }
 
-  @include flex(center, none, row, none);
+  @include flex(none, none, none, none);
 }
 
 .profile {
   width: 100px;
-  height: 80px;
-  margin: 0px 20px 0px 40px;
+  height: 100px;
   border-radius: 100%;
+  margin-top: 20px;
 }
 
 .userDetails {
@@ -96,4 +96,16 @@
 .imagesOffsetContainer {
   @include flex(none, none, row, 40px);
   margin-bottom: 25px;
+}
+
+.column {
+  width: 200px;
+  min-width: 100px;
+  margin-right: 30px;
+  @include flex(none, center, column, 15px);
+}
+
+.infoContainer {
+  flex: 1;
+  @include flex(center, none, row, none);
 }
