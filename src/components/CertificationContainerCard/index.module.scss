@@ -39,7 +39,7 @@
 
 .cardBody {
   overflow: auto;
-  background-color: #fff;
+  background-color: white;
 
   /* width */
   &::-webkit-scrollbar {
@@ -68,16 +68,16 @@
 .infoContainer {
   padding-top: 50px;
   padding-bottom: 50px;
-  background-color: #fff !important;
+  background-color: white !important;
 
-  @include flex(center, none, row, none);
+  @include flex(none, none, row, none);
 }
 
 .profile {
   width: 100px;
   height: 100px;
-  margin: 0px 100px 50px 0px;
   border-radius: 100%;
+  margin-top: 20px;
 }
 
 .userDetails {
@@ -102,8 +102,11 @@
 }
 
 .column {
-  flex-direction: column;
-  width: 250px;
+  width: 200px;
+  background-color: white;
+  min-width: 100px;
+  margin-right: 30px;
+  @include flex(none, center, column, 15px);
 }
 
 .active {
