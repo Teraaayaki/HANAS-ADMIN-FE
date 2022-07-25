@@ -61,6 +61,7 @@ const renderValidIDList = (validIDData, is_verified) => {
               )}
             </span>
             <img
+              className={style.IDIMG}
               src={valid_id}
               alt="&nbsp; Valid ID"
               width={350}
@@ -73,6 +74,7 @@ const renderValidIDList = (validIDData, is_verified) => {
           <div className={style.container}>
             <span className={`${style.infoLabel} invisible`}>_</span>
             <img
+              className={style.IDIMG}
               src={valid_id}
               alt="&nbsp; Valid ID"
               width={350}
@@ -94,6 +96,7 @@ const renderValidIDList = (validIDData, is_verified) => {
           )}
         </span>
         <img
+          className={style.IDIMG}
           src={validIDData[0].valid_id}
           alt="&nbsp; Valid ID"
           width={350}
@@ -231,6 +234,7 @@ const UserContainerCard = ({ link, userInfo }) => {
                   </span>
                   {userInfo.verificationData.nbi_brgy_clearance ? (
                     <img
+                      className={style.IDIMG}
                       src={userInfo.verificationData.nbi_brgy_clearance}
                       alt="&nbsp; NBI/Brgy Clearance"
                       width={350}

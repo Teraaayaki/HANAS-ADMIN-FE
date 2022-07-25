@@ -78,6 +78,7 @@
   height: 100px;
   border-radius: 100%;
   margin-top: 20px;
+  object-fit: cover;
 }
 
 .userDetails {
@@ -117,4 +118,8 @@
 .deact {
   color: $rejected-color;
   @extend .info;
+}
+
+.certificateIMG {
+  object-fit: contain;
 }

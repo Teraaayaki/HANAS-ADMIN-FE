@@ -69,6 +69,7 @@
   height: 100px;
   border-radius: 100%;
   margin-top: 20px;
+  object-fit: cover;
 }
 
 .userDetails {
@@ -102,4 +103,8 @@
 .infoContainer {
   flex: 1;
   @include flex(center, none, row, none);
+}
+
+.IDIMG {
+  object-fit: contain;
 }

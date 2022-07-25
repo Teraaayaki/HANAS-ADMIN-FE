@@ -146,6 +146,7 @@ const renderCertificatesList = (certificatesData, is_certified) => {
               )}
             </span>
             <img
+              className={style.certificateIMG}
               src={certificate}
               alt="&nbsp; Valid ID"
               width={350}
@@ -158,6 +159,7 @@ const renderCertificatesList = (certificatesData, is_certified) => {
           <div className={style.container}>
             <span className={`${style.infoLabel} invisible`}>_</span>
             <img
+              className={style.certificateIMG}
               src={certificate}
               alt="&nbsp; Valid ID"
               width={350}
@@ -181,6 +183,7 @@ const renderCertificatesList = (certificatesData, is_certified) => {
           )}
         </span>
         <img
+          className={style.certificateIMG}
           src={certificatesData[0]}
           alt="&nbsp; Valid ID"
           width={350}
