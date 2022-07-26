@@ -6,7 +6,7 @@ import DataTable from '../../../components/Table';
 import StatusBadge from '../../../components/StatusBadge';
 import style from './index.module.scss';
 import { FaCheckCircle } from 'react-icons/fa';
-import { getConvFeeList, setConvFeeToPaid, resetSuccess, resetError } from "../../../redux/actions/convFeeActions";
+import { getConvFeeList, setConvFeeToPaid, sortConvenienceFee, resetSuccess, resetError, filterConvenienceFee } from "../../../redux/actions/convFeeActions";
 import { ToastContainer, toast } from "react-toastify";
 import moment from 'moment';
 
@@ -34,9 +34,13 @@ const { convFeeListData, success, successMessage, error } = useSelector((state) 
     setItemOffset(newOffset);
   };
   
-//   const handleSortTransaction = (e) => {
-//     dispatch(sortTransaction(e));
-//   };
+  const handleSortConvenienceFee = (e) => {
+    dispatch(sortConvenienceFee(e));
+  };
+
+  const handleFilterConvenienceFee = (e) => {
+    dispatch(filterConvenienceFee(e));
+  }
 
 const handlePayment = (amount, id) => {
   const DATA = {
@@ -46,9 +50,41 @@ const handlePayment = (amount, id) => {
   dispatch(setConvFeeToPaid(DATA));
 };
 
-  const sortItems = [];
+  const sortItems = [
+    {
+      name: 'Default',
+      event_key: 'all',
+      onClick: () => { dispatch(handleSortConvenienceFee('all'))}
+    },
+    {
+      name: 'Name (A-Z)',
+      event_key: 'name',
+      onClick: () => { dispatch(handleSortConvenienceFee('name'))}
+    },
+    {
+      name: 'Last Activity Date',
+      event_key: 'date',
+      onClick: () => { dispatch(handleSortConvenienceFee('date'))}
+    },
+  ];
 
-  const filterItems = [];
+  const filterItems = [
+    {
+      name: 'Default',
+      event_key: 'all',
+      onClick: () => { dispatch(handleFilterConvenienceFee('all'))}
+    },
+    {
+      name: 'Paid',
+      event_key: 'pending',
+      onClick: () => { dispatch(handleFilterConvenienceFee('paid'))}
+    },
+    {
+      name: 'Pending',
+      event_key: 'accepted',
+      onClick: () => { dispatch(handleFilterConvenienceFee('pending'))}
+    },
+  ];
 
   const renderTransactionFeeList = (convFeeListData) => {
     return convFeeListData.map((transaction, idx) => {
@@ -58,7 +94,7 @@ const handlePayment = (amount, id) => {
           className={`${style.tableDataRow} ${style.clickable}`}
         >
           <td className={style.tableData}>
-            <span className={style.truncate}>{transaction.worker.first_name} {transaction.worker.middle_name} {transaction.worker.family_name}</span>
+            <span className={style.truncate}>{transaction.workerData[0].name}</span>
           </td>
           <td className={style.tableData}>
             <span className={style.truncate}>{moment(transaction.updatedAt).format('LL')}</span>

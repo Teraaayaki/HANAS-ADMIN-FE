@@ -22,6 +22,30 @@ const convFeeAPI = {
     return API.request(options);
   },
 
+  sortConvFee: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: '/admin/sort-convenience-fee',
+      data: {
+        choice: DATA,
+      }
+    };
+
+    return API.request(options);
+  },
+
+  filterConvFee: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: '/admin/filter-convenience-fee',
+      data: {
+        choice: DATA,
+      }
+    };
+
+    return API.request(options);
+  },
+
 };
 
 export default convFeeAPI;

@@ -28,3 +28,21 @@ export const setConvFeeToPaid = (DATA) => async (dispatch) => {
         dispatch({ type: ConvFeeActions.CONV_FEE_ERROR, payload: error?.response?.data?.error});
     });
 };
+
+export const sortConvenienceFee = (DATA) => async (dispatch) => {
+    convFeeAPI.sortConvFee(DATA).then( ({data}) => {
+        dispatch({ type: ConvFeeActions.CONV_FEE_LIST, payload: data.convFeeTransactions});
+    }).catch( (error) => {
+        console.log(error);
+        dispatch({ type: ConvFeeActions.CONV_FEE_ERROR, payload: error?.response?.data?.error});
+    });
+};
+
+export const filterConvenienceFee = (DATA) => async (dispatch) => {
+    convFeeAPI.filterConvFee(DATA).then( ({data}) => {
+        dispatch({ type: ConvFeeActions.CONV_FEE_LIST, payload: data.convFeeTransactions});
+    }).catch( (error) => {
+        console.log(error);
+        dispatch({ type: ConvFeeActions.CONV_FEE_ERROR, payload: error?.response?.data?.error});
+    });
+};
