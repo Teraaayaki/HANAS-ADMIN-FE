@@ -17,7 +17,6 @@ import style from "./index.module.scss";
 
 const ContainerCard = ({ link, userInfo }) => {
 
-  console.log("USER INFO", userInfo);
   const [show, setShow] = useState(false);
   const [showReject, setShowReject] = useState(false);
   const { success, error, successMessage } = useSelector(
