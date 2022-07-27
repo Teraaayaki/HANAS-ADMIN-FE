@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card, Button, Modal } from "react-bootstrap";
+import { Card, Button, Modal, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
@@ -16,6 +16,8 @@ import Zoom from "react-img-zoom";
 import style from "./index.module.scss";
 
 const ContainerCard = ({ link, userInfo }) => {
+
+  console.log("USER INFO", userInfo);
   const [show, setShow] = useState(false);
   const [showReject, setShowReject] = useState(false);
   const { success, error, successMessage } = useSelector(
@@ -247,36 +249,21 @@ const ContainerCard = ({ link, userInfo }) => {
                     )}
                   </span>
                   <span className={style.info}>(Front)</span>
-                  <Zoom
-                    img={userInfo[0].valid_id[0]}
-                    zoomScale={2}
-                    width={350}
-                    height={200}
-                  />
+                  <Image src={userInfo[0].valid_id[0]} />
                 </div>
                 <div className={style.container}>
                   <span className={`${style.infoLabel} invisible`}>
                     VALID ID PRESENTED
                   </span>
                   <span className={style.info}>(Back)</span>
-                  <Zoom
-                    img={userInfo[0].valid_id[0]}
-                    zoomScale={2}
-                    width={350}
-                    height={200}
-                  />
+                  <Image src={userInfo[0].valid_id[1]} />
                 </div>
                 <div className={style.container}>
                   <span className={style.infoLabel}>
                     NBI / POLICE CLEARANCE
                   </span>
                   <span className={style.info}>NBI Clearance</span>
-                  <Zoom
-                    img={userInfo[0].nbi_brgy_clearance[0]}
-                    zoomScale={2}
-                    width={350}
-                    height={200}
-                  />
+                  <Image src={userInfo[0].nbi_brgy_clearance[0]} />
                 </div>
               </section>
             </section>
