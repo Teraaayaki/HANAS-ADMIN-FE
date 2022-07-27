@@ -46,3 +46,13 @@ export const filterConvenienceFee = (DATA) => async (dispatch) => {
         dispatch({ type: ConvFeeActions.CONV_FEE_ERROR, payload: error?.response?.data?.error});
     });
 };
+
+export const checkConvenienceFeeOverdue = () => async (dispatch) => {
+    convFeeAPI.checkForOverdue().then( () => {
+        dispatch({ type: ConvFeeActions.CONV_FEE_SUCCESS});
+        dispatch({ type: ConvFeeActions.CONV_FEE_SUCCESS_MESSAGE});
+    }).catch( (error) => {
+        console.log(error);
+        dispatch({ type: ConvFeeActions.CONV_FEE_ERROR, payload: error?.response?.data?.error});
+    });
+}

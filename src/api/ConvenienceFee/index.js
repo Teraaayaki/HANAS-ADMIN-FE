@@ -22,6 +22,15 @@ const convFeeAPI = {
     return API.request(options);
   },
 
+  checkForOverdue: () => {
+    const options = {
+      method: 'PATCH',
+      url: '/admin/reset-conv-fee',
+    };
+
+    return API.request(options);
+  },
+
   sortConvFee: (DATA) => {
     const options = {
       method: 'PATCH',
