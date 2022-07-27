@@ -6,6 +6,7 @@ import transactionReducer from "./transactionReducer";
 import verificationReducer from "./verificationReducer";
 import reportReducer from "./reportReducer";
 import overviewReducer from "./overviewReducer";
+import certificationReducer from "./certificationReducer";
 import convFeeReducer from "./convFeeReducer";
 
 export default combineReducers({
@@ -13,6 +14,7 @@ export default combineReducers({
   client: clientReducer,
   worker: workerReducer,
   transaction: transactionReducer,
+  certification: certificationReducer,
   verification: verificationReducer,
   report: reportReducer,
   overview: overviewReducer,

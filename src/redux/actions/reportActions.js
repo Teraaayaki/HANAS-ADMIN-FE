@@ -79,11 +79,11 @@ export const rejectReport = (reportID) => async (dispatch) => {
     });
 };
 
-export const setPendingReport = (reportID) => async (dispatch) => {
-  ReportAPI.setPendingReport(reportID)
+export const reopenReport = (reportID) => async (dispatch) => {
+  ReportAPI.reopenReport(reportID)
     .then(({ data }) => {
       dispatch({
-        type: ReportActions.SET_PENDING_REPORT,
+        type: ReportActions.REOPEN_REPORT,
       });
     })
     .catch((error) => {
@@ -96,23 +96,35 @@ export const setPendingReport = (reportID) => async (dispatch) => {
 };
 
 export const sortReport = (DATA) => async (dispatch) => {
-
-  ReportAPI.sortReport(DATA).then( ({data}) => {
-    dispatch({ type: ReportActions.GET_REPORT_LIST, payload: data.reportList});
-  })
-  .catch( (error) => {
-    console.log(error);
-    dispatch({ type: ReportActions.REPORT_ERROR, payload: error?.response?.data?.error});
-  });
-
+  ReportAPI.sortReport(DATA)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.GET_REPORT_LIST,
+        payload: data.reportList,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: ReportActions.REPORT_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
 };
 
 export const filterReport = (DATA) => async (dispatch) => {
-  ReportAPI.filterReport(DATA).then( ({data}) => {
-    dispatch({ type: ReportActions.GET_REPORT_LIST, payload: data.reportList});
-  })
-  .catch( (error) => {
-    console.log(error);
-    dispatch({ type: ReportActions.REPORT_ERROR, payload: error?.response?.data?.error});
-  });
-}
+  ReportAPI.filterReport(DATA)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.GET_REPORT_LIST,
+        payload: data.reportList,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: ReportActions.REPORT_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};

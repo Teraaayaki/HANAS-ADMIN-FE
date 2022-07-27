@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   reportData: [],
   error: null,
   success: null,
-  successMessage: '',
+  successMessage: "",
 };
 
 const reportReducer = (state = INITIAL_STATE, action) => {
@@ -32,21 +32,21 @@ const reportReducer = (state = INITIAL_STATE, action) => {
         ...state,
         reportData: action.payload,
         success: true,
-        successMessage: 'Report has been successfully resolved',
+        successMessage: "Report has been successfully resolved",
       };
     case ReportActions.REJECT_REPORT:
       return {
         ...state,
         reportData: action.payload,
         success: true,
-        successMessage: 'Report has been rejected',
+        successMessage: "Report has been rejected",
       };
-    case ReportActions.SET_PENDING_REPORT:
+    case ReportActions.REOPEN_REPORT:
       return {
         ...state,
         reportData: action.payload,
         success: true,
-        successMessage: 'Report has been successfully set to Pending',
+        successMessage: "Report has been successfully set to Pending",
       };
     case ReportActions.REPORT_RESET_ERROR:
       return {
@@ -58,7 +58,7 @@ const reportReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         success: false,
-        successMessage: '',
+        successMessage: "",
       };
     default:
       return state;
