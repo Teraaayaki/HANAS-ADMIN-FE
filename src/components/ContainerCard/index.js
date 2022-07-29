@@ -13,9 +13,12 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Zoom from "react-img-zoom";
+import ReactImageMagnify from 'react-image-magnify';
 import style from "./index.module.scss";
 
 const ContainerCard = ({ link, userInfo }) => {
+
+  console.log("USER INFO", userInfo);
 
   const [show, setShow] = useState(false);
   const [showReject, setShowReject] = useState(false);
@@ -248,21 +251,60 @@ const ContainerCard = ({ link, userInfo }) => {
                     )}
                   </span>
                   <span className={style.info}>(Front)</span>
-                  <Image src={userInfo[0].valid_id[0]} />
+                  <ReactImageMagnify
+                     {...{
+                      smallImage: {
+                          alt: 'Front Portion',
+                          isFluidWidth: true,
+                          src: `${userInfo[0].valid_id[0]}`
+                      },
+                      largeImage: {
+                          src: `${userInfo[0].valid_id[0]}`,
+                          width: 1200,
+                          height: 1800
+                      }
+                    }}  
+                  />
                 </div>
                 <div className={style.container}>
                   <span className={`${style.infoLabel} invisible`}>
                     VALID ID PRESENTED
                   </span>
                   <span className={style.info}>(Back)</span>
-                  <Image src={userInfo[0].valid_id[1]} />
+                  <ReactImageMagnify
+                     {...{
+                      smallImage: {
+                          alt: 'Back Portion',
+                          isFluidWidth: true,
+                          src: `${userInfo[0].valid_id[1]}`
+                      },
+                      largeImage: {
+                          src: `${userInfo[0].valid_id[1]}`,
+                          width: 1200,
+                          height: 1800
+                      }
+                    }}  
+                  />
                 </div>
                 <div className={style.container}>
                   <span className={style.infoLabel}>
                     NBI / POLICE CLEARANCE
                   </span>
                   <span className={style.info}>NBI Clearance</span>
-                  <Image src={userInfo[0].nbi_brgy_clearance[0]} />
+                  <ReactImageMagnify
+                     {...{
+                      smallImage: {
+                          alt: 'NBI Clearance',
+                          isFluidWidth: true,
+                          src: `${userInfo[0].nbi_brgy_clearance[0]}`
+                      },
+                      largeImage: {
+                          src: `${userInfo[0].nbi_brgy_clearance[0]}`,
+                          width: 1200,
+                          height: 1800
+                      }
+                    }}  
+                  />
                 </div>
               </section>
             </section>
