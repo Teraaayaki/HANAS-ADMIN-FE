@@ -1,6 +1,8 @@
 import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import ReactImageMagnify from "react-image-magnify";
+
 import {
   activateClient,
   deactivateClient,
@@ -60,12 +62,21 @@ const renderValidIDList = (validIDData, is_verified) => {
                 <span className="mx-3 text-danger">Not Verified</span>
               )}
             </span>
-            <img
-              className={style.IDIMG}
-              src={valid_id}
-              alt="&nbsp; Valid ID"
-              width={350}
-              height={200}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Valid ID",
+                  isFluidWidth: true,
+                  src: `${valid_id}`,
+                },
+                largeImage: {
+                  src: `${valid_id}`,
+                  width: 1620,
+                  height: 1214,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.IDIMG,
+              }}
             />
           </div>
         );
@@ -73,6 +84,22 @@ const renderValidIDList = (validIDData, is_verified) => {
         return (
           <div className={style.container}>
             <span className={`${style.infoLabel} invisible`}>_</span>
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Valid ID",
+                  isFluidWidth: true,
+                  src: `${valid_id}`,
+                },
+                largeImage: {
+                  src: `${valid_id}`,
+                  width: 1620,
+                  height: 1214,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.IDIMG,
+              }}
+            />
             <img
               className={style.IDIMG}
               src={valid_id}
@@ -95,12 +122,21 @@ const renderValidIDList = (validIDData, is_verified) => {
             <span className="mx-3 text-danger">Not Verified</span>
           )}
         </span>
-        <img
-          className={style.IDIMG}
-          src={validIDData[0].valid_id}
-          alt="&nbsp; Valid ID"
-          width={350}
-          height={200}
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: "Valid ID",
+              isFluidWidth: true,
+              src: `${validIDData}`,
+            },
+            largeImage: {
+              src: `${validIDData}`,
+              width: 1620,
+              height: 1214,
+            },
+            enlargedImagePosition: "over",
+            enlargedImageClassName: style.IDIMG,
+          }}
         />
       </div>
     );
@@ -225,20 +261,29 @@ const UserContainerCard = ({ link, userInfo }) => {
             {link === "skilledworkers" ? (
               <section className={style.userDetailRow}>
                 {renderValidIDList(
-                  userInfo.verificationData.valid_id,
+                  userInfo.verificationData[0].valid_id,
                   userInfo.is_verified
                 )}
                 <div className={style.container}>
                   <span className={style.infoLabel}>
                     NBI / POLICE CLEARANCE
                   </span>
-                  {userInfo.verificationData.nbi_brgy_clearance ? (
-                    <img
-                      className={style.IDIMG}
-                      src={userInfo.verificationData.nbi_brgy_clearance}
-                      alt="&nbsp; NBI/Brgy Clearance"
-                      width={350}
-                      height={200}
+                  {userInfo.verificationData[0].nbi_brgy_clearance ? (
+                    <ReactImageMagnify
+                      {...{
+                        smallImage: {
+                          alt: "NBI/Brgy Clearance",
+                          isFluidWidth: true,
+                          src: `${userInfo.verificationData[0].nbi_brgy_clearance}`,
+                        },
+                        largeImage: {
+                          src: `${userInfo.verificationData[0].nbi_brgy_clearance}`,
+                          width: 1620,
+                          height: 1214,
+                        },
+                        enlargedImagePosition: "over",
+                        enlargedImageClassName: style.IDIMG,
+                      }}
                     />
                   ) : (
                     <span className={style.info}>No Data</span>

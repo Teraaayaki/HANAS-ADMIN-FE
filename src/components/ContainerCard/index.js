@@ -13,11 +13,10 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Zoom from "react-img-zoom";
-import ReactImageMagnify from 'react-image-magnify';
+import ReactImageMagnify from "react-image-magnify";
 import style from "./index.module.scss";
 
 const ContainerCard = ({ link, userInfo }) => {
-
   console.log("USER INFO", userInfo);
 
   const [show, setShow] = useState(false);
@@ -252,18 +251,20 @@ const ContainerCard = ({ link, userInfo }) => {
                   </span>
                   <span className={style.info}>(Front)</span>
                   <ReactImageMagnify
-                     {...{
+                    {...{
                       smallImage: {
-                          alt: 'Front Portion',
-                          isFluidWidth: true,
-                          src: `${userInfo[0].valid_id[0]}`
+                        alt: "Valid ID",
+                        isFluidWidth: true,
+                        src: `${userInfo[0].valid_id[0]}`,
                       },
                       largeImage: {
-                          src: `${userInfo[0].valid_id[0]}`,
-                          width: 1200,
-                          height: 1800
-                      }
-                    }}  
+                        src: `${userInfo[0].valid_id[0]}`,
+                        width: 1620,
+                        height: 1214,
+                      },
+                      enlargedImagePosition: "over",
+                      enlargedImageClassName: style.IDIMG,
+                    }}
                   />
                 </div>
                 <div className={style.container}>
@@ -272,18 +273,20 @@ const ContainerCard = ({ link, userInfo }) => {
                   </span>
                   <span className={style.info}>(Back)</span>
                   <ReactImageMagnify
-                     {...{
+                    {...{
                       smallImage: {
-                          alt: 'Back Portion',
-                          isFluidWidth: true,
-                          src: `${userInfo[0].valid_id[1]}`
+                        alt: "Valid ID",
+                        isFluidWidth: true,
+                        src: `${userInfo[0].valid_id[1]}`,
                       },
                       largeImage: {
-                          src: `${userInfo[0].valid_id[1]}`,
-                          width: 1200,
-                          height: 1800
-                      }
-                    }}  
+                        src: `${userInfo[0].valid_id[1]}`,
+                        width: 1620,
+                        height: 1214,
+                      },
+                      enlargedImagePosition: "over",
+                      enlargedImageClassName: style.IDIMG,
+                    }}
                   />
                 </div>
                 <div className={style.container}>
@@ -292,18 +295,20 @@ const ContainerCard = ({ link, userInfo }) => {
                   </span>
                   <span className={style.info}>NBI Clearance</span>
                   <ReactImageMagnify
-                     {...{
+                    {...{
                       smallImage: {
-                          alt: 'NBI Clearance',
-                          isFluidWidth: true,
-                          src: `${userInfo[0].nbi_brgy_clearance[0]}`
+                        alt: "NBI Clearance",
+                        isFluidWidth: true,
+                        src: `${userInfo[0].nbi_brgy_clearance[0]}`,
                       },
                       largeImage: {
-                          src: `${userInfo[0].nbi_brgy_clearance[0]}`,
-                          width: 1200,
-                          height: 1800
-                      }
-                    }}  
+                        src: `${userInfo[0].nbi_brgy_clearance[0]}`,
+                        width: 1620,
+                        height: 1214,
+                      },
+                      enlargedImagePosition: "over",
+                      enlargedImageClassName: style.IDIMG,
+                    }}
                   />
                 </div>
               </section>

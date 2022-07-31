@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import ReactImageMagnify from "react-image-magnify";
 import {
   acceptCertification,
   rejectCertification,
@@ -75,11 +76,21 @@ const renderValidIDList = (validIDData) => {
               VALID ID PRESENTED
               <span className="mx-3 text-success">Verified</span>
             </span>
-            <img
-              src={valid_id}
-              alt="&nbsp; Valid ID"
-              width={350}
-              height={200}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Valid ID",
+                  isFluidWidth: true,
+                  src: `${valid_id}`,
+                },
+                largeImage: {
+                  src: `${valid_id}`,
+                  width: 1620,
+                  height: 1214,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.certificateIMG,
+              }}
             />
           </div>
         );
@@ -87,11 +98,21 @@ const renderValidIDList = (validIDData) => {
         return (
           <div className={style.container}>
             <span className={`${style.infoLabel} invisible`}>_</span>
-            <img
-              src={valid_id}
-              alt="&nbsp; Valid ID"
-              width={350}
-              height={200}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Valid ID",
+                  isFluidWidth: true,
+                  src: `${valid_id}`,
+                },
+                largeImage: {
+                  src: `${valid_id}`,
+                  width: 1620,
+                  height: 1214,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.certificateIMG,
+              }}
             />
           </div>
         );
@@ -104,11 +125,22 @@ const renderValidIDList = (validIDData) => {
           VALID ID PRESENTED
           <span className="mx-3 text-success">Verified</span>
         </span>
-        <img
-          src={validIDData[0].valid_id}
-          alt="&nbsp; Valid ID"
-          width={350}
-          height={200}
+        {console.log("validIDData", validIDData)}
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: "Valid ID",
+              isFluidWidth: true,
+              src: `${validIDData[0]}`,
+            },
+            largeImage: {
+              src: `${validIDData[0]}`,
+              width: 1620,
+              height: 1214,
+            },
+            enlargedImagePosition: "over",
+            enlargedImageClassName: style.certificateIMG,
+          }}
         />
       </div>
     );
@@ -145,12 +177,21 @@ const renderCertificatesList = (certificatesData, is_certified) => {
                 <span className="mx-3 text-warning">Pending</span>
               )}
             </span>
-            <img
-              className={style.certificateIMG}
-              src={certificate}
-              alt="&nbsp; Valid ID"
-              width={350}
-              height={200}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Certificate",
+                  isFluidWidth: true,
+                  src: `${certificate}`,
+                },
+                largeImage: {
+                  src: `${certificate}`,
+                  width: 1620,
+                  height: 1214,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.certificateIMG,
+              }}
             />
           </div>
         );
@@ -158,12 +199,21 @@ const renderCertificatesList = (certificatesData, is_certified) => {
         return (
           <div className={style.container}>
             <span className={`${style.infoLabel} invisible`}>_</span>
-            <img
-              className={style.certificateIMG}
-              src={certificate}
-              alt="&nbsp; Valid ID"
-              width={350}
-              height={200}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Certificate",
+                  isFluidWidth: true,
+                  src: `${certificate}`,
+                },
+                largeImage: {
+                  src: `${certificate}`,
+                  width: 1620,
+                  height: 1214,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.certificateIMG,
+              }}
             />
           </div>
         );
@@ -182,12 +232,21 @@ const renderCertificatesList = (certificatesData, is_certified) => {
             <span className="mx-3 text-warning">Pending</span>
           )}
         </span>
-        <img
-          className={style.certificateIMG}
-          src={certificatesData[0]}
-          alt="&nbsp; Valid ID"
-          width={350}
-          height={200}
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: "Certificate",
+              isFluidWidth: true,
+              src: `${certificatesData[0]}`,
+            },
+            largeImage: {
+              src: `${certificatesData[0]}`,
+              width: 1620,
+              height: 1214,
+            },
+            enlargedImagePosition: "over",
+            enlargedImageClassName: style.certificateIMG,
+          }}
         />
       </div>
     );
@@ -368,14 +427,21 @@ const CertificationContainerCard = ({ link, certificationInfo }) => {
                 <span className={style.infoLabel}>NBI / POLICE CLEARANCE</span>
                 {certificationInfo.workerData[0].verificationData[0]
                   .nbi_brgy_clearance ? (
-                  <img
-                    src={
-                      certificationInfo.workerData[0].verificationData[0]
-                        .nbi_brgy_clearance
-                    }
-                    alt="&nbsp; NBI/Brgy Clearance"
-                    width={350}
-                    height={200}
+                  <ReactImageMagnify
+                    {...{
+                      smallImage: {
+                        alt: "NBI/Brgy Clearance",
+                        isFluidWidth: true,
+                        src: `${certificationInfo.workerData[0].verificationData[0].nbi_brgy_clearance}`,
+                      },
+                      largeImage: {
+                        src: `${certificationInfo.workerData[0].verificationData[0].nbi_brgy_clearance}`,
+                        width: 1620,
+                        height: 1214,
+                      },
+                      enlargedImagePosition: "over",
+                      enlargedImageClassName: style.certificateIMG,
+                    }}
                   />
                 ) : (
                   <span className={style.info}>No Data</span>

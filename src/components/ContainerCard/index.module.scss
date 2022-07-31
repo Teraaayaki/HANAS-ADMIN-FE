@@ -110,3 +110,7 @@
   flex: 1;
   @include flex(center, none, row, none);
 }
+
+.IDIMG {
+  object-fit: contain;
+}
