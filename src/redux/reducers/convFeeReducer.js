@@ -19,11 +19,6 @@ const convFeeReducer = (state = INITIAL_STATE, action) => {
           ...state,
           error: action.payload,
         };
-      case ConvFeeActions.CONV_FEE_SUCCESS:
-        return {
-          ...state,
-          success: true,
-        };
       case ConvFeeActions.CONV_FEE_SUCCESS_MESSAGE:
         return {
           ...state,
@@ -33,9 +28,14 @@ const convFeeReducer = (state = INITIAL_STATE, action) => {
       case ConvFeeActions.CONV_FEE_RESET_SUCCESS_MESSAGE:
         return {
           ...state,
-          success: null,
+          success: false,
           successMessage: '',
         };
+      case ConvFeeActions.CONV_FEE_RESET_ERROR:
+        return {
+          ...state,
+          error: null,
+        }
       default:
         return state;
     }

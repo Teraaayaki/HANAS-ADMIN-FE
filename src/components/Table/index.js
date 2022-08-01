@@ -2,12 +2,13 @@ import React, { useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { BiSortUp } from 'react-icons/bi';
+import Button from 'react-bootstrap/Button';
+import { BiSortUp, BiMessageSquareCheck} from 'react-icons/bi';
 import { FaFilter } from 'react-icons/fa';
 
 import style from './index.module.scss';
 
-const DataTable = ({ tableTitle, headerNames, renderData, sortItems, filterItems }) => {
+const DataTable = ({ tableTitle, headerNames, renderData, sortItems, filterItems, buttonOverdue }) => {
 
   return (
     <Card className={style.card}>
@@ -53,6 +54,7 @@ const DataTable = ({ tableTitle, headerNames, renderData, sortItems, filterItems
             </Dropdown.Menu>
           </Dropdown>
           }
+          {buttonOverdue === undefined ? '': <Button variant="danger" size="sm" onClick={buttonOverdue}> <BiMessageSquareCheck className={style.checkIcon}/> Check Overdue</Button>}
         </div>
       </Card.Header>
       <Card.Body className={style.cardBody}>

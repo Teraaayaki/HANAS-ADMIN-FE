@@ -13,6 +13,8 @@ const StatusBadge = ({ status }) => {
         return style.green;
       case "UNVERIFIED":
       case "REJECTED":
+      case "OVERDUE":
+      return style.red;
       case "DEACTIVATED":
         return style.red;
       case "PAID":

@@ -50,6 +50,10 @@
   @include text-style($color-gray-1, $font-size-sm, $font-weight-regular);
 }
 
+.checkIcon {
+  @include text-style($color-white-1, $font-size-lg, $font-weight-regular);
+}
+
 .cardBody {
   padding: 0px;
   overflow: auto;
