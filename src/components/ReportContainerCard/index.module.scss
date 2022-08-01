@@ -103,3 +103,7 @@
 .info {
   @include text-style($color-black-1, $font-size-lg, $font-weight-semibold);
 }
+
+.reportIMG {
+  object-fit: contain;
+}

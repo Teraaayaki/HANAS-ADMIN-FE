@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
+import ReactImageMagnify from "react-image-magnify";
 
 import {
   resolveReport,
@@ -21,51 +22,59 @@ const renderAttachedImages = (imageData) => {
   if (imageData !== undefined) {
     last = imageData.length - 1;
   }
+  {
+    console.log("Imagedata", imageData);
+  }
   if (last > -1) {
-    if (last < 3) {
-      return imageData.map((image, idx) => {
-        if (idx < 1) {
+    return imageData.map((image, idx) => {
+      if (idx < 1) {
+        return (
+          <div key={idx} className={style.container}>
+            <span className={style.infoLabel}>ATTACHED IMAGES</span>
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Valid ID",
+                  isFluidWidth: true,
+                  src: `${image}`,
+                },
+                largeImage: {
+                  src: `${image}`,
+                  width: 1600,
+                  height: 1200,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.ReportIMG,
+              }}
+            />
+          </div>
+        );
+      } else {
+        if (idx <= 2) {
           return (
             <div key={idx} className={style.container}>
-              <span className={style.infoLabel}>ATTACHED IMAGES</span>
-              <img
-                src={image}
-                alt="&nbsp; Attached Upload"
-                width={350}
-                height={200}
+              <span className={`${style.infoLabel} invisible`}>_</span>
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: "Valid ID",
+                    isFluidWidth: true,
+                    src: `${image}`,
+                  },
+                  largeImage: {
+                    src: `${image}`,
+                    width: 1600,
+                    height: 1200,
+                  },
+                  enlargedImagePosition: "over",
+                  enlargedImageClassName: style.ReportIMG,
+                }}
               />
             </div>
           );
-        } else {
-          if (idx <= last) {
-            return (
-              <div key={idx} className={style.container}>
-                <span className={`${style.infoLabel} invisible`}>_</span>
-                <img
-                  src={image}
-                  alt="&nbsp; Attached Upload"
-                  width={350}
-                  height={200}
-                />
-              </div>
-            );
-          }
         }
-      });
-    } else {
-      return imageData.map((image, idx) => {
-        if (idx > 2 && idx <= last) {
-          <div key={idx} className={style.container}>
-            <img
-              src={image}
-              alt="&nbsp; Attached Upload"
-              width={350}
-              height={200}
-            />
-          </div>;
-        }
-      });
-    }
+      }
+    });
   } else {
     return (
       <div className={style.container}>
@@ -86,11 +95,21 @@ const renderAttachedImages2 = (imageData) => {
       if (idx >= 3) {
         return (
           <div key={idx} className={style.container}>
-            <img
-              src={image}
-              alt="&nbsp; Attached Upload2"
-              width={350}
-              height={200}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Valid ID",
+                  isFluidWidth: true,
+                  src: `${image}`,
+                },
+                largeImage: {
+                  src: `${image}`,
+                  width: 1600,
+                  height: 1200,
+                },
+                enlargedImagePosition: "over",
+                enlargedImageClassName: style.ReportIMG,
+              }}
             />
           </div>
         );
