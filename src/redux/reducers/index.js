@@ -8,6 +8,7 @@ import reportReducer from "./reportReducer";
 import overviewReducer from "./overviewReducer";
 import certificationReducer from "./certificationReducer";
 import convFeeReducer from "./convFeeReducer";
+import achievementReducer from "./achievementReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   report: reportReducer,
   overview: overviewReducer,
   convenience: convFeeReducer,
+  achievement: achievementReducer,
 });

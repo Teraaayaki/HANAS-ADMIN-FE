@@ -20,6 +20,7 @@ import PaginatedTransactionFeeList from "../pages/transactionFee/transactionFeeL
 import ReportDetail from "../pages/report/ReportDetail";
 import PaginatedCertificationList from "../pages/certification/CertificationList";
 import CertificationDetail from "../pages/certification/CertificationDetail";
+import PaginatedAchievementsList from "../pages/achievements/AchievementsList";
 
 const Routes = () => {
   return (
@@ -119,6 +120,13 @@ const Routes = () => {
         pageTitle="Convenience Fee"
         exact
         component={PaginatedTransactionFeeList}
+      ></AdminRoute>
+
+      <AdminRoute
+        path="/achievements"
+        pageTitle="Achievements"
+        exact
+        component={PaginatedAchievementsList}
       ></AdminRoute>
     </Switch>
   );
