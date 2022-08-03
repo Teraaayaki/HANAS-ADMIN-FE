@@ -47,99 +47,110 @@ const renderMyServicesList = (myServicesData) => {
 const renderValidIDList = (validIDData, is_verified) => {
   let last = -1;
   if (validIDData !== undefined) {
-    last = validIDData.length - 1;
-  }
-  if (last > 0) {
-    return validIDData.map((valid_id, idx) => {
-      if (idx < last) {
-        return (
-          <div className={style.container}>
-            <span className={style.infoLabel}>
-              VALID ID PRESENTED
-              {is_verified ? (
-                <span className="mx-3 text-success">Verified</span>
-              ) : (
-                <span className="mx-3 text-danger">Not Verified</span>
-              )}
-            </span>
-            <ReactImageMagnify
-              {...{
-                smallImage: {
-                  alt: "Valid ID",
-                  isFluidWidth: true,
-                  src: `${valid_id}`,
-                },
-                largeImage: {
-                  src: `${valid_id}`,
-                  width: 1620,
-                  height: 1214,
-                },
-                enlargedImagePosition: "over",
-                enlargedImageClassName: style.IDIMG,
-              }}
-            />
-          </div>
-        );
-      } else {
-        return (
-          <div className={style.container}>
-            <span className={`${style.infoLabel} invisible`}>_</span>
-            <ReactImageMagnify
-              {...{
-                smallImage: {
-                  alt: "Valid ID",
-                  isFluidWidth: true,
-                  src: `${valid_id}`,
-                },
-                largeImage: {
-                  src: `${valid_id}`,
-                  width: 1620,
-                  height: 1214,
-                },
-                enlargedImagePosition: "over",
-                enlargedImageClassName: style.IDIMG,
-              }}
-            />
-            <img
-              className={style.IDIMG}
-              src={valid_id}
-              alt="&nbsp; Valid ID"
-              width={350}
-              height={200}
-            />
-          </div>
-        );
-      }
-    });
-  } else if (last > -1) {
-    return (
-      <div className={style.container}>
-        <span className={style.infoLabel}>
-          VALID ID PRESENTED
-          {is_verified ? (
-            <span className="mx-3 text-success">Verified</span>
-          ) : (
+    last = validIDData.valid_id.length - 1;
+
+    if (last > 0) {
+      return validIDData.valid_id.map((valid_id, idx) => {
+        if (idx < last) {
+          return (
+            <div className={style.container}>
+              <span className={style.infoLabel}>
+                VALID ID PRESENTED
+                {is_verified ? (
+                  <span className="mx-3 text-success">Verified</span>
+                ) : (
+                  <span className="mx-3 text-danger">Not Verified</span>
+                )}
+              </span>
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: "Valid ID",
+                    isFluidWidth: true,
+                    src: `${valid_id}`,
+                  },
+                  largeImage: {
+                    src: `${valid_id}`,
+                    width: 1620,
+                    height: 1214,
+                  },
+                  enlargedImagePosition: "over",
+                  enlargedImageClassName: style.IDIMG,
+                }}
+              />
+            </div>
+          );
+        } else {
+          return (
+            <div className={style.container}>
+              <span className={`${style.infoLabel} invisible`}>_</span>
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: "Valid ID",
+                    isFluidWidth: true,
+                    src: `${valid_id}`,
+                  },
+                  largeImage: {
+                    src: `${valid_id}`,
+                    width: 1620,
+                    height: 1214,
+                  },
+                  enlargedImagePosition: "over",
+                  enlargedImageClassName: style.IDIMG,
+                }}
+              />
+              <img
+                className={style.IDIMG}
+                src={valid_id}
+                alt="&nbsp; Valid ID"
+                width={350}
+                height={200}
+              />
+            </div>
+          );
+        }
+      });
+    } else if (last > -1) {
+      return (
+        <div className={style.container}>
+          <span className={style.infoLabel}>
+            VALID ID PRESENTED
+            {is_verified ? (
+              <span className="mx-3 text-success">Verified</span>
+            ) : (
+              <span className="mx-3 text-danger">Not Verified</span>
+            )}
+          </span>
+          <ReactImageMagnify
+            {...{
+              smallImage: {
+                alt: "Valid ID",
+                isFluidWidth: true,
+                src: `${validIDData.valid_id}`,
+              },
+              largeImage: {
+                src: `${validIDData.valid_id}`,
+                width: 1620,
+                height: 1214,
+              },
+              enlargedImagePosition: "over",
+              enlargedImageClassName: style.IDIMG,
+            }}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className={style.container}>
+          <span className={style.infoLabel}>
+            VALID ID PRESENTED
             <span className="mx-3 text-danger">Not Verified</span>
-          )}
-        </span>
-        <ReactImageMagnify
-          {...{
-            smallImage: {
-              alt: "Valid ID",
-              isFluidWidth: true,
-              src: `${validIDData}`,
-            },
-            largeImage: {
-              src: `${validIDData}`,
-              width: 1620,
-              height: 1214,
-            },
-            enlargedImagePosition: "over",
-            enlargedImageClassName: style.IDIMG,
-          }}
-        />
-      </div>
-    );
+          </span>
+          <span className={style.info}>No Data</span>
+        </div>
+      );
+    }
   } else {
     return (
       <div className={style.container}>
@@ -261,14 +272,15 @@ const UserContainerCard = ({ link, userInfo }) => {
             {link === "skilledworkers" ? (
               <section className={style.userDetailRow}>
                 {renderValidIDList(
-                  userInfo.verificationData[0].valid_id,
+                  userInfo.verificationData[0],
                   userInfo.is_verified
                 )}
                 <div className={style.container}>
                   <span className={style.infoLabel}>
                     NBI / POLICE CLEARANCE
                   </span>
-                  {userInfo.verificationData[0].nbi_brgy_clearance ? (
+                  {userInfo.verificationData[0] !== undefined &&
+                  userInfo.verificationData[0].nbi_brgy_clearance ? (
                     <ReactImageMagnify
                       {...{
                         smallImage: {

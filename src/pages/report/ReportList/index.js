@@ -48,7 +48,7 @@ const renderReportList = (reportListData) => {
             </span>
           </Link>
         </td>
-        {report.reported_user && report.reportedUserData[0] !== undefined ? (
+        {/* {report.reported_user && report.reportedUserData[0] !== undefined ? (
           <td className={style.tableData}>
             <img
               className={style.profilePic}
@@ -74,7 +74,7 @@ const renderReportList = (reportListData) => {
           <td className={style.tableData}>
             <span className={style.truncate}>N/A</span>
           </td>
-        )}
+        )} */}
         <td className={style.tableData}>
           <span>{moment(report.createdAt).format("LL")}</span> <br />
           <span className={style.time}>
@@ -93,7 +93,7 @@ const renderReportList = (reportListData) => {
 };
 
 const ReportList = ({ itemsPerPage }) => {
-  const headerNames = ["Concern", "Reporter", "Reportee", "Date", "Status"];
+  const headerNames = ["Concern", "Reporter", "Date Submitted", "Status"];
 
   const handleSortReport = (e) => {
     dispatch(sortReport(e));
