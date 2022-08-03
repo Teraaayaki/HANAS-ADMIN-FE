@@ -1,4 +1,6 @@
 @use "../../../styles/tableGlobalStyles" as *;
+@use '../../../styles/variables' as *;
+@use '../../../styles/globalMixins' as *;
 
 .paginateContainer {
   display: flex;
@@ -8,4 +10,29 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+}
+.bold {
+  font-weight: bold;
+}
+
+.conditionButtons {
+  background-color: transparent;
+  border: none;
+
+  @include flex(none, center, row, 10px);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.conditionsText {
+  @include text-style($color-black-1, $font-size-md, $font-weight-regular);
+}
+
+.sortIcon {
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-regular);
 }

@@ -28,7 +28,7 @@ const achievementReducer = (state = INITIAL_STATE, action) => {
       case AchievementActions.ACHIEVEMENT_RESET_SUCCESS_MESSAGE:
         return {
           ...state,
-          success: false,
+          success: null,
           successMessage: '',
         };
       case AchievementActions.ACHIEVEMENT_RESET_ERROR:

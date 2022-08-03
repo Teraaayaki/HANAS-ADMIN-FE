@@ -10,6 +10,19 @@ const achievementAPI = {
     return API.request(options);
   },
 
+  addToAchievement: (DATA) => {
+    const options = {
+      method: 'PATCH',
+      url: '/admin/add-to-achievement',
+      data: {
+        item : DATA.itemClaimed,
+        _id: DATA.id
+      }
+    };
+
+    return API.request(options);
+  },
+
 };
 
 export default achievementAPI;
