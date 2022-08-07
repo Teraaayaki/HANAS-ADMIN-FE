@@ -21,6 +21,7 @@ const AchievementList = ({ itemsPerPage }) => {
   const [show, setShow] = useState(false);
   const [selectedId, setSelectedId] = useState('');
   const [itemClaimed, setItemClaimed] = useState('');
+  const [itemName, setItemname] = useState('');
 
   const { achievementListData, success, successMessage, error } = useSelector((state) => state.achievement);
 
@@ -63,34 +64,34 @@ const AchievementList = ({ itemsPerPage }) => {
 
   const itemArray = [
     {
-      name: 'First Item',
+      name: 'First Item (5 Kilos Rice)',
       event_key: 'first',
-      onClick: () => (setItemClaimed('first_item_claimed'))
+      onClick: () => {(setItemClaimed('first_item_claimed')); setItemname('First Item (5 Kilos Rice)')}
     },
     {
-      name: 'Second Item',
+      name: 'Second Item (PHP300 Worth of Gas)',
       event_key: 'second',
-      onClick: () => (setItemClaimed('second_item_claimed'))
+      onClick: () => {(setItemClaimed('second_item_claimed')); setItemname('Second Item (PHP300 Worth of Gas)')}
     },
     {
-      name: 'Third Item',
+      name: 'Third Item (PHP450 Worth of Groceries)',
       event_key: 'third',
-      onClick: () => (setItemClaimed('third_item_claimed'))
+      onClick: () => {(setItemClaimed('third_item_claimed')); setItemname('Third Item (PHP450 Worth of Groceries)')}
     },
     {
-      name: 'Fourth Item',
+      name: 'Fourth Item (PHP600 GCash Voucher)',
       event_key: 'fourth',
-      onClick: () => (setItemClaimed('fourth_item_claimed'))
+      onClick: () => {(setItemClaimed('fourth_item_claimed')); setItemname('Fourth Item (PHP600 GCash Voucher)')}
     },
     {
-      name: 'Fifth Item',
+      name: 'Fifth Item (1 LPG Tank)',
       event_key: 'fifth',
-      onClick: () => (setItemClaimed('fifth_item_claimed'))
+      onClick: () => {(setItemClaimed('fifth_item_claimed')); setItemname('Fifth Item (1 LPG Tank)')}
     },
     {
-      name: 'Sixth Item',
+      name: 'Sixth Item (Mystery)',
       event_key: 'sixth',
-      onClick: () => (setItemClaimed('sixth_item_claimed'))
+      onClick: () => {(setItemClaimed('sixth_item_claimed')); setItemname('Sixth Item (Mystery)')}
     },
   ]
 
@@ -113,7 +114,6 @@ const AchievementList = ({ itemsPerPage }) => {
             </td>
             <td className={style.tableData}>
                 <Button variant="success" onClick={ () => {setSelectedId(achievement._id); handleOpen()}}>Claim Item</Button>{" "}
-                <Button variant="secondary">Earn Points</Button>{" "}
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>Claim Item</Modal.Title>
@@ -127,7 +127,7 @@ const AchievementList = ({ itemsPerPage }) => {
                         id="dropdown-basic"
                       >
                         <BiSortUp className={style.sortIcon} />
-                        <span className={style.conditionsText}>Item</span>
+                        <span className={style.conditionsText}>Choose an Item</span>
                       </Dropdown.Toggle>
                       <Dropdown.Menu className={style.conditionMenu}>
                         { itemArray.map( (item) => {
@@ -137,6 +137,7 @@ const AchievementList = ({ itemsPerPage }) => {
                         })}
                       </Dropdown.Menu>
                     </Dropdown><br/>
+                    <h5>Item about to Claim: <br/>{itemName}</h5>
                     Are you sure you want to claim the item for this user?
                   </Modal.Body>
                   <Modal.Footer>

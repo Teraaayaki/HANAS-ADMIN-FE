@@ -3,6 +3,7 @@ import { AchievementActions } from "../actions/types";
 const INITIAL_STATE = {
   achievementListData: [],
   error: null,
+  errorMessage: '',
   success: null,
   successMessage: '',
 };
@@ -18,6 +19,7 @@ const achievementReducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           error: action.payload,
+          errorMessage: '',
         };
       case AchievementActions.ACHIEVEMENT_SUCCESS_MESSAGE:
         return {
@@ -35,6 +37,7 @@ const achievementReducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           error: null,
+          errorMessage: '',
         };
       default:
         return state;
