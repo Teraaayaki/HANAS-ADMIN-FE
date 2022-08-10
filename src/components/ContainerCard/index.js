@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card, Button, Modal, Image } from "react-bootstrap";
+import { Card, Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
@@ -12,18 +12,23 @@ import {
 } from "../../redux/actions/verificationActions.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Zoom from "react-img-zoom";
+import { useParams } from "react-router-dom";
 import ReactImageMagnify from "react-image-magnify";
+import {
+  getSpecificVerification,
+} from "../../../src/redux/actions/verificationActions.js";
 import style from "./index.module.scss";
 
 const ContainerCard = ({ link, userInfo }) => {
-  console.log("USER INFO", userInfo);
+  
+  let { requestID } = useParams();
 
   const [show, setShow] = useState(false);
   const [showReject, setShowReject] = useState(false);
   const { success, error, successMessage } = useSelector(
     (state) => state.verification
   );
+
 
   const handleCloseAccept = () => setShow(false);
   const handleShowAccept = () => setShow(true);
@@ -72,6 +77,10 @@ const ContainerCard = ({ link, userInfo }) => {
       });
     }
   }, [error]);
+
+  useEffect(() => {
+    dispatch(getSpecificVerification(requestID));
+  }, [dispatch, requestID]);
 
   if (!userInfo) {
     return (
@@ -140,7 +149,7 @@ const ContainerCard = ({ link, userInfo }) => {
 
           {link === "verification-requests" ? (
             <div>
-              {userInfo[0].verify_status === "Pending" ? (
+              {userInfo[0]?.verify_status === "Pending" ? (
                 <>
                   <Button
                     className={style.acceptButton}

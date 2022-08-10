@@ -20,6 +20,10 @@ const VerificationRequestDetail = () => {
     dispatch(getSpecificVerification(requestID));
   }, [dispatch, requestID]);
 
+  useEffect(() => {
+    console.log(verificationData);
+  }, [verificationData]);
+
   return (
     <div className="main-content">
       <ContainerCard
