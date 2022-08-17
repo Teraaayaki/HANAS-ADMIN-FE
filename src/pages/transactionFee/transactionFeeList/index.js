@@ -112,7 +112,6 @@ const handlePayment = (amount, id) => {
     return convFeeListData.map((transaction, idx) => {
       return (
         <>
-          
           <tr
             key={transaction._id}
             className={`${style.tableDataRow} ${style.clickable}`}
@@ -155,7 +154,6 @@ const handlePayment = (amount, id) => {
             </td>
           </tr>
         </>
-        
       );
     });
   };
