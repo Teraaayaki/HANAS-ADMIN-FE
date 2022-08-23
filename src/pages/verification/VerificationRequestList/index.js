@@ -18,7 +18,7 @@ import {
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import defaultProf from "../../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
 /*bootstrap module for easier styling for the pagination*/
@@ -31,8 +31,11 @@ const renderVerificationRequestList = (verificationData, handleOpen) => {
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={verificationData.workerData[0].profile_pic}
-            alt="&nbsp; Profile Pic"
+            src={
+              verificationData.workerData[0].profile_pic === "none"
+                ? defaultProf
+                : verificationData.workerData[0].profile_pic
+            }
           />
           <Link to={`/verification-requests/${verificationData.user_id}`}>
             <span className={style.truncate}>Request for Verification</span>
@@ -70,56 +73,68 @@ const VerificationRequestList = ({ itemsPerPage }) => {
     "Request Status",
   ];
 
-
   const handleSortVerification = (e) => {
     dispatch(sortVerification(e));
   };
 
   const handleFilterVerification = (e) => {
     dispatch(filterVerification(e));
-  }
+  };
 
   const sortItems = [
     {
-      name: 'Default',
-      event_key: 'all',
-      onClick: () => { dispatch(handleSortVerification('all'))}
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleSortVerification("all"));
+      },
     },
     {
-      name: 'Name (A-Z)',
-      event_key: 'name',
-      onClick: () => { dispatch(handleSortVerification('name'))}
+      name: "Name (A-Z)",
+      event_key: "name",
+      onClick: () => {
+        dispatch(handleSortVerification("name"));
+      },
     },
     {
-      name: 'Date of Account Creation',
-      event_key: 'date',
-      onClick: () => { dispatch(handleSortVerification('date'))}
-    }
+      name: "Date of Account Creation",
+      event_key: "date",
+      onClick: () => {
+        dispatch(handleSortVerification("date"));
+      },
+    },
   ];
 
   const filterItems = [
     {
-      name: 'Default',
-      event_key: 'all',
-      onClick: () => { dispatch(handleSortVerification('all'))}
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleSortVerification("all"));
+      },
     },
     {
-      name: 'Pending',
-      event_key: 'pending',
-      onClick: () => { dispatch(handleFilterVerification('Pending'))}
+      name: "Pending",
+      event_key: "pending",
+      onClick: () => {
+        dispatch(handleFilterVerification("Pending"));
+      },
     },
     {
-      name: 'Accepted',
-      event_key: 'accepted',
-      onClick: () => { dispatch(handleFilterVerification('Accepted'))}
+      name: "Accepted",
+      event_key: "accepted",
+      onClick: () => {
+        dispatch(handleFilterVerification("Accepted"));
+      },
     },
     {
-      name: 'Rejected',
-      event_key: 'rejected',
-      onClick: () => { dispatch(handleFilterVerification('Rejected'))}
+      name: "Rejected",
+      event_key: "rejected",
+      onClick: () => {
+        dispatch(handleFilterVerification("Rejected"));
+      },
     },
-  ]
-    
+  ];
 
   const dispatch = useDispatch();
 
@@ -211,7 +226,6 @@ const VerificationRequestList = ({ itemsPerPage }) => {
         </Modal.Footer>
       </Modal>
 
-
       <div className="main-content">
         <DataTable
           tableTitle="All Requests"
@@ -250,14 +264,7 @@ const VerificationRequestList = ({ itemsPerPage }) => {
 };
 
 const PaginatedVerificationRequestList = () => {
-  return (
-    <div>
-      {
-          <VerificationRequestList itemsPerPage={10} />
-      }
-    </div>
-    
-  );
-}
+  return <div>{<VerificationRequestList itemsPerPage={10} />}</div>;
+};
 
 export default PaginatedVerificationRequestList;

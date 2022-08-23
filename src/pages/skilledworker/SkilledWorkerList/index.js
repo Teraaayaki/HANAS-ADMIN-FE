@@ -15,6 +15,7 @@ import {
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
+import defaultProf from "../../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
 const renderMyServicesList = (myServicesData) => {
@@ -38,13 +39,16 @@ const renderMyServicesList = (myServicesData) => {
 
 const renderSkilledWorkersList = (workerListData) => {
   return workerListData.map((skilledworker, idx) => {
-    console.log("SKILLED WORKER DATA", skilledworker);
     return (
       <tr key={idx} className={style.tableDataRow}>
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={skilledworker.profile_pic}
+            src={
+              skilledworker.profile_pic === "none"
+                ? defaultProf
+                : skilledworker.profile_pic
+            }
             alt="&nbsp; Profile Pic"
           />
           <Link to={`/skilledworkers/${skilledworker._id}`}>

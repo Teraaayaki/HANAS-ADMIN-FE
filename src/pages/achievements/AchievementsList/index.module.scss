@@ -1,6 +1,6 @@
 @use "../../../styles/tableGlobalStyles" as *;
-@use '../../../styles/variables' as *;
-@use '../../../styles/globalMixins' as *;
+@use "../../../styles/variables" as *;
+@use "../../../styles/globalMixins" as *;
 
 .paginateContainer {
   display: flex;
@@ -35,4 +35,8 @@
 
 .sortIcon {
   @include text-style($color-gray-1, $font-size-lg, $font-weight-regular);
+}
+
+.claimedItem {
+  background-color: gray;
 }

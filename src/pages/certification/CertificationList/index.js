@@ -15,7 +15,7 @@ import {
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
-
+import defaultProf from "../../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
 const renderRatingText = (feedbackData) => {
@@ -36,7 +36,7 @@ const renderCertificationList = (certificationListData) => {
             src={
               certification.workerData[0].profile_pic
                 ? certification.workerData[0].profile_pic
-                : "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
+                : defaultProf
             }
             alt="&nbsp; Profile Pic"
           />

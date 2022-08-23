@@ -14,6 +14,7 @@ import {
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
+import defaultProf from "../../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 import { Button } from "react-bootstrap";
 
@@ -22,15 +23,13 @@ const renderReportList = (reportListData) => {
     return (
       <tr key={idx} className={style.tableDataRow}>
         <td className={style.tableData}>
-          <Link to={`/user-reports/${report._id}`}>
-            <span>{report.concern}</span>
-          </Link>
-        </td>
-
-        <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={report.reporterData[0].profile_pic}
+            src={
+              report.reporterData[0].profile_pic === "none"
+                ? defaultProf
+                : report.reporterData[0].profile_pic
+            }
             alt="&nbsp; Profile Pic"
           />
           <Link
@@ -46,6 +45,11 @@ const renderReportList = (reportListData) => {
               {report.reporterData[0].family_name + " "}
               {report.reporterData[0].suffix}
             </span>
+          </Link>
+        </td>
+        <td className={style.tableData}>
+          <Link to={`/user-reports/${report._id}`}>
+            <span>{report.concern}</span>
           </Link>
         </td>
         {/* {report.reported_user && report.reportedUserData[0] !== undefined ? (
@@ -93,7 +97,7 @@ const renderReportList = (reportListData) => {
 };
 
 const ReportList = ({ itemsPerPage }) => {
-  const headerNames = ["Concern", "Reporter", "Date Submitted", "Status"];
+  const headerNames = ["Reporter", "Concern", "Date Submitted", "Status"];
 
   const handleSortReport = (e) => {
     dispatch(sortReport(e));

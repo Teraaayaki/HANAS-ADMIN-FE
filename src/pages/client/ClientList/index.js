@@ -15,6 +15,7 @@ import {
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
 import { GoKebabVertical } from "react-icons/go";
+import defaultProf from "../../../assets/Logo/defaultProf.jpg";
 
 import style from "./index.module.scss";
 
@@ -25,8 +26,9 @@ const renderClientList = (clientListData) => {
         <td className={style.tableData}>
           <img
             className={style.profilePic}
-            src={client.profile_pic}
-            alt="&nbsp; Profile Pic"
+            src={
+              client.profile_pic === "none" ? defaultProf : client.profile_pic
+            }
           />
           <Link to={`/clients/${client._id}`}>
             <span className={style.truncate}>{client.name}</span>

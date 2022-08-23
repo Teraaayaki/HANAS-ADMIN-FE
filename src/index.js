@@ -18,7 +18,6 @@ import reducers from './redux/reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-
 const persistConfig = {
   key: 'root',
   storage,
@@ -28,7 +27,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk)), );
 
 
-  let persistor = persistStore(store);
+let persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
