@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
@@ -66,7 +66,7 @@ const ForgotPass = () => {
         onClose: () => dispatch(resetSuccess()),
       });
     }
-  }, [dispatch, error, successMessage]);
+  }, [dispatch, success, successMessage]);
 
   useEffect(() => {
     if (error) {
@@ -81,7 +81,7 @@ const ForgotPass = () => {
         onClose: () => dispatch(resetError()),
       });
     }
-  }, [dispatch, success, successMessage]);
+  }, [dispatch, error]);
 
   return (
     <div className={style.formContainer}>
@@ -187,9 +187,9 @@ const ForgotPass = () => {
               }
             />
             <Form.Text className={style.forgotPassword}>
-              Go Back to Login{" "}
+              Go Back to{" "}
               <Link to="/login" className={style.clickHereLink}>
-                Click Here
+                Login
               </Link>
             </Form.Text>
           </Form.Group>
