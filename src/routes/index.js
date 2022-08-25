@@ -21,6 +21,7 @@ import ReportDetail from "../pages/report/ReportDetail";
 import PaginatedCertificationList from "../pages/certification/CertificationList";
 import CertificationDetail from "../pages/certification/CertificationDetail";
 import PaginatedAchievementsList from "../pages/achievements/AchievementsList";
+import ForgotPass from "../pages/ForgotPass";
 
 const Routes = () => {
   return (
@@ -30,6 +31,7 @@ const Routes = () => {
       </Route>
 
       <AuthRoute path="/login" exact component={Login}></AuthRoute>
+      <AuthRoute path="/forgot-password" exact component={ForgotPass}></AuthRoute>
 
       <AdminRoute
         path="/overview"

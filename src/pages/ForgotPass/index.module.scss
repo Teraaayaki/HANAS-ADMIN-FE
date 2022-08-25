@@ -1,0 +1,101 @@
+@use "../../styles/variables" as *;
+@use "../../styles/globalMixins" as *;
+
+.formContainer {
+  background-color: $color-black-1;
+  height: 100%;
+
+  @include flex(center, center, row, none);
+}
+
+.form {
+  background-color: $color-white-1;
+  border-radius: 8px;
+  width: 380px;
+  height: 585px;
+  padding: 50px 30px;
+
+  @include flex(none, none, column, 35px);
+}
+
+.logo {
+  width: 150px;
+}
+
+.adminText {
+  margin-bottom: 30px;
+  opacity: 0.7;
+
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-bold);
+}
+
+.formTitle {
+  @include text-style($color-black-1, $font-size-page-title, $font-weight-bold);
+}
+
+.formMessage {
+  @include text-style($color-gray-1, $font-size-md, $font-weight-regular);
+}
+
+.inputLabels {
+  @include text-style($color-gray-1, $font-size-sm, $font-weight-bold);
+}
+
+.inputFields {
+  height: 40px;
+  border: 1px solid $color-white-2;
+  border-radius: 8px;
+  opacity: 0.8;
+
+  @include text-style($color-gray-2, $font-size-md, $font-weight-regular);
+}
+
+.faEyeIcon {
+  position: absolute;
+  top: 41.5px;
+  right: 12.5px;
+  cursor: pointer;
+
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-regular);
+
+  &:hover {
+    color: $color-gray-2;
+  }
+}
+
+.adjustedFaEyeIcon {
+  position: absolute;
+  top: 41.5px;
+  right: 35px;
+  cursor: pointer;
+
+  @include text-style($color-gray-1, $font-size-lg, $font-weight-regular);
+
+  &:hover {
+    color: $color-gray-2;
+  }
+}
+
+.forgotPassword {
+  @include text-style($color-gray-1, $font-size-sm, $font-weight-regular);
+}
+
+.clickHereLink {
+  text-decoration: none;
+  color: $hanas-color;
+
+  &:hover {
+    color: $hanas-hover-color;
+  }
+}
+
+.loginButton {
+  background-color: $hanas-color;
+  border: none;
+  height: 48px;
+  font-size: $font-size-md;
+
+  &:hover {
+    background-color: $hanas-hover-color;
+  }
+}
