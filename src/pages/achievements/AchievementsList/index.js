@@ -87,7 +87,10 @@ const AchievementList = ({ itemsPerPage }) => {
         setItemClaimed("first_item_claimed");
         setItemname("First Item (5 Kilos Rice)");
       },
-      itemClaimed: achievementCheckData.first_item_claimed,
+      itemClaimed:
+        achievementCheckData?.first_item_claimed === undefined
+          ? false
+          : achievementCheckData.first_item_claimed,
     },
     {
       item_number: "Second Item",
@@ -97,7 +100,10 @@ const AchievementList = ({ itemsPerPage }) => {
         setItemClaimed("second_item_claimed");
         setItemname("Second Item (PHP300 Worth of Gas)");
       },
-      itemClaimed: achievementCheckData.second_item_claimed,
+      itemClaimed:
+        achievementCheckData?.second_item_claimed === undefined
+          ? false
+          : achievementCheckData.second_item_claimed,
     },
     {
       item_number: "Third Item",
@@ -107,7 +113,10 @@ const AchievementList = ({ itemsPerPage }) => {
         setItemClaimed("third_item_claimed");
         setItemname("Third Item (PHP450 Worth of Groceries)");
       },
-      itemClaimed: achievementCheckData.third_item_claimed,
+      itemClaimed:
+        achievementCheckData?.third_item_claimed === undefined
+          ? false
+          : achievementCheckData.third_item_claimed,
     },
     {
       item_number: "Fourth Item",
@@ -117,7 +126,10 @@ const AchievementList = ({ itemsPerPage }) => {
         setItemClaimed("fourth_item_claimed");
         setItemname("Fourth Item (PHP600 GCash Voucher)");
       },
-      itemClaimed: achievementCheckData.fourth_item_claimed,
+      itemClaimed:
+        achievementCheckData?.fourth_item_claimed === undefined
+          ? false
+          : achievementCheckData.fourth_item_claimed,
     },
     {
       item_number: "Fifth Item",
@@ -127,7 +139,10 @@ const AchievementList = ({ itemsPerPage }) => {
         setItemClaimed("fifth_item_claimed");
         setItemname("Fifth Item (1 LPG Tank)");
       },
-      itemClaimed: achievementCheckData.fifth_item_claimed,
+      itemClaimed:
+        achievementCheckData?.fifth_item_claimed === undefined
+          ? false
+          : achievementCheckData.fifth_item_claimed,
     },
     {
       item_number: "Sixth Item",
@@ -137,13 +152,15 @@ const AchievementList = ({ itemsPerPage }) => {
         setItemClaimed("sixth_item_claimed");
         setItemname("Sixth Item (Mystery)");
       },
-      itemClaimed: achievementCheckData.sixth_item_claimed,
+      itemClaimed:
+        achievementCheckData?.sixth_item_claimed === undefined
+          ? false
+          : achievementCheckData.sixth_item_claimed,
     },
   ];
 
   const renderAchievementList = (achievementListData) => {
     return achievementListData.map((achievement, idx) => {
-      console.log("ACHIEVEMENT", achievement);
       return (
         <tr
           key={achievement._id}
