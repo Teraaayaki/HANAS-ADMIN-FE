@@ -14,13 +14,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import ReactImageMagnify from "react-image-magnify";
-import {
-  getSpecificVerification,
-} from "../../../src/redux/actions/verificationActions.js";
+import { getSpecificVerification } from "../../../src/redux/actions/verificationActions.js";
+import defaultProf from "../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
 const ContainerCard = ({ link, userInfo }) => {
-  
   let { requestID } = useParams();
 
   const [show, setShow] = useState(false);
@@ -28,7 +26,6 @@ const ContainerCard = ({ link, userInfo }) => {
   const { success, error, successMessage } = useSelector(
     (state) => state.verification
   );
-
 
   const handleCloseAccept = () => setShow(false);
   const handleShowAccept = () => setShow(true);
@@ -177,7 +174,11 @@ const ContainerCard = ({ link, userInfo }) => {
             <div className={style.column}>
               <img
                 className={style.profile}
-                src={userInfo[0].workerData[0].profile_pic}
+                src={
+                  userInfo[0].workerData[0].profile_pic !== "none"
+                    ? userInfo[0].workerData[0].profile_pic
+                    : defaultProf
+                }
                 alt="&nbsp; Profile Pic"
               />
             </div>

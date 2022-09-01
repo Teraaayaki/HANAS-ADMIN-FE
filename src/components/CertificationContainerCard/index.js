@@ -11,7 +11,8 @@ import {
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-
+import defaultProf from "../../assets/Logo/defaultProf.jpg";
+import hanasLogoBG from "../../assets/Logo/hanas-logo-bg.png";
 import style from "./index.module.scss";
 
 const renderHeaderButtons = (certificationInfo, dispatch) => {
@@ -276,9 +277,9 @@ const CertificationContainerCard = ({ link, certificationInfo }) => {
             <img
               className={style.profile}
               src={
-                certificationInfo.serviceData[0].image
+                certificationInfo.serviceData[0].image !== "none"
                   ? certificationInfo.serviceData[0].image
-                  : "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
+                  : hanasLogoBG
               }
               alt="&nbsp; Service Pic"
             />
@@ -340,9 +341,9 @@ const CertificationContainerCard = ({ link, certificationInfo }) => {
             <img
               className={style.profile}
               src={
-                certificationInfo.workerData[0].profile_pic
+                certificationInfo.workerData[0].profile_pic !== "none"
                   ? certificationInfo.workerData[0].profile_pic
-                  : "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
+                  : defaultProf
               }
               alt="&nbsp; Profile Pic"
             />

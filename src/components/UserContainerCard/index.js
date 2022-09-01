@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-
+import defaultProf from "../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
 const renderMyServicesList = (myServicesData) => {
@@ -211,9 +211,9 @@ const UserContainerCard = ({ link, userInfo }) => {
             <img
               className={style.profile}
               src={
-                userInfo.profile_pic
+                userInfo.profile_pic !== "none"
                   ? userInfo.profile_pic
-                  : "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
+                  : defaultProf
               }
               alt="&nbsp; Profile Pic"
             />
