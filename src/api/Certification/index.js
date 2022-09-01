@@ -43,11 +43,8 @@ const CertificationAPI = {
 
   sortCertification: (DATA) => {
     const options = {
-      method: "PATCH",
-      url: `/admin/sort-certification`,
-      data: {
-        choice: DATA,
-      },
+      method: "GET",
+      url: `/admin/get-certification-list/${DATA}`,
     };
 
     return API.request(options);
@@ -55,11 +52,8 @@ const CertificationAPI = {
 
   filterClient: (DATA) => {
     const options = {
-      method: "PATCH",
-      url: `/admin/filter-certification`,
-      data: {
-        choice: DATA,
-      },
+      method: "GET",
+      url: `/admin/filter-certification/${DATA}`,
     };
 
     return API.request(options);

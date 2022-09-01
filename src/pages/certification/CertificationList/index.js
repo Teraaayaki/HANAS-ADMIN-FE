@@ -14,7 +14,6 @@ import {
 } from "../../../redux/actions/certificationActions";
 import DataTable from "../../../components/Table";
 import StatusBadge from "../../../components/StatusBadge";
-import { GoKebabVertical } from "react-icons/go";
 import defaultProf from "../../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
@@ -88,6 +87,7 @@ const CertificationList = ({ itemsPerPage }) => {
   ];
 
   const handleSortClient = (e) => {
+    console.log(e);
     dispatch(sortCertification(e));
   };
 
@@ -128,17 +128,24 @@ const CertificationList = ({ itemsPerPage }) => {
       },
     },
     {
-      name: "Active",
-      event_key: "active",
+      name: "Pending",
+      event_key: "Pending",
       onClick: () => {
-        dispatch(handleFilterClient("active"));
+        dispatch(handleFilterClient("Pending"));
       },
     },
     {
-      name: "Deactivated",
-      event_key: "deactivated",
+      name: "Accepted",
+      event_key: "Accepted",
       onClick: () => {
-        dispatch(handleFilterClient("deactivated"));
+        dispatch(handleFilterClient("Accepted"));
+      },
+    },
+    {
+      name: "Rejected",
+      event_key: "Rejected",
+      onClick: () => {
+        dispatch(handleFilterClient("Rejected"));
       },
     },
   ];
