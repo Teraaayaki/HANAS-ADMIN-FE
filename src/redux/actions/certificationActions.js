@@ -1,7 +1,7 @@
 import { CertificationActions } from "./types";
 import CertificationAPI from "../../api/Certification";
 
-export const getCertificationList = () => async (dispatch) => {
+export const getCertificationList = () => (dispatch) => {
   CertificationAPI.getCertificationList()
     .then(({ data }) => {
       dispatch({
@@ -18,7 +18,7 @@ export const getCertificationList = () => async (dispatch) => {
     });
 };
 
-export const getCertification = (certificationID) => async (dispatch) => {
+export const getCertification = (certificationID) => (dispatch) => {
   CertificationAPI.getCertification(certificationID)
     .then(({ data }) => {
       dispatch({
@@ -35,7 +35,7 @@ export const getCertification = (certificationID) => async (dispatch) => {
     });
 };
 
-export const acceptCertification = (certificationID) => async (dispatch) => {
+export const acceptCertification = (certificationID) => (dispatch) => {
   CertificationAPI.acceptCertification(certificationID)
     .then(({ data }) => {
       dispatch({
@@ -52,7 +52,7 @@ export const acceptCertification = (certificationID) => async (dispatch) => {
     });
 };
 
-export const rejectCertification = (certificationID) => async (dispatch) => {
+export const rejectCertification = (certificationID) => (dispatch) => {
   CertificationAPI.rejectCertification(certificationID)
     .then(({ data }) => {
       dispatch({
@@ -69,7 +69,7 @@ export const rejectCertification = (certificationID) => async (dispatch) => {
     });
 };
 
-export const reopenCertification = (certificationID) => async (dispatch) => {
+export const reopenCertification = (certificationID) => (dispatch) => {
   CertificationAPI.reopenCertification(certificationID)
     .then(({ data }) => {
       dispatch({
@@ -86,7 +86,7 @@ export const reopenCertification = (certificationID) => async (dispatch) => {
     });
 };
 
-export const sortCertification = (DATA) => async (dispatch) => {
+export const sortCertification = (DATA) => (dispatch) => {
   CertificationAPI.sortCertification(DATA)
     .then(({ data }) => {
       dispatch({
@@ -103,8 +103,8 @@ export const sortCertification = (DATA) => async (dispatch) => {
     });
 };
 
-export const filterCertification = (DATA) => async (dispatch) => {
-  CertificationAPI.filterCertification(DATA)
+export const filterCertification = (DATA) => (dispatch) => {
+  CertificationAPI.filterClient(DATA)
     .then(({ data }) => {
       dispatch({
         type: CertificationActions.GET_CERTIFICATION_LIST,
