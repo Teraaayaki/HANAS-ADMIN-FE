@@ -90,10 +90,12 @@ const SkilledWorkerList = ({ itemsPerPage }) => {
   ];
 
   const handleSortClient = (e) => {
+    console.log(e);
     dispatch(sortWorker(e));
   };
 
   const handleFilterClient = (e) => {
+    console.log(e);
     dispatch(filterWorker(e));
   };
 
