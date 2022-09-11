@@ -13,6 +13,26 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import defaultProf from "../../assets/Logo/defaultProf.jpg";
 import hanasLogoBG from "../../assets/Logo/hanas-logo-bg.png";
+import service1 from "../../assets/Services/service1.png";
+import service2 from "../../assets/Services/service2.png";
+import service3 from "../../assets/Services/service3.png";
+import service4 from "../../assets/Services/service4.png";
+import service5 from "../../assets/Services/service5.png";
+import service6 from "../../assets/Services/service6.png";
+import service7 from "../../assets/Services/service7.png";
+import service8 from "../../assets/Services/service8.png";
+import service9 from "../../assets/Services/service9.png";
+import service10 from "../../assets/Services/service10.png";
+import service11 from "../../assets/Services/service11.png";
+import service12 from "../../assets/Services/service12.png";
+import service13 from "../../assets/Services/service13.png";
+import service14 from "../../assets/Services/service14.png";
+import service15 from "../../assets/Services/service15.png";
+import service16 from "../../assets/Services/service16.png";
+import service17 from "../../assets/Services/service17.png";
+import service18 from "../../assets/Services/service18.png";
+import service19 from "../../assets/Services/service19.png";
+import service20 from "../../assets/Services/service20.png";
 import style from "./index.module.scss";
 
 const renderHeaderButtons = (certificationInfo, dispatch) => {
@@ -261,6 +281,58 @@ const renderCertificatesList = (certificatesData, is_certified) => {
   }
 };
 
+const renderServiceImage = (image) => {
+  let ID;
+  if (image !== "none") {
+    ID = image.substring(15, 17);
+    switch (ID) {
+      case "1.":
+        return service1;
+      case "2.":
+        return service2;
+      case "3.":
+        return service3;
+      case "4.":
+        return service4;
+      case "5.":
+        return service5;
+      case "6.":
+        return service6;
+      case "7.":
+        return service7;
+      case "8.":
+        return service8;
+      case "9.":
+        return service9;
+      case "10":
+        return service10;
+      case "11":
+        return service11;
+      case "12":
+        return service12;
+      case "13":
+        return service13;
+      case "14":
+        return service14;
+      case "15":
+        return service15;
+      case "16":
+        return service16;
+      case "17":
+        return service17;
+      case "18":
+        return service18;
+      case "19":
+        return service19;
+      case "20":
+        return service20;
+      default:
+        return;
+    }
+  }
+  return hanasLogoBG;
+};
+
 const CertificationContainerCard = ({ link, certificationInfo }) => {
   const dispatch = useDispatch();
   return (
@@ -276,11 +348,7 @@ const CertificationContainerCard = ({ link, certificationInfo }) => {
           <div className={style.column}>
             <img
               className={style.profile}
-              src={
-                certificationInfo.serviceData[0].image !== "none"
-                  ? certificationInfo.serviceData[0].image
-                  : hanasLogoBG
-              }
+              src={renderServiceImage(certificationInfo.serviceData[0].image)}
               alt="&nbsp; Service Pic"
             />
           </div>
