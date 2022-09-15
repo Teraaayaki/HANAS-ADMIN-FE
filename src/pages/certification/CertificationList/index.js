@@ -33,9 +33,9 @@ const renderCertificationList = (certificationListData) => {
           <img
             className={style.profilePic}
             src={
-              certification.workerData[0].profile_pic
-                ? certification.workerData[0].profile_pic
-                : defaultProf
+              certification.workerData[0].profile_pic === "none"
+                ? defaultProf
+                : certification.workerData[0].profile_pic
             }
             alt="&nbsp; Profile Pic"
           />
