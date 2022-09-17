@@ -22,7 +22,8 @@ import moment from "moment";
 const TransactionFeeList = ({ itemsPerPage }) => {
   const [show, setShow] = useState(false);
   const [showPaid, setShowPaid] = useState(false);
-  const [transactionID, setTransactionId] = useState(false);
+  const [transactionID, setTransactionId] = useState("");
+  const [transactionAmount, setTransactionAmount] = useState(0);
 
   //PAGINATION STATES
   const [currentItems, setCurrentItems] = useState([]);
@@ -169,6 +170,7 @@ const TransactionFeeList = ({ itemsPerPage }) => {
                   onClick={() => {
                     handleOpenPaid();
                     setTransactionId(transaction._id);
+                    setTransactionAmount(transaction.total_amount);
                   }}
                 />
               )}
@@ -187,7 +189,7 @@ const TransactionFeeList = ({ itemsPerPage }) => {
                   <Button
                     variant="success"
                     onClick={() => {
-                      handlePayment(transaction.total_amount, transactionID);
+                      handlePayment(transactionAmount, transactionID);
                       setTimeout(() => {
                         handleClosePaid();
                       }, 1000);
