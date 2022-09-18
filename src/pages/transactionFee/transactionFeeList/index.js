@@ -40,6 +40,7 @@ const TransactionFeeList = ({ itemsPerPage }) => {
     "Worker Name",
     "Last Activity Date",
     "Remaining Balance",
+    "Last Payment",
     "Status",
     "Actions",
   ];
@@ -137,6 +138,7 @@ const TransactionFeeList = ({ itemsPerPage }) => {
 
   const renderTransactionFeeList = (convFeeListData) => {
     return convFeeListData.map((transaction, idx) => {
+      const lastItem = transaction.payments[transaction.payments.length - 1];
       return (
         <>
           <tr
@@ -156,6 +158,19 @@ const TransactionFeeList = ({ itemsPerPage }) => {
             <td className={style.tableData}>
               <span className={style.truncate}>
                 ₱ {transaction.total_amount.toFixed(2)}
+              </span>
+            </td>
+            <td className={style.tableData}>
+              <span className={style.truncate}>
+                {lastItem === undefined
+                  ? "N/A"
+                  : "₱ " + lastItem.amount[0].toFixed(2)}
+                {console.log("LAST ITEM", lastItem)}
+              </span>
+              <span className={style.time}>
+                {lastItem === undefined
+                  ? "Date Unavailable"
+                  : moment(lastItem.date[0]).format("LL")}
               </span>
             </td>
             <td className={style.tableData}>
