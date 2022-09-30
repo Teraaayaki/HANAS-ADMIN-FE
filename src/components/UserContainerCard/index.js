@@ -64,6 +64,7 @@ const renderValidIDList = (validIDData, is_verified) => {
                   <span className="mx-3 text-danger">Not Verified</span>
                 )}
               </span>
+              <span className={style.info}>(Front)</span>
               <ReactImageMagnify
                 {...{
                   smallImage: {
@@ -86,6 +87,7 @@ const renderValidIDList = (validIDData, is_verified) => {
           return (
             <div className={style.container}>
               <span className={`${style.infoLabel} invisible`}>_</span>
+              <span className={style.info}>(Back)</span>
               <ReactImageMagnify
                 {...{
                   smallImage: {
@@ -124,6 +126,7 @@ const renderValidIDList = (validIDData, is_verified) => {
               <span className="mx-3 text-danger">Not Verified</span>
             )}
           </span>
+          <span className={style.info}>(Front)</span>
           <ReactImageMagnify
             {...{
               smallImage: {

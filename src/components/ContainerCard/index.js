@@ -259,6 +259,7 @@ const ContainerCard = ({ link, userInfo }) => {
                       <span className="mx-3 text-danger">Not Verified</span>
                     )}
                   </span>
+                  <span className={style.info}>(Front)</span>
                   <ReactImageMagnify
                     {...{
                       smallImage: {
@@ -280,6 +281,7 @@ const ContainerCard = ({ link, userInfo }) => {
                   <span className={`${style.infoLabel} invisible`}>
                     VALID ID PRESENTED
                   </span>
+                  <span className={style.info}>(Back)</span>
                   <ReactImageMagnify
                     {...{
                       smallImage: {
