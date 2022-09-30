@@ -104,13 +104,6 @@ const renderValidIDList = (validIDData, is_verified) => {
                   enlargedImageClassName: style.IDIMG,
                 }}
               />
-              <img
-                className={style.IDIMG}
-                src={valid_id}
-                alt="&nbsp; Valid ID"
-                width={350}
-                height={200}
-              />
             </div>
           );
         }
