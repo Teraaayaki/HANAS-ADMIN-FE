@@ -29,7 +29,7 @@ const SkilledWorkerDetail = () => {
     return (
       <div className="main-content">
         <UserContainerCard
-          link="skilledworkers"
+          link={"skilledworkers"}
           userInfo={workerData[0]}
         ></UserContainerCard>
       </div>

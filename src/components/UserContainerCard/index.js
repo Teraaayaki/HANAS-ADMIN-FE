@@ -18,6 +18,8 @@ import Button from "react-bootstrap/Button";
 import defaultProf from "../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
+import history from "../../utils/history";
+
 const renderMyServicesList = (myServicesData) => {
   let last = -1;
   if (myServicesData && myServicesData !== undefined) {
@@ -185,7 +187,7 @@ const UserContainerCard = ({ link, userInfo }) => {
   return (
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
-        <Link to={`/${link}`} className={style.backButton}>
+        <Link className={style.backButton} onClick={() => history.goBack()}>
           BACK
         </Link>
 

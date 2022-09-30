@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import { getClient } from "../../../redux/actions/clientActions";
 import UserContainerCard from "../../../components/UserContainerCard";
@@ -29,7 +29,7 @@ const ClientDetail = () => {
     return (
       <div className="main-content">
         <UserContainerCard
-          link="clients"
+          link={"clients"}
           userInfo={clientData[0]}
         ></UserContainerCard>
       </div>
