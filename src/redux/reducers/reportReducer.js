@@ -23,11 +23,15 @@ const reportReducer = (state = INITIAL_STATE, action) => {
         ...state,
         reporterReportsListData: action.payload,
         reporterReportsListError: null,
+        error: null,
+        success: null,
       };
     case ReportActions.GET_REPORTER_REPORTS_LIST_ERROR:
       return {
         ...state,
         reporterReportsListError: action.payload,
+        success: false,
+        error: null,
       };
     case ReportActions.REPORT_ERROR:
       return {

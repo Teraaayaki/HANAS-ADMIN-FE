@@ -7,45 +7,49 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { GoKebabVertical } from "react-icons/go";
 
-import {
-  filterReport,
-  getReportList,
-  sortReport,
-} from "../../redux/actions/reportActions";
+import { filterReport, sortReport } from "../../redux/actions/reportActions";
 import DataTable from "../../components/Table";
 import StatusBadge from "../../components/StatusBadge";
-import defaultProf from "../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 import { Button } from "react-bootstrap";
-import { getReporterReportsList } from "../../redux/actions/reportActions";
 
 const renderReportList = (reportListData) => {
-  return reportListData.map((report, idx) => {
-    return (
-      <tr key={idx} className={style.tableDataRow}>
-        <td className={style.tableData}>{report.concern}</td>
-        <td className={style.tableData}>
-          <span>{moment(report.updatedAt).format("LL")}</span> <br />
-          <span className={style.time}>
-            {moment(report.updatedAt).format("LT")}
-          </span>
-        </td>
-        <td className={style.tableData}>
-          <span>{moment(report.createdAt).format("LL")}</span> <br />
-          <span className={style.time}>
-            {moment(report.createdAt).format("LT")}
-          </span>
-        </td>
-        <td className={style.tableData}>
-          <StatusBadge status={report.status.toUpperCase()} />
-        </td>
-      </tr>
-    );
-  });
+  return reportListData.length > 0 ? (
+    reportListData.map((report, idx) => {
+      return (
+        <tr key={idx} className={style.tableDataRow}>
+          <td className={style.tableData}>
+            <Link to={`/user-reports/${report._id}`}>{report.concern}</Link>
+          </td>
+          <td className={style.tableData}>
+            <span>{moment(report.updatedAt).format("LL")}</span> <br />
+            <span className={style.time}>
+              {moment(report.updatedAt).format("LT")}
+            </span>
+          </td>
+          <td className={style.tableData}>
+            <span>{moment(report.createdAt).format("LL")}</span> <br />
+            <span className={style.time}>
+              {moment(report.createdAt).format("LT")}
+            </span>
+          </td>
+          <td className={style.tableData}>
+            <StatusBadge status={report.status.toUpperCase()} />
+          </td>
+        </tr>
+      );
+    })
+  ) : (
+    <tr className={style.tableDataRow}>
+      <td className={style.tableData}>No Data Available</td>
+    </tr>
+  );
 };
 
-const ReporterReportsList = ({ clientID, itemsPerPage }) => {
+const ReporterReportsList = ({ reporterReportsListData, itemsPerPage }) => {
   const headerNames = ["Concern", "Last Modified", "Date Submitted", "Status"];
+
+  const dispatch = useDispatch();
 
   const handleSortReport = (e) => {
     dispatch(sortReport(e));
@@ -110,15 +114,6 @@ const ReporterReportsList = ({ clientID, itemsPerPage }) => {
     },
   ];
 
-  const dispatch = useDispatch();
-  const { reporterReportsListData, reporterReportsListError } = useSelector(
-    (state) => state.report
-  );
-
-  useEffect(() => {
-    dispatch(getReporterReportsList(clientID));
-  }, [dispatch]);
-
   // Pagination States & Hooks
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
@@ -126,8 +121,17 @@ const ReporterReportsList = ({ clientID, itemsPerPage }) => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(reporterReportsListData.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(reporterReportsListData.length / itemsPerPage));
+    setCurrentItems(
+      reporterReportsListData.reporterReportsListData.slice(
+        itemOffset,
+        endOffset
+      )
+    );
+    setPageCount(
+      Math.ceil(
+        reporterReportsListData.reporterReportsListData.length / itemsPerPage
+      )
+    );
   }, [itemOffset, itemsPerPage, reporterReportsListData]);
 
   const handlePageClick = (event) => {
@@ -136,11 +140,12 @@ const ReporterReportsList = ({ clientID, itemsPerPage }) => {
     setItemOffset(newOffset);
   };
 
-  if (currentItems !== null && currentItems[0] !== undefined) {
+  if (currentItems !== null) {
     return (
       <div className="card">
+        {console.log("Ni", reporterReportsListData)}
         <DataTable
-          tableTitle="User Reports and Concerns"
+          tableTitle="Reports and Concerns"
           headerNames={headerNames}
           renderData={() => renderReportList(currentItems)}
           sortItems={null}
@@ -165,17 +170,20 @@ const ReporterReportsList = ({ clientID, itemsPerPage }) => {
   } else {
     return (
       <div className="card">
-        <div className={style.flexedContainer}>
-          <h1 className="m-auto">No Data Preview Available </h1>
-        </div>
+        <div className={style.flexedContainer}></div>
       </div>
     );
   }
 };
 
-const PaginatedReporterReportsList = (clientID) => {
+const PaginatedReporterReportsList = (reporterReportsListData) => {
   return (
-    <div>{<ReporterReportsList clientI={clientID} itemsPerPage={10} />}</div>
+    <div style={{ paddingTop: 20, paddingBottom: 50 }}>
+      <ReporterReportsList
+        reporterReportsListData={reporterReportsListData}
+        itemsPerPage={10}
+      />
+    </div>
   );
 };
 
