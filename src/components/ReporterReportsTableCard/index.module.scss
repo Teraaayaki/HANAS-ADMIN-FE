@@ -1,0 +1,133 @@
+@use "../../styles/variables" as *;
+@use "../../styles/tableGlobalStyles" as *;
+@use "../../styles/globalMixins" as *;
+
+.paginateContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.flexedContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+%reset-button-style {
+  background-color: transparent;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+  border: none;
+}
+
+.card {
+  height: 100%;
+}
+
+.cardHeader {
+  padding: 35px 35px;
+  background-color: $color-white-1;
+
+  @include flex(space-between, center, row, none);
+}
+
+.backButton {
+  color: $color-black-1;
+
+  @extend %reset-button-style;
+}
+
+.acceptButton {
+  color: $verified-color;
+
+  @extend %reset-button-style;
+}
+
+.deactButton {
+  color: $rejected-color;
+
+  @extend %reset-button-style;
+}
+
+.success {
+  color: $verified-color;
+}
+
+.danger {
+  color: $rejected-color;
+}
+
+.warning {
+  color: $pending-color;
+}
+
+.cardBody {
+  overflow: auto;
+  padding-top: 50px;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $color-white-1;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $color-gray-1;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-gray-3;
+  }
+  @include flex(none, none, none, none);
+}
+
+.profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  margin-top: 20px;
+  object-fit: cover;
+}
+
+.userDetails {
+  @include flex(none, none, column, 40px);
+}
+
+.userDetailRow {
+  @include flex(none, none, row, 40px);
+}
+
+.container {
+  width: 330px;
+  @include flex(none, none, column, 15px);
+}
+
+.infoLabel {
+  @include text-style($color-gray-2, $font-size-sm, $font-weight-bold);
+}
+
+.info {
+  @include text-style($color-black-1, $font-size-lg, $font-weight-semibold);
+}
+
+.column {
+  width: 200px;
+  min-width: 100px;
+  margin-right: 30px;
+  @include flex(none, center, column, 15px);
+}
+
+.infoContainer {
+  flex: 1;
+  @include flex(center, none, row, none);
+}
+
+.IDIMG {
+  object-fit: contain;
+}

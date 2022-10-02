@@ -22,9 +22,6 @@ const renderAttachedImages = (imageData) => {
   if (imageData !== undefined) {
     last = imageData.length - 1;
   }
-  {
-    console.log("Imagedata", imageData);
-  }
   if (last > -1) {
     return imageData.map((image, idx) => {
       if (idx < 1) {
