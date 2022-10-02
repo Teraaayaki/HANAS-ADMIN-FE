@@ -28,6 +28,7 @@ const SkilledWorkerDetail = () => {
   ) {
     return (
       <div className="main-content">
+        {console.log("WD", workerData)}
         <UserContainerCard
           link={"skilledworkers"}
           userInfo={workerData[0]}

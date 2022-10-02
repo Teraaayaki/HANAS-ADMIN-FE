@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import ReactImageMagnify from "react-image-magnify";
+import ReactPaginate from "react-paginate";
 
 import {
   activateClient,
@@ -19,6 +20,7 @@ import defaultProf from "../../assets/Logo/defaultProf.jpg";
 import style from "./index.module.scss";
 
 import history from "../../utils/history";
+import DataTable from "../../components/Table";
 
 const renderMyServicesList = (myServicesData) => {
   let last = -1;
@@ -164,6 +166,13 @@ const renderValidIDList = (validIDData, is_verified) => {
 
 const UserContainerCard = ({ link, userInfo }) => {
   const dispatch = useDispatch();
+
+  // States
+
+  //Hooks
+
+  // Vars
+
   const handleActivateOnClick = () => {
     if (userInfo.is_worker) {
       dispatch(activateWorker(userInfo._id));
@@ -250,15 +259,15 @@ const UserContainerCard = ({ link, userInfo }) => {
               </div>
             </section>
             <section className={style.userDetailRow}>
-              {link === "skilledworkers" ? (
+              {link === "skilledworkers" && (
                 <div className={style.container}>
                   <span className={style.infoLabel}>SERVICE/S OFFERED</span>
                   <span className={style.info}>
-                    {renderMyServicesList(userInfo.myServicesData)}
+                    {userInfo.myServicesData[0]
+                      ? renderMyServicesList(userInfo.myServicesData)
+                      : "None"}
                   </span>
                 </div>
-              ) : (
-                ""
               )}
               <div className={style.container}>
                 <span className={style.infoLabel}>MEMBER SINCE</span>
@@ -266,8 +275,43 @@ const UserContainerCard = ({ link, userInfo }) => {
                   {moment(userInfo.createdAt).format("LL")}
                 </span>
               </div>
+              {link === "clients" && <div className={style.container} />}
+              <div className={style.container}>
+                <span className={style.infoLabel}>
+                  {" REPORTS ( ALL / "}
+                  <span className={style.warning}>PENDING</span>
+                  {" / "}
+                  <span className={style.success}>RESOLVED</span>
+                  {" / "}
+                  <span className={style.danger}>REJECTED</span>
+                  {" )"}
+                </span>
+                <span className={style.info}>
+                  {userInfo.countReports.length > 0
+                    ? userInfo.countReports[0].Count
+                    : 0}
+                  {" / "}
+                  <span className={style.warning}>
+                    {userInfo.countPendingReports.length > 0
+                      ? userInfo.countPendingReports[0].Count
+                      : 0}
+                  </span>
+                  {" / "}
+                  <span className={style.success}>
+                    {userInfo.countResolvedReports.length > 0
+                      ? " " + userInfo.countResolvedReports[0].Count
+                      : 0}
+                  </span>
+                  {" / "}
+                  <span className={style.danger}>
+                    {userInfo.countRejectedReports.length > 0
+                      ? " " + userInfo.countRejectedReports[0].Count
+                      : 0}
+                  </span>
+                </span>
+              </div>
             </section>
-            {link === "skilledworkers" ? (
+            {link === "skilledworkers" && (
               <section className={style.userDetailRow}>
                 {renderValidIDList(
                   userInfo.verificationData[0],
@@ -300,8 +344,6 @@ const UserContainerCard = ({ link, userInfo }) => {
                   )}
                 </div>
               </section>
-            ) : (
-              ""
             )}
           </section>
         </div>

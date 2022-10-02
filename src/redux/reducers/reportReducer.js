@@ -2,8 +2,10 @@ import { ReportActions } from "../actions/types";
 
 const INITIAL_STATE = {
   reportListData: [],
+  reporterReportsListData: [],
   reportData: [],
   error: null,
+  reporterReportsListError: null,
   success: null,
   successMessage: "",
 };
@@ -15,6 +17,17 @@ const reportReducer = (state = INITIAL_STATE, action) => {
         ...state,
         reportListData: action.payload,
         error: null,
+      };
+    case ReportActions.GET_REPORTER_REPORTS_LIST:
+      return {
+        ...state,
+        reporterReportsListData: action.payload,
+        reporterReportsListError: null,
+      };
+    case ReportActions.GET_REPORTER_REPORTS_LIST_ERROR:
+      return {
+        ...state,
+        reporterReportsListError: action.payload,
       };
     case ReportActions.REPORT_ERROR:
       return {

@@ -37,6 +37,18 @@
   @extend %reset-button-style;
 }
 
+.success {
+  color: $verified-color;
+}
+
+.danger {
+  color: $rejected-color;
+}
+
+.warning {
+  color: $pending-color;
+}
+
 .cardBody {
   overflow: auto;
   padding-top: 50px;

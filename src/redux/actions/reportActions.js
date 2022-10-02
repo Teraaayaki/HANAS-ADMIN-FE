@@ -30,6 +30,23 @@ export const getReportList = () => async (dispatch) => {
     });
 };
 
+export const getReporterReportsList = (clientID) => async (dispatch) => {
+  ReportAPI.getReporterReportsList(clientID)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.GET_REPORTER_REPORTS_LIST,
+        payload: data.reporterReportsList,
+      });
+    })
+    .catch((error) => {
+      console.log("GetReporterReportsList " + error);
+      dispatch({
+        type: ReportActions.REPORTER_REPORTS_LIST_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
+
 export const getReport = (reportID) => async (dispatch) => {
   ReportAPI.getReport(reportID)
     .then(({ data }) => {

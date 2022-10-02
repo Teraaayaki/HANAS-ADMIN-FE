@@ -9,6 +9,14 @@ const ReportAPI = {
     return API.request(options);
   },
 
+  getReporterReportsList: (clientID) => {
+    const options = {
+      method: "GET",
+      url: `/admin/get-reporter-reports-list/${clientID}`,
+    };
+    return API.request(options);
+  },
+
   getReport: (reportID) => {
     const options = {
       method: "GET",
