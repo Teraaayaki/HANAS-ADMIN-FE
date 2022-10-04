@@ -68,14 +68,14 @@ const ReporterReportsList = ({ reporterReportsListData, itemsPerPage }) => {
       },
     },
     {
-      name: "Name (A-Z)",
+      name: "Concern (A-Z)",
       event_key: "name",
       onClick: () => {
         dispatch(handleSortReport("name"));
       },
     },
     {
-      name: "Date",
+      name: "Date Submitted",
       event_key: "date",
       onClick: () => {
         dispatch(handleSortReport("date"));
@@ -143,13 +143,12 @@ const ReporterReportsList = ({ reporterReportsListData, itemsPerPage }) => {
   if (currentItems !== null) {
     return (
       <div className="card">
-        {console.log("Ni", reporterReportsListData)}
         <DataTable
           tableTitle="Reports and Concerns"
           headerNames={headerNames}
           renderData={() => renderReportList(currentItems)}
-          sortItems={null}
-          filterItems={null}
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate
