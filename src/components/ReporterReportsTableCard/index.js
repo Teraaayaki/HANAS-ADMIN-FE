@@ -77,7 +77,6 @@ const ReporterReportsList = ({
 
   useEffect(() => {
     dispatch(sortReporterReports({ choice: "createdAt", clientID: userID }));
-    dispatch(sortReporterReports({ choice: "createdAt", clientID: userID }));
   }, [userID]);
 
   useEffect(() => {
