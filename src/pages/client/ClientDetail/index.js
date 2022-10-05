@@ -25,7 +25,7 @@ const ClientDetail = () => {
       dispatch(getClient(clientID));
       dispatch(getReporterReportsList(clientID));
     }
-  }, [clientID, clientData]);
+  }, [dispatch, clientID, clientData]);
 
   if (
     clientData !== undefined &&
@@ -37,6 +37,7 @@ const ClientDetail = () => {
         <div className="main-content">
           <UserContainerCard link={"clients"} userInfo={clientData[0]} />
           <ReporterReportsTableCard
+            clientID={clientID}
             reporterReportsListData={reporterReportsListData}
           />
         </div>

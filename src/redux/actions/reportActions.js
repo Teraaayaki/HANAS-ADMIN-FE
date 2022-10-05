@@ -145,3 +145,37 @@ export const filterReport = (DATA) => async (dispatch) => {
       });
     });
 };
+
+export const sortReporterReports = (DATA) => async (dispatch) => {
+  ReportAPI.sortReporterReports(DATA)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.GET_REPORTER_REPORTS_LIST,
+        payload: data.reporterReportsList,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: ReportActions.GET_REPORTER_REPORTS_LIST_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
+
+export const filterReporterReports = (DATA) => async (dispatch) => {
+  ReportAPI.filterReporterReports(DATA)
+    .then(({ data }) => {
+      dispatch({
+        type: ReportActions.GET_REPORTER_REPORTS_LIST,
+        payload: data.reporterReportsList,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: ReportActions.GET_REPORTER_REPORTS_LIST_ERROR,
+        payload: error?.response?.data?.error,
+      });
+    });
+};
