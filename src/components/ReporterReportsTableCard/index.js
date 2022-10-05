@@ -57,12 +57,23 @@ const ReporterReportsList = ({
   const headerNames = ["Concern", "Last Updated", "Date Submitted", "Status"];
 
   // Pagination States & Hooks
-  let { clientID } = useParams();
+  let { clientID, workerID } = useParams();
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
+  const [userID, setUserID] = useState();
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (clientID) {
+      setUserID(clientID);
+      clientID = undefined;
+    } else if (workerID) {
+      setUserID(workerID);
+      workerID = undefined;
+    }
+  }, [clientID, workerID]);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -91,21 +102,25 @@ const ReporterReportsList = ({
       name: "Default (Date Submitted)",
       event_key: "createdAt",
       onClick: () => {
-        dispatch(sortReporterReports({ choice: "createdAt", clientID }));
+        dispatch(
+          sortReporterReports({ choice: "createdAt", clientID: userID })
+        );
       },
     },
     {
       name: "Concern (A-Z)",
       event_key: "concern",
       onClick: () => {
-        dispatch(sortReporterReports({ choice: "concern", clientID }));
+        dispatch(sortReporterReports({ choice: "concern", clientID: userID }));
       },
     },
     {
       name: "Last Updated",
       event_key: "updatedAt",
       onClick: () => {
-        dispatch(sortReporterReports({ choice: "updatedAt", clientID }));
+        dispatch(
+          sortReporterReports({ choice: "updatedAt", clientID: userID })
+        );
       },
     },
   ];
@@ -115,28 +130,34 @@ const ReporterReportsList = ({
       name: "Default (All)",
       event_key: "all",
       onClick: () => {
-        dispatch(filterReporterReports({ choice: "All", clientID }));
+        dispatch(filterReporterReports({ choice: "All", clientID: userID }));
       },
     },
     {
       name: "Resolved",
       event_key: "resolved",
       onClick: () => {
-        dispatch(filterReporterReports({ choice: "Resolved", clientID }));
+        dispatch(
+          filterReporterReports({ choice: "Resolved", clientID: userID })
+        );
       },
     },
     {
       name: "Pending",
       event_key: "pending",
       onClick: () => {
-        dispatch(filterReporterReports({ choice: "Pending", clientID }));
+        dispatch(
+          filterReporterReports({ choice: "Pending", clientID: userID })
+        );
       },
     },
     {
       name: "Rejected",
       event_key: "rejected",
       onClick: () => {
-        dispatch(filterReporterReports({ choice: "Rejected", clientID }));
+        dispatch(
+          filterReporterReports({ choice: "Rejected", clientID: userID })
+        );
       },
     },
   ];
@@ -181,7 +202,7 @@ const PaginatedReporterReportsList = (reporterReportsListData) => {
     <div style={{ paddingTop: 20, paddingBottom: 50 }}>
       <ReporterReportsList
         reporterReportsListData={reporterReportsListData}
-        itemsPerPage={10}
+        itemsPerPage={5}
       />
     </div>
   );

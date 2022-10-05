@@ -37,7 +37,6 @@ const ClientDetail = () => {
         <div className="main-content">
           <UserContainerCard link={"clients"} userInfo={clientData[0]} />
           <ReporterReportsTableCard
-            clientID={clientID}
             reporterReportsListData={reporterReportsListData}
           />
         </div>
