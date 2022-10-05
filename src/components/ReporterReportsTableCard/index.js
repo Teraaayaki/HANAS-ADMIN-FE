@@ -68,12 +68,16 @@ const ReporterReportsList = ({
   useEffect(() => {
     if (clientID) {
       setUserID(clientID);
-      clientID = undefined;
     } else if (workerID) {
       setUserID(workerID);
-      workerID = undefined;
     }
+    clientID = undefined;
+    workerID = undefined;
   }, [clientID, workerID]);
+
+  useEffect(() => {
+    dispatch(sortReporterReports({ choice: "createdAt", clientID: userID }));
+  }, [userID]);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;

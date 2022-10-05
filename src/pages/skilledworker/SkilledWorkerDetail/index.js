@@ -26,7 +26,7 @@ const SkilledWorkerDetail = () => {
       dispatch(getWorker(workerID));
       dispatch(getReporterReportsList(workerID));
     }
-  }, [workerID, workerData]);
+  }, [dispatch, workerID, workerData]);
 
   if (
     workerData !== undefined &&
