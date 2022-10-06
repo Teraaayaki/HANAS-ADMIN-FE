@@ -61,12 +61,38 @@ const ReportAPI = {
     return API.request(options);
   },
 
+  sortReporterReports: (DATA) => {
+    const options = {
+      method: "PATCH",
+      url: `/admin/sort-reporter-reports`,
+      data: {
+        choice: DATA.choice,
+        clientID: DATA.clientID,
+      },
+    };
+
+    return API.request(options);
+  },
+
   filterReport: (DATA) => {
     const options = {
       method: "PATCH",
       url: `/admin/filter-report`,
       data: {
         choice: DATA,
+      },
+    };
+
+    return API.request(options);
+  },
+
+  filterReporterReports: (DATA) => {
+    const options = {
+      method: "PATCH",
+      url: `/admin/filter-reporter-reports/`,
+      data: {
+        choice: DATA.choice,
+        clientID: DATA.clientID,
       },
     };
 

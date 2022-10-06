@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
 import { Link } from "react-router-dom";
 /*bootstrap module for easier styling for the pagination*/
 import "bootstrap/dist/css/bootstrap.min.css";
-import { GoKebabVertical } from "react-icons/go";
+import {
+  getReporterReportsList,
+  sortReporterReports,
+  filterReporterReports,
+} from "../../redux/actions/reportActions";
 
-import { filterReport, sortReport } from "../../redux/actions/reportActions";
 import DataTable from "../../components/Table";
 import StatusBadge from "../../components/StatusBadge";
 import style from "./index.module.scss";
-import { Button } from "react-bootstrap";
 
-const renderReportList = (reportListData) => {
-  return reportListData.length > 0 ? (
-    reportListData.map((report, idx) => {
+const renderReportList = (reporterReportsListData) => {
+  return reporterReportsListData.length > 0 ? (
+    reporterReportsListData.map((report, idx) => {
       return (
         <tr key={idx} className={style.tableDataRow}>
           <td className={style.tableData}>
@@ -46,78 +49,35 @@ const renderReportList = (reportListData) => {
   );
 };
 
-const ReporterReportsList = ({ reporterReportsListData, itemsPerPage }) => {
-  const headerNames = ["Concern", "Last Modified", "Date Submitted", "Status"];
-
-  const dispatch = useDispatch();
-
-  const handleSortReport = (e) => {
-    dispatch(sortReport(e));
-  };
-
-  const handleFilterReport = (e) => {
-    dispatch(filterReport(e));
-  };
-
-  const sortItems = [
-    {
-      name: "Default",
-      event_key: "all",
-      onClick: () => {
-        dispatch(handleSortReport("all"));
-      },
-    },
-    {
-      name: "Name (A-Z)",
-      event_key: "name",
-      onClick: () => {
-        dispatch(handleSortReport("name"));
-      },
-    },
-    {
-      name: "Date",
-      event_key: "date",
-      onClick: () => {
-        dispatch(handleSortReport("date"));
-      },
-    },
-  ];
-
-  const filterItems = [
-    {
-      name: "Default",
-      event_key: "all",
-      onClick: () => {
-        dispatch(handleFilterReport("all"));
-      },
-    },
-    {
-      name: "Resolved",
-      event_key: "resolved",
-      onClick: () => {
-        dispatch(handleFilterReport("resolved"));
-      },
-    },
-    {
-      name: "Pending",
-      event_key: "pending",
-      onClick: () => {
-        dispatch(handleFilterReport("pending"));
-      },
-    },
-    {
-      name: "Rejected",
-      event_key: "rejected",
-      onClick: () => {
-        dispatch(handleFilterReport("rejected"));
-      },
-    },
-  ];
+const ReporterReportsList = ({
+  reporterReportsListData,
+  itemsPerPage,
+  // clientID,
+}) => {
+  const headerNames = ["Concern", "Last Updated", "Date Submitted", "Status"];
 
   // Pagination States & Hooks
+  let { clientID, workerID } = useParams();
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
+  const [userID, setUserID] = useState();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (clientID) {
+      setUserID(clientID);
+    } else if (workerID) {
+      setUserID(workerID);
+    }
+    clientID = undefined;
+    workerID = undefined;
+  }, [clientID, workerID]);
+
+  useEffect(() => {
+    dispatch(sortReporterReports({ choice: "createdAt", clientID: userID }));
+  }, [userID]);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -134,22 +94,87 @@ const ReporterReportsList = ({ reporterReportsListData, itemsPerPage }) => {
     );
   }, [itemOffset, itemsPerPage, reporterReportsListData]);
 
+  //Vars
   const handlePageClick = (event) => {
     const newOffset =
       (event.selected * itemsPerPage) % reporterReportsListData.length;
     setItemOffset(newOffset);
   };
 
+  const sortItems = [
+    {
+      name: "Default (Date Submitted)",
+      event_key: "createdAt",
+      onClick: () => {
+        dispatch(
+          sortReporterReports({ choice: "createdAt", clientID: userID })
+        );
+      },
+    },
+    {
+      name: "Concern (A-Z)",
+      event_key: "concern",
+      onClick: () => {
+        dispatch(sortReporterReports({ choice: "concern", clientID: userID }));
+      },
+    },
+    {
+      name: "Last Updated",
+      event_key: "updatedAt",
+      onClick: () => {
+        dispatch(
+          sortReporterReports({ choice: "updatedAt", clientID: userID })
+        );
+      },
+    },
+  ];
+
+  const filterItems = [
+    {
+      name: "Default (All)",
+      event_key: "all",
+      onClick: () => {
+        dispatch(filterReporterReports({ choice: "All", clientID: userID }));
+      },
+    },
+    {
+      name: "Resolved",
+      event_key: "resolved",
+      onClick: () => {
+        dispatch(
+          filterReporterReports({ choice: "Resolved", clientID: userID })
+        );
+      },
+    },
+    {
+      name: "Pending",
+      event_key: "pending",
+      onClick: () => {
+        dispatch(
+          filterReporterReports({ choice: "Pending", clientID: userID })
+        );
+      },
+    },
+    {
+      name: "Rejected",
+      event_key: "rejected",
+      onClick: () => {
+        dispatch(
+          filterReporterReports({ choice: "Rejected", clientID: userID })
+        );
+      },
+    },
+  ];
+
   if (currentItems !== null) {
     return (
       <div className="card">
-        {console.log("Ni", reporterReportsListData)}
         <DataTable
           tableTitle="Reports and Concerns"
           headerNames={headerNames}
           renderData={() => renderReportList(currentItems)}
-          sortItems={null}
-          filterItems={null}
+          sortItems={sortItems}
+          filterItems={filterItems}
         />
         <div className={style.paginateContainer}>
           <ReactPaginate
@@ -181,7 +206,7 @@ const PaginatedReporterReportsList = (reporterReportsListData) => {
     <div style={{ paddingTop: 20, paddingBottom: 50 }}>
       <ReporterReportsList
         reporterReportsListData={reporterReportsListData}
-        itemsPerPage={10}
+        itemsPerPage={5}
       />
     </div>
   );

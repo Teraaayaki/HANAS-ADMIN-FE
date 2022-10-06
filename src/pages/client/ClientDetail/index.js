@@ -25,7 +25,7 @@ const ClientDetail = () => {
       dispatch(getClient(clientID));
       dispatch(getReporterReportsList(clientID));
     }
-  }, [clientID, clientData]);
+  }, [dispatch, clientID, clientData]);
 
   if (
     clientData !== undefined &&

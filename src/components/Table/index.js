@@ -20,76 +20,58 @@ const DataTable = ({
     <Card className={style.card}>
       <Card.Header className={style.cardHeader}>
         <h6 className={style.cardHeaderTitle}>{tableTitle}</h6>
-        {sortItems ? (
-          <div className={style.listConditions}>
-            {sortItems.length === 0 ? (
-              ""
-            ) : (
-              <Dropdown>
-                <Dropdown.Toggle
-                  className={style.conditionButtons}
-                  bsPrefix="none"
-                  id="dropdown-basic"
-                >
-                  <BiSortUp className={style.sortIcon} />
-                  <span className={style.conditionsText}>Sort</span>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className={style.conditionMenu}>
-                  {sortItems.map((item) => {
-                    return (
-                      <Dropdown.Item
-                        key={item.event_key}
-                        onClick={item.onClick}
-                      >
-                        {" "}
-                        {item.name}{" "}
-                      </Dropdown.Item>
-                    );
-                  })}
-                </Dropdown.Menu>
-              </Dropdown>
-            )}
-
-            {filterItems.length === 0 ? (
-              ""
-            ) : (
-              <Dropdown>
-                <Dropdown.Toggle
-                  className={style.conditionButtons}
-                  bsPrefix="none"
-                  id="dropdown-basic"
-                >
-                  <FaFilter className={style.filterIcon} />
-                  <span className={style.conditionsText}>Filter</span>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className={style.conditionMenu}>
-                  {filterItems.map((item) => {
-                    return (
-                      <Dropdown.Item
-                        key={item.event_key}
-                        onClick={item.onClick}
-                      >
-                        {" "}
-                        {item.name}{" "}
-                      </Dropdown.Item>
-                    );
-                  })}
-                </Dropdown.Menu>
-              </Dropdown>
-            )}
-            {buttonOverdue === undefined ? (
-              ""
-            ) : (
-              <Button variant="danger" size="sm" onClick={buttonOverdue}>
-                {" "}
-                <BiMessageSquareCheck className={style.checkIcon} /> Check
-                Overdue
-              </Button>
-            )}
-          </div>
-        ) : (
-          ""
-        )}
+        <div className={style.listConditions}>
+          {sortItems && sortItems.length > 0 && (
+            <Dropdown>
+              <Dropdown.Toggle
+                className={style.conditionButtons}
+                bsPrefix="none"
+                id="dropdown-basic"
+              >
+                <BiSortUp className={style.sortIcon} />
+                <span className={style.conditionsText}>Sort</span>
+              </Dropdown.Toggle>
+              <Dropdown.Menu className={style.conditionMenu}>
+                {sortItems.map((item) => {
+                  return (
+                    <Dropdown.Item key={item.event_key} onClick={item.onClick}>
+                      {" "}
+                      {item.name}{" "}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+          )}
+          {filterItems && filterItems.length > 0 && (
+            <Dropdown>
+              <Dropdown.Toggle
+                className={style.conditionButtons}
+                bsPrefix="none"
+                id="dropdown-basic"
+              >
+                <FaFilter className={style.filterIcon} />
+                <span className={style.conditionsText}>Filter</span>
+              </Dropdown.Toggle>
+              <Dropdown.Menu className={style.conditionMenu}>
+                {filterItems.map((item) => {
+                  return (
+                    <Dropdown.Item key={item.event_key} onClick={item.onClick}>
+                      {" "}
+                      {item.name}{" "}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+          )}
+          {buttonOverdue !== undefined && (
+            <Button variant="danger" size="sm" onClick={buttonOverdue}>
+              {" "}
+              <BiMessageSquareCheck className={style.checkIcon} /> Check Overdue
+            </Button>
+          )}
+        </div>
       </Card.Header>
       <Card.Body className={style.cardBody}>
         <Table responsive="sm">
