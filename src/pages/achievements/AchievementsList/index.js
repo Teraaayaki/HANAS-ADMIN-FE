@@ -83,6 +83,7 @@ const AchievementList = ({ itemsPerPage }) => {
       item_number: "First Item",
       name: "(5 Kilos Rice)",
       event_key: "first",
+      itemNameClaim: "first_item_claimed",
       onClick: () => {
         setItemClaimed("first_item_claimed");
         setItemname("First Item (5 Kilos Rice)");
@@ -96,6 +97,7 @@ const AchievementList = ({ itemsPerPage }) => {
       item_number: "Second Item",
       name: "(PHP300 Worth of Gas)",
       event_key: "second",
+      itemNameClaim: "second_item_claimed",
       onClick: () => {
         setItemClaimed("second_item_claimed");
         setItemname("Second Item (PHP300 Worth of Gas)");
@@ -109,6 +111,7 @@ const AchievementList = ({ itemsPerPage }) => {
       item_number: "Third Item",
       name: "(PHP450 Worth of Groceries)",
       event_key: "third",
+      itemNameClaim: "third_item_claimed",
       onClick: () => {
         setItemClaimed("third_item_claimed");
         setItemname("Third Item (PHP450 Worth of Groceries)");
@@ -122,6 +125,7 @@ const AchievementList = ({ itemsPerPage }) => {
       item_number: "Fourth Item",
       name: "(PHP600 GCash Voucher)",
       event_key: "fourth",
+      itemNameClaim: "fourth_item_claimed",
       onClick: () => {
         setItemClaimed("fourth_item_claimed");
         setItemname("Fourth Item (PHP600 GCash Voucher)");
@@ -135,6 +139,7 @@ const AchievementList = ({ itemsPerPage }) => {
       item_number: "Fifth Item",
       name: "(1 LPG Tank)",
       event_key: "fifth",
+      itemNameClaim: "fifth_item_claimed",
       onClick: () => {
         setItemClaimed("fifth_item_claimed");
         setItemname("Fifth Item (1 LPG Tank)");
@@ -148,6 +153,7 @@ const AchievementList = ({ itemsPerPage }) => {
       item_number: "Sixth Item",
       name: "(Mystery)",
       event_key: "sixth",
+      itemNameClaim: "sixth_item_claimed",
       onClick: () => {
         setItemClaimed("sixth_item_claimed");
         setItemname("Sixth Item (Mystery)");
@@ -184,59 +190,35 @@ const AchievementList = ({ itemsPerPage }) => {
                 )}
           </td>
           <td className={style.tableData}>
-            <Button
-              variant="success"
-              onClick={() => {
-                setSelectedId(achievement._id);
-                handleAchievementCheck(achievement._id);
-                handleOpen();
-              }}
-            >
-              Claim Item
-            </Button>{" "}
+            {!achievement.bookingData[0]?.total_earnings ? (
+              <Button variant="secondary" disabled>
+                Claim Item
+              </Button>
+            ) : (
+              <Button
+                variant="success"
+                onClick={() => {
+                  setSelectedId(achievement._id);
+                  handleAchievementCheck(achievement._id);
+                  handleOpen();
+                }}
+              >
+                Claim Item
+              </Button>
+            )}
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Claim Item</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <p className={style.bold}>IMPORTANT</p>Please Choose which item
-                to be claimed:
-                <Dropdown required>
-                  <Dropdown.Toggle
-                    className={style.conditionButtons}
-                    bsPrefix="none"
-                    id="dropdown-basic"
-                  >
-                    <BiSortUp className={style.sortIcon} />
-                    <span className={style.conditionsText}>Choose an Item</span>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu className={style.conditionMenu}>
-                    {itemArray.map((item) => {
-                      return item.itemClaimed === true ? (
-                        <Dropdown.Item
-                          className={style.claimedItem}
-                          key={item.event_key}
-                          disabled
-                        >
-                          {" "}
-                          {item.name} Claimed
-                        </Dropdown.Item>
-                      ) : (
-                        <Dropdown.Item
-                          key={item.event_key}
-                          onClick={item.onClick}
-                        >
-                          {" "}
-                          {item.item_number} {item.name}{" "}
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </Dropdown.Menu>
-                </Dropdown>
                 <br />
                 <h5>
                   Item about to Claim: <br />
-                  {itemName}
+                  {itemArray.find((item) => item.itemClaimed === false).name}
+                  {setItemClaimed(
+                    itemArray.find((item) => item.itemClaimed === false)
+                      .itemNameClaim
+                  )}
                 </h5>
                 Are you sure you want to claim the item for this user?
               </Modal.Body>
