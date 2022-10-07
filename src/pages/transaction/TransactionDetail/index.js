@@ -1,14 +1,13 @@
-import React from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
-import style from './index.module.scss';
-import moment from 'moment';
+import style from "./index.module.scss";
+import moment from "moment";
 
 const TransactionDetail = ({ show, handleClose, data }) => {
-
   // console.log("SPECIFIC DATA", data.myServiceData[0].serviceData[0].service_type);
-  if(!data){
+  if (!data) {
     return (
       <Modal
         show={show}
@@ -37,9 +36,9 @@ const TransactionDetail = ({ show, handleClose, data }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    )
+    );
   }
-  
+
   return (
     <Modal
       show={show}
@@ -60,7 +59,9 @@ const TransactionDetail = ({ show, handleClose, data }) => {
           <section className={style.firstColumnDetails}>
             <div className={style.transInfoContainer}>
               <span className={style.infoLabel}>SERVICE RENDERED</span>
-              <span className={style.info}>{data.myServiceData[0].serviceData[0].service_type}</span>
+              <span className={style.info}>
+                {data.myServiceData[0].serviceData[0].service_type}
+              </span>
             </div>
             <div className={style.transInfoContainer}>
               <span className={style.infoLabel}>CLIENT NAME</span>
@@ -70,7 +71,9 @@ const TransactionDetail = ({ show, handleClose, data }) => {
             </div>
             <div className={style.transInfoContainer}>
               <span className={style.infoLabel}>BOOKING DATE</span>
-              <span className={style.info}>{moment(data.createdAt).format('LL')}</span>
+              <span className={style.info}>
+                {moment(data.createdAt).format("LL")}
+              </span>
             </div>
           </section>
 
@@ -78,17 +81,21 @@ const TransactionDetail = ({ show, handleClose, data }) => {
             <div className={style.transInfoContainer}>
               <span className={style.infoLabel}>SKILLED WORKER NAME</span>
               <span className={style.info}>
-              {`${data.workerData[0].first_name} ${data.workerData[0].middle_name} ${data.workerData[0].family_name}`}
+                {`${data.workerData[0].first_name} ${data.workerData[0].middle_name} ${data.workerData[0].family_name}`}
               </span>
             </div>
             <div className={style.transInfoContainer}>
               <span className={style.infoLabel}>ADDRESS</span>
-              <span className={style.address}>{data.clientData[0].address}</span>
+              <span className={style.address}>
+                {data.clientData[0].address}
+              </span>
             </div>
-            {/* <div className={style.transInfoContainer}>
-              <span className={style.infoLabel}>DATE PAID</span>
-              <span className={style.info}>{data.}</span>
-            </div> */}
+            <div className={style.transInfoContainer}>
+              <span className={style.infoLabel}>GCASH REFERENCE NUMBER</span>
+              <span className={style.info}>
+                {!data.reference_no ? "N/A" : data.reference_no}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -99,15 +106,21 @@ const TransactionDetail = ({ show, handleClose, data }) => {
           </div>
           <div className={style.paymentInfoContainer}>
             <span className={style.paymentInfo}>Rate Per Hour</span>
-            <span className={style.paymentInfo}>₱ {data.myServiceData[0].hourly_rate.toFixed(2)}</span>
+            <span className={style.paymentInfo}>
+              ₱ {data.myServiceData[0].hourly_rate.toFixed(2)}
+            </span>
           </div>
           <div className={style.paymentInfoContainer}>
             <span className={style.paymentInfo}>Total Hours Rendered</span>
-            <span className={style.paymentInfo}>{data.total_hours} hour(s)</span>
+            <span className={style.paymentInfo}>
+              {data.total_hours} hour(s)
+            </span>
           </div>
           <div className={style.paymentInfoContainer}>
             <span className={style.paymentInfo}>Convenience Fee</span>
-            <span className={style.paymentInfo}>₱ {data.conv_fee.toFixed(2)}</span>
+            <span className={style.paymentInfo}>
+              ₱ {data.conv_fee.toFixed(2)}
+            </span>
           </div>
           {/* <div className={style.paymentInfoContainer}>
             <span className={style.paymentInfo}>Discount/Promo</span>
@@ -117,7 +130,9 @@ const TransactionDetail = ({ show, handleClose, data }) => {
           <hr />
           <div className={style.paymentInfoContainer}>
             <span className={style.paymentInfoLabels}>Total Amount Paid</span>
-            <span className={style.paymentInfoLabels}>₱ {data.total_cost.toFixed(2)}</span>
+            <span className={style.paymentInfoLabels}>
+              ₱ {data.total_cost.toFixed(2)}
+            </span>
           </div>
         </div>
       </Modal.Body>

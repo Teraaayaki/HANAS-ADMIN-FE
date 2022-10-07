@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { GoKebabVertical } from 'react-icons/go';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { GoKebabVertical } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
 
-import ReactPaginate from 'react-paginate';
-import DataTable from '../../../components/Table';
-import StatusBadge from '../../../components/StatusBadge';
-import TransactionDetail from '../TransactionDetail';
-import style from './index.module.scss';
-import { getTransactionList, sortTransaction} from "../../../redux/actions/transactionActions";
-import moment from 'moment';
+import ReactPaginate from "react-paginate";
+import DataTable from "../../../components/Table";
+import StatusBadge from "../../../components/StatusBadge";
+import TransactionDetail from "../TransactionDetail";
+import style from "./index.module.scss";
+import {
+  getTransactionList,
+  sortTransaction,
+  filterTransaction,
+} from "../../../redux/actions/transactionActions";
+import moment from "moment";
 
 const TransactionList = ({ itemsPerPage }) => {
   const [showTransactionDets, setShowTransactionDets] = useState(false);
@@ -24,12 +28,16 @@ const TransactionList = ({ itemsPerPage }) => {
   const dispatch = useDispatch();
 
   const headerNames = [
-    'Client Name',
-    'Worker Name',
-    'Address',
-    'Service',
-    'Payment',
-    'Status'
+    "Client Name",
+    "Worker Name",
+    "Address",
+    "Service",
+    "Payment",
+    "Payment Due to Worker",
+    "Gcash No. of Worker",
+    "Payment Method",
+    "Service Status",
+    "Payment to Worker Status",
   ];
 
   //PAGINATION HANDLE
@@ -37,35 +45,62 @@ const TransactionList = ({ itemsPerPage }) => {
     const newOffset = (event.selected * itemsPerPage) % transactions.length;
     setItemOffset(newOffset);
   };
-  
+
   const handleSortTransaction = (e) => {
     dispatch(sortTransaction(e));
   };
 
+  const handleFilterTransaction = (e) => {
+    dispatch(filterTransaction(e));
+  };
+
   const sortItems = [
     {
-      name: 'Default',
-      event_key: 'all',
-      onClick: () => { dispatch(handleSortTransaction('all'))}
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleSortTransaction("all"));
+      },
     },
     {
-      name: 'Total Cost',
-      event_key: 'cost',
-      onClick: () => { dispatch(handleSortTransaction('cost'))}
+      name: "Total Cost",
+      event_key: "cost",
+      onClick: () => {
+        dispatch(handleSortTransaction("cost"));
+      },
     },
     {
-      name: 'Booking Start Date',
-      event_key: 'date',
-      onClick: () => { dispatch(handleSortTransaction('date'))}
+      name: "Booking Start Date",
+      event_key: "date",
+      onClick: () => {
+        dispatch(handleSortTransaction("date"));
+      },
     },
     {
-      name: 'Service Type',
-      event_key: 'service',
-      onClick: () => { dispatch(handleSortTransaction('service'))}
-    }
+      name: "Service Type",
+      event_key: "service",
+      onClick: () => {
+        dispatch(handleSortTransaction("service"));
+      },
+    },
   ];
 
-  const filterItems = [];
+  const filterItems = [
+    {
+      name: "Default",
+      event_key: "all",
+      onClick: () => {
+        dispatch(handleFilterTransaction("all"));
+      },
+    },
+    {
+      name: "Gcash",
+      event_key: "gcash",
+      onClick: () => {
+        dispatch(handleFilterTransaction("gcash"));
+      },
+    },
+  ];
 
   const renderTransactionsList = (transactions) => {
     return transactions.map((transaction, idx) => {
@@ -79,20 +114,54 @@ const TransactionList = ({ itemsPerPage }) => {
           className={`${style.tableDataRow} ${style.clickable}`}
         >
           <td className={style.tableData}>
-            <span className={style.truncate}>{`${transaction.clientData[0].first_name} ${transaction.clientData[0].middle_name} ${transaction.clientData[0].family_name}`}</span>
+            <span
+              className={style.truncate}
+            >{`${transaction.clientData[0].first_name} ${transaction.clientData[0].middle_name} ${transaction.clientData[0].family_name}`}</span>
           </td>
           <td className={style.tableData}>
-            <span className={style.truncate}>{`${transaction.workerData[0].first_name} ${transaction.workerData[0].middle_name} ${transaction.workerData[0].family_name}`}</span>
+            <span
+              className={style.truncate}
+            >{`${transaction.workerData[0].first_name} ${transaction.workerData[0].middle_name} ${transaction.workerData[0].family_name}`}</span>
           </td>
           <td className={style.tableData}>
-            <span className={style.truncate}>{transaction.clientData[0].address}</span>
+            <span className={style.truncate}>
+              {transaction.clientData[0].address}
+            </span>
           </td>
           <td className={style.tableData}>
-            <span>{transaction.myServiceData[0].serviceData[0].service_type}</span>
+            <span>
+              {transaction.myServiceData[0].serviceData[0].service_type}
+            </span>
           </td>
           <td className={style.tableData}>
             <span>₱ {transaction.total_cost.toFixed(2)}</span> <br />
-            <span className={style.time}> {moment(transaction.booked_dateTimeStart).format('LL')}</span>
+            <span className={style.time}>
+              {" "}
+              {moment(transaction.booked_dateTimeStart).format("LL")}
+            </span>
+          </td>
+          <td className={style.tableData}>
+            {/* prettier-ignore */}
+            <span>
+              ₱{" "}
+              {transaction.total_cost.toFixed(2) -
+                (transaction.total_cost.toFixed(2) * 0.08)}
+            </span>{" "}
+            {console.log(transaction)}
+          </td>
+          <td className={style.tableData}>
+            <span>0{transaction.workerData[0].mobile_no}</span> <br />
+          </td>
+          <td className={style.tableData}>
+            <span>
+              {!transaction.payment_method
+                ? "Cash"
+                : transaction.payment_method}
+            </span>{" "}
+            <br />
+          </td>
+          <td className={style.tableData}>
+            <StatusBadge status={transaction.book_status.toUpperCase()} />
           </td>
           <td className={style.tableData}>
             <StatusBadge status={transaction.book_status.toUpperCase()} />
@@ -107,57 +176,54 @@ const TransactionList = ({ itemsPerPage }) => {
 
   useEffect(() => {
     dispatch(getTransactionList());
-   }, [dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
-  // Fetch items from another resources.
-  const endOffset = itemOffset + itemsPerPage;
-  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  setCurrentItems(transactions.slice(itemOffset, endOffset));
-  setPageCount(Math.ceil(transactions.length / itemsPerPage));
+    // Fetch items from another resources.
+    const endOffset = itemOffset + itemsPerPage;
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(transactions.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(transactions.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, transactions]);
 
-    return (
-      <div className="main-content">
-        <TransactionDetail
-          show={showTransactionDets}
-          handleClose={() => setShowTransactionDets(false)}
-          data={specificDetail.length === 0 ? null: specificDetail}
+  return (
+    <div className="main-content">
+      <TransactionDetail
+        show={showTransactionDets}
+        handleClose={() => setShowTransactionDets(false)}
+        data={specificDetail.length === 0 ? null : specificDetail}
+      />
+      <DataTable
+        tableTitle="Details"
+        headerNames={headerNames}
+        renderData={() => renderTransactionsList(currentItems)}
+        sortItems={sortItems}
+        filterItems={filterItems}
+      />
+      <div className={style.paginateContainer}>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="Next"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={1}
+          pageCount={pageCount}
+          previousLabel="Previous"
+          renderOnZeroPageCount={null}
+          containerClassName={
+            "pagination"
+          } /* as this work same as bootstrap class */
+          subContainerClassName={
+            "pages pagination"
+          } /* as this work same as bootstrap class */
+          activeClassName={"active"} /* as this work same as bootstrap class */
         />
-        <DataTable
-          tableTitle="Details"
-          headerNames={headerNames}
-          renderData={() => renderTransactionsList(currentItems)}
-          sortItems={sortItems}
-          filterItems={filterItems}
-        />
-        <div className={style.paginateContainer}>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="Next"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={1}
-            pageCount={pageCount}
-            previousLabel="Previous"
-            renderOnZeroPageCount={null}
-            containerClassName={'pagination'} /* as this work same as bootstrap class */
-            subContainerClassName={'pages pagination'} /* as this work same as bootstrap class */
-            activeClassName={'active'} /* as this work same as bootstrap class */
-          />
-        </div>
       </div>
-    );
+    </div>
+  );
 };
 
 const PaginatedTransactionList = () => {
-  return (
-    <div>
-      {
-          <TransactionList itemsPerPage={10} />
-      }
-    </div>
-    
-  );
-}
+  return <div>{<TransactionList itemsPerPage={10} />}</div>;
+};
 
 export default PaginatedTransactionList;
