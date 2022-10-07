@@ -184,24 +184,29 @@ const AchievementList = ({ itemsPerPage }) => {
                 )}
           </td>
           <td className={style.tableData}>
-            <Button
-              variant="success"
-              onClick={() => {
-                setSelectedId(achievement._id);
-                handleAchievementCheck(achievement._id);
-                handleOpen();
-              }}
-            >
-              Claim Item
-            </Button>{" "}
+            {!achievement.bookingData[0]?.total_earnings ? (
+              <Button variant="secondary" disabled>
+                Claim Item
+              </Button>
+            ) : (
+              <Button
+                variant="success"
+                onClick={() => {
+                  setSelectedId(achievement._id);
+                  // setItemClaimed(itemArray.find((item) => !item.itemClaimed).item_number)
+                  handleAchievementCheck(achievement._id);
+                  handleOpen();
+                }}
+              >
+                Claim Item
+              </Button>
+            )}{" "}
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Claim Item</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <p className={style.bold}>IMPORTANT</p>Please Choose which item
-                to be claimed:
-                <Dropdown required>
+                {/* <Dropdown required>
                   <Dropdown.Toggle
                     className={style.conditionButtons}
                     bsPrefix="none"
@@ -211,7 +216,7 @@ const AchievementList = ({ itemsPerPage }) => {
                     <span className={style.conditionsText}>Choose an Item</span>
                   </Dropdown.Toggle>
                   <Dropdown.Menu className={style.conditionMenu}>
-                    {itemArray.map((item) => {
+                    {itemArray.map((item, index) => {
                       return item.itemClaimed === true ? (
                         <Dropdown.Item
                           className={style.claimedItem}
@@ -232,11 +237,11 @@ const AchievementList = ({ itemsPerPage }) => {
                       );
                     })}
                   </Dropdown.Menu>
-                </Dropdown>
+                </Dropdown> */}
                 <br />
                 <h5>
                   Item about to Claim: <br />
-                  {itemName}
+                  {itemArray.find((item) => !item.itemClaimed).name}
                 </h5>
                 Are you sure you want to claim the item for this user?
               </Modal.Body>
